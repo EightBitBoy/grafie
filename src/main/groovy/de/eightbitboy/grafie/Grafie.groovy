@@ -10,11 +10,14 @@ class Grafie implements Plugin<Project> {
 
         project.task('encryptFiles') {
             println('### Encrypting files.')
+            println("### Using the file extension ${project.grafie.fileExtension}.")
         }
 
         project.task('decryptFiles') {
             println('### Decrypting files.')
         }
+
+        project.task('crypto', type: FileCryptoTask)
     }
 }
 

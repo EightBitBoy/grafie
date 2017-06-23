@@ -1,5 +1,7 @@
 package de.eightbitboy.grafie
 
+import org.gradle.api.Project
+import org.gradle.testfixtures.ProjectBuilder
 import spock.lang.Specification
 
 class GrafieTest extends Specification {
@@ -12,5 +14,14 @@ class GrafieTest extends Specification {
 
         then:
         numbers.size() == 3
+    }
+
+    def "do something"() {
+        when:
+        Project project = ProjectBuilder.builder().build()
+        project.pluginManager.apply('de.eightbitboy.grafie')
+
+        then:
+        project.tasks.crypto instanceof FileCryptoTask
     }
 }
