@@ -1,8 +1,18 @@
+apply plugin: 'java-gradle-plugin'
 apply plugin: 'groovy'
 
 repositories {
     jcenter()
     mavenCentral()
+}
+
+gradlePlugin {
+    plugins {
+        simplePlugin {
+            id = 'de.eightbitboy.grafie'
+            implementationClass = 'de.eightbitboy.grafie.Grafie'
+        }
+    }
 }
 
 dependencies {
