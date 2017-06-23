@@ -18,10 +18,19 @@ apply plugin: 'groovy'
 apply plugin: 'com.gradle.plugin-publish'
 apply plugin: 'com.github.ben-manes.versions'
 
+gradlePlugin {
+    plugins {
+        grafie {
+            id = 'de.eightbitboy.grafie'
+            implementationClass = 'de.eightbitboy.grafie.Grafie'
+        }
+    }
+}
+
 pluginBundle {
     website = 'https://github.com/EightBitBoy/grafie'
     vcsUrl = 'https://github.com/EightBitBoy/grafie'
-    description = 'Grafie - Gradle File Encryption Plugin'
+    description = 'Grafie encrypts and decrypts files in your workspace. Use it to protect sensitive information in your public repositories!'
     tags = ['privacy', 'cryptography', 'git']
 
     plugins {
