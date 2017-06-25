@@ -8,4 +8,5 @@ Grafie - Gradle File Encryption Plugin
 ## Usage
 
 ## Resources that helped developing the plugin
-[Gradle documentation - Writing Custom Plugins](https://docs.gradle.org/3.3/userguide/custom_plugins.html)
+* [Gradle documentation: Writing Custom Plugins](https://docs.gradle.org/3.3/userguide/custom_plugins.html)
+* [jonathanhood's gradle-plugin-example](https://github.com/jonathanhood/gradle-plugin-example)
