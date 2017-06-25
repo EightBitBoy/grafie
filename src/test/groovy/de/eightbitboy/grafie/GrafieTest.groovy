@@ -16,7 +16,7 @@ class GrafieTest extends Specification {
         numbers.size() == 3
     }
 
-    def "do something"() {
+    def "add the plugin to a project"() {
         when:
         Project project = ProjectBuilder.builder().build()
         project.pluginManager.apply('de.eightbitboy.grafie')
