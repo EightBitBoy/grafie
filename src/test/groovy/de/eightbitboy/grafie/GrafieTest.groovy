@@ -6,8 +6,10 @@ import spock.lang.Specification
 
 class GrafieTest extends Specification {
     def "add the plugin to a project"() {
-        when:
+        setup:
         Project project = ProjectBuilder.builder().build()
+
+        when:
         project.pluginManager.apply('de.eightbitboy.grafie')
 
         then:
