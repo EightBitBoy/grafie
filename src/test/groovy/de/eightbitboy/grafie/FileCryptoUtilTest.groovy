@@ -1,5 +1,6 @@
 package de.eightbitboy.grafie
 
+import org.apache.commons.lang3.ArrayUtils
 import org.gradle.internal.impldep.org.apache.commons.lang.RandomStringUtils
 import spock.lang.Specification
 
@@ -32,6 +33,7 @@ class FileCryptoUtilTest extends Specification {
 
         then:
         key != null
+        ArrayUtils.isNotEmpty(key)
         key.length == 16
     }
 
@@ -42,6 +44,7 @@ class FileCryptoUtilTest extends Specification {
 
         then:
         key != null
+        ArrayUtils.isNotEmpty(key)
         key.length == 16
 
         where:
