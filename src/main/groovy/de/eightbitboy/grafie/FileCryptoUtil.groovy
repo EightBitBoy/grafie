@@ -15,6 +15,9 @@ class FileCryptoUtil {
 
     /** Create a 128 bit key from an arbitrary string. */
     byte[] processKey(String key) {
+        if (!key) {
+            throw new IllegalArgumentException("The provided key is null or empty!")
+        }
         return Arrays.copyOf(DigestUtils.sha256(key), 16)
     }
 }
