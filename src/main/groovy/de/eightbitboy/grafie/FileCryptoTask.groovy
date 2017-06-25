@@ -1,11 +1,11 @@
 package de.eightbitboy.grafie
 
+import org.gradle.api.DefaultTask
 import org.gradle.api.tasks.TaskAction
 
-class FileCryptoTask {
-
+class FileCryptoTask extends DefaultTask {
     @TaskAction
-    void action() {
-
+    def encrypt() {
+        println('Encrypting!')
     }
 }
