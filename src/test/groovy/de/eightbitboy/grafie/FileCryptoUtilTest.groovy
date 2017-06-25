@@ -10,9 +10,25 @@ class FileCryptoUtilTest extends Specification {
         cryptoUtil = new FileCryptoUtil()
     }
 
+    def "a password must not be null"() {
+        when:
+        cryptoUtil.processPassword(null)
+
+        then:
+        thrown(IllegalArgumentException)
+    }
+
+    def "a password must not be empty"() {
+        when:
+        cryptoUtil.processPassword('')
+
+        then:
+        thrown(IllegalArgumentException)
+    }
+
     def "process a password"() {
         when:
-        byte[] key = cryptoUtil.processKey("secret")
+        byte[] key = cryptoUtil.processPassword('secret')
 
         then:
         key != null
@@ -21,7 +37,7 @@ class FileCryptoUtilTest extends Specification {
 
     def "process passwords of arbitrary length"() {
         when:
-        byte[] key = cryptoUtil.processKey(password)
+        byte[] key = cryptoUtil.processPassword(password)
         then:
 
         then:
