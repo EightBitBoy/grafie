@@ -9,10 +9,20 @@ enum Mode {
 }
 
 class FileCryptoTask extends DefaultTask {
-    /** The task's operation mode. Use "ENCRYPT" so no unencrpyted files are overwritten, no damage will be done. */
     Mode mode = Mode.ENCRYPT
 
     @TaskAction
-    def encrypt() {
+    def cryptoAction() {
+        doLast {
+            println(project.projectDir)
+        }
+    }
+
+    void decrypt() {
+
+    }
+
+    void encrypt() {
+
     }
 }
