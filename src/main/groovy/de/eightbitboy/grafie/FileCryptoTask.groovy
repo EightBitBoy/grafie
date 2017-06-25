@@ -34,10 +34,10 @@ class FileCryptoTask extends DefaultTask {
             if (project.property(GRAFIE_KEY)) {
                 return project.property(GRAFIE_KEY)
             } else {
-                //TODO Throw some exception!
+                throw new InvalidUserDataException("The property 'grafieKey' has no value!")
             }
         } else {
-            throw new InvalidUserDataException("No encryption/decryption key is provided via gradle.properties!")
+            throw new InvalidUserDataException("No encryption/decryption key is provided via gradle.properties! Add 'grafieKey=YOUR_KEY' to the gradle.properties!")
         }
     }
 }
