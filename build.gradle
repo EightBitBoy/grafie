@@ -14,6 +14,7 @@ buildscript {
 }
 
 apply plugin: 'groovy'
+//TODO https://docs.gradle.org/3.3/userguide/javaGradle_plugin.html
 apply plugin: 'java-gradle-plugin'
 apply plugin: 'com.gradle.plugin-publish'
 apply plugin: 'com.github.ben-manes.versions'
