@@ -22,6 +22,7 @@ class GrafieTest extends Specification {
         project.pluginManager.apply('de.eightbitboy.grafie')
 
         then:
-        project.tasks.crypto instanceof FileCryptoTask
+        project.tasks.decryptFiles instanceof FileCryptoTask
+        project.tasks.encryptFiles instanceof FileCryptoTask
     }
 }

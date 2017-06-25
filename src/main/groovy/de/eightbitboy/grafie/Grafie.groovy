@@ -8,6 +8,14 @@ class Grafie implements Plugin<Project> {
 
     void apply(Project project) {
         project.extensions.create('grafie', GrafieExtension)
-        project.task('crypto', type: FileCryptoTask)
+
+        project.task('decryptFiles', type: FileCryptoTask) {
+            mode = Mode.DECRYPT
+        }
+
+        project.task('encryptFiles', type: FileCryptoTask) {
+            mode = Mode.ENCRYPT
+        }
+
     }
 }
