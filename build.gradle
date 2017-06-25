@@ -1,31 +1,19 @@
 apply plugin: 'groovy'
 
+repositories {
+    mavenCentral()
+    jcenter()
+}
+
 dependencies {
     compile gradleApi()
     compile 'org.codehaus.groovy:groovy-all:2.4.11'
     testCompile 'org.spockframework:spock-core:1.1-groovy-2.4'
 }
 
-apply plugin: 'maven'
-
-repositories {
-    mavenCentral()
-}
-
-dependencies {
-    testCompile 'junit:junit:4.12'
-}
 
 group = 'de.eightbitboy'
 version = '0.1.0-SNAPSHOT'
-
-uploadArchives {
-    repositories {
-        mavenDeployer {
-            repository(url: uri('../repo'))
-        }
-    }
-}
 
 /*
 version = '0.1.0-SNAPSHOT'
