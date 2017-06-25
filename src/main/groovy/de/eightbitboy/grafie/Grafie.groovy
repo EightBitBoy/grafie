@@ -4,7 +4,6 @@ import org.gradle.api.Project
 import org.gradle.api.Plugin
 
 /*
-https://docs.gradle.org/3.3/userguide/custom_plugins.html
 https://guides.gradle.org/writing-gradle-plugins/
 https://guides.gradle.org/implementing-gradle-plugins/
 https://github.com/gradle/gradle/tree/master/subprojects

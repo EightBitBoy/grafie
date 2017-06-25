@@ -1,28 +1,44 @@
 package de.eightbitboy.grafie
 
 import org.gradle.api.DefaultTask
+import org.gradle.api.InvalidUserDataException
 import org.gradle.api.tasks.TaskAction
 
-enum Mode {
-    DECRYPT,
-    ENCRYPT
-}
 
 class FileCryptoTask extends DefaultTask {
+    enum Mode {
+        DECRYPT,
+        ENCRYPT
+    }
+
     Mode mode = Mode.ENCRYPT
+    final String GRAFIE_KEY = "grafieKey"
 
     @TaskAction
-    def cryptoAction() {
+    void cryptoAction() {
         doLast {
             println(project.projectDir)
+
+            FileCryptoUtil cryptoUtil = new FileCryptoUtil()
+            if (mode == Mode.DECRYPT) {
+                //cryptoUtil.decrypt()
+            }
+            if (mode == Mode.ENCRYPT) {
+                //cryptoUtil.encrypt()
+            }
         }
     }
 
-    void decrypt() {
-
-    }
-
-    void encrypt() {
-
+    /** Get the encryption/decryption key. */
+    String getKey() {
+        if (project.hasProperty(GRAFIE_KEY)) {
+            if (project.property(GRAFIE_KEY)) {
+                return project.property(GRAFIE_KEY)
+            } else {
+                //TODO Throw some exception!
+            }
+        } else {
+            throw new InvalidUserDataException("No encryption/decryption key is provided via gradle.properties!")
+        }
     }
 }
