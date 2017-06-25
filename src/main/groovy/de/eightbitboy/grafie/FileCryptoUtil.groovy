@@ -13,7 +13,8 @@ class FileCryptoUtil {
 
     }
 
+    /** Create a 128 bit key from an arbitrary string. */
     byte[] processKey(String key) {
-        return DigestUtils.sha256(key)
+        return Arrays.copyOf(DigestUtils.sha256(key), 16)
     }
 }
