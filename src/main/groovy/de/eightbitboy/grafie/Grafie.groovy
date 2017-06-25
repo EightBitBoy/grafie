@@ -6,7 +6,8 @@ import org.gradle.api.Plugin
 class Grafie implements Plugin<Project> {
     final static ID = 'de.eightbitboy.grafie'
 
-    void apply(Project target) {
-        target.task('crypto', type: FileCryptoTask)
+    void apply(Project project) {
+        project.extensions.create('grafie', GrafieExtension)
+        project.task('crypto', type: FileCryptoTask)
     }
 }
