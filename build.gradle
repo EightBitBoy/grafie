@@ -14,8 +14,7 @@ buildscript {
 }
 
 apply plugin: 'groovy'
-//TODO https://docs.gradle.org/3.3/userguide/javaGradle_plugin.html
-apply plugin: 'java-gradle-plugin'
+//apply plugin: 'java-gradle-plugin' //https://docs.gradle.org/3.3/userguide/javaGradle_plugin.html
 apply plugin: 'com.gradle.plugin-publish'
 apply plugin: 'com.github.ben-manes.versions'
 
@@ -25,6 +24,7 @@ repositories {
 }
 
 dependencies {
+    compile gradleApi()
     compile 'org.codehaus.groovy:groovy-all:2.4.11'
     testCompile 'org.spockframework:spock-core:1.1-groovy-2.4'
 }
