@@ -26,6 +26,7 @@ repositories {
 dependencies {
     compile gradleApi()
     compile 'org.codehaus.groovy:groovy-all:2.4.11'
+    compile 'commons-codec:commons-codec:1.10'
     testCompile 'org.spockframework:spock-core:1.1-groovy-2.4'
 }
 

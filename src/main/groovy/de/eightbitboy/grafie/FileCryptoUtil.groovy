@@ -1,5 +1,7 @@
 package de.eightbitboy.grafie;
 
+import org.apache.commons.codec.digest.DigestUtils;
+
 import java.io.File;
 
 class FileCryptoUtil {
@@ -9,5 +11,9 @@ class FileCryptoUtil {
 
     public void encrypt(String key, File file) {
 
+    }
+
+    byte[] processKey(String key) {
+        return DigestUtils.sha256(key)
     }
 }
