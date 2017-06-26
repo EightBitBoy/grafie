@@ -2,6 +2,7 @@ package de.eightbitboy.grafie
 
 import org.apache.commons.lang3.ArrayUtils
 import org.gradle.internal.impldep.org.apache.commons.lang.RandomStringUtils
+import spock.lang.PendingFeature
 import spock.lang.Specification
 
 class FileCryptoUtilTest extends Specification {
@@ -51,14 +52,17 @@ class FileCryptoUtilTest extends Specification {
         password << (1..200).collect() { RandomStringUtils.random(it) }
     }
 
+    @PendingFeature
     def "encrypt a file"() {
 
     }
 
+    @PendingFeature
     def "decrypt a file"() {
 
     }
 
+    @PendingFeature
     def "encrypt and decrypt files of arbitrary length"() {
 
     }
