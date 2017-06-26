@@ -11,8 +11,8 @@ https://speakerdeck.com/bmuschko/gradle-plugin-best-practices-by-example
  */
 
 class Grafie implements Plugin<Project> {
-    final static ID = 'de.eightbitboy.grafie'
-    final static GROUP = 'Grafie'
+    final static String ID = 'de.eightbitboy.grafie'
+    final static String GROUP = 'Grafie'
 
     void apply(Project project) {
         project.extensions.create('grafie', GrafieExtension)
