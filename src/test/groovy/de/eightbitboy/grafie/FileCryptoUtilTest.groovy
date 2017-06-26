@@ -52,27 +52,37 @@ class FileCryptoUtilTest extends Specification {
         password << (1..200).collect() { RandomStringUtils.random(it) }
     }
 
-    def "decrypt a file"() {
+    def "encrypt and decrypt a file"() {
         setup:
         File file = new File('file.txt')
-        file.write("This is a test.")
+        file.write('This is a test.')
+
+        File encryptedFile = new File('file.txt.grafie')
+        assert !encryptedFile.exists()
 
         when:
         cryptoUtil.encrypt('password', file)
 
         then:
-        new File('file.txt.grafie').exists()
+        encryptedFile.exists()
 
         when:
         file.delete()
 
         then:
-        !new File('file.txt').exists()
-    }
+        !file.exists()
 
-    @PendingFeature
-    def "encrypt a file"() {
+        when:
+        cryptoUtil.decrypt('password', encryptedFile)
+        file = new File('file.txt')
 
+        then:
+        file.exists()
+        file.getText('UTF-8') == 'This is a test.'
+
+        cleanup:
+        file.delete()
+        encryptedFile.delete()
     }
 
     @PendingFeature

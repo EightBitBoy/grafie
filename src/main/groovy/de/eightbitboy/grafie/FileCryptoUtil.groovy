@@ -17,15 +17,27 @@ class FileCryptoUtil {
     final static String UTF_8 = 'UTF-8'
     final static String fileExtension = '.grafie'
 
-    void decrypt(String password, File file) {
+    void decrypt(String password, File encryptedFile) {
         Cipher cipher = setup(processPassword(password), Cipher.DECRYPT_MODE)
-        new File(file.getCanonicalPath() + fileExtension).withWriter(UTF_8) { writer ->
-            writer.write(Base64.getEncoder().encodeToString(cipher.doFinal(file.getText(UTF_8).getBytes(UTF_8))))
+
+        if (!encryptedFile.getCanonicalPath().endsWith(fileExtension)) {
+            //TODO Throw some exception!
         }
+
+        /*
+        new File(encryptedFile.getCanonicalPath()).withWriter(UTF_8) { writer ->
+            writer.write(Base64.getEncoder().encodeToString(cipher.doFinal(encryptedFile.getText(UTF_8).getBytes(UTF_8))))
+        }
+        */
     }
 
-    void encrypt(String password, File file) {
+    void encrypt(String password, File decryptedFile) {
         Cipher cipher = setup(processPassword(password), Cipher.ENCRYPT_MODE)
+
+        File encryptedFile = new File(decryptedFile.getCanonicalPath() + fileExtension)
+        if (!encryptedFile.exists()) {
+            encryptedFile.createNewFile()
+        }
     }
 
     /** Create a 128 bit key from an arbitrary password string. */
