@@ -52,9 +52,22 @@ pluginBundle {
     }
 }
 
+publishing {
+    publications {
+        GrafiePublication(MavenPublication) {
+            from components.java
+            groupId project.group
+            artifactId 'grafie'
+            version project.version
+        }
+    }
+}
+
 bintray {
     user = System.getenv('bintrayUser')
     key = System.getenv('bintrayKey')
+
+    publications = ['GrafiePublication']
 
     publish = true
     override = true
@@ -64,6 +77,7 @@ bintray {
         name = 'grafie'
         licenses = ['Apache-2.0']
         vcsUrl = 'git@github.com:EightBitBoy/grafie.git'
+        publicDownloadNumbers = true
 
         version {
             name = project.version
