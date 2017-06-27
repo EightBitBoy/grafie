@@ -39,7 +39,7 @@ version = '0.1.0-SNAPSHOT'
 
 pluginBundle {
     website = 'https://github.com/EightBitBoy/grafie'
-    vcsUrl = 'https://github.com/EightBitBoy/grafie'
+    vcsUrl = 'git@github.com:EightBitBoy/grafie.git'
     description = 'Grafie encrypts and decrypts files in your workspace. Use it to protect sensitive information in your public git repositories!'
     tags = ['crypto', 'cryptography', 'encryption', 'git', 'privacy']
 
@@ -55,6 +55,21 @@ pluginBundle {
 bintray {
     user = System.getenv('bintrayUser')
     key = System.getenv('bintrayKey')
+
+    publish = true
+    override = true
+
+    pkg {
+        repo = 'projects'
+        name = 'grafie'
+        licenses = ['Apache-2.0']
+        vcsUrl = 'git@github.com:EightBitBoy/grafie.git'
+
+        version {
+            name = project.version
+            released = new Date()
+        }
+    }
 }
 
 /*
