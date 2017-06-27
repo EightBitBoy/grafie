@@ -23,7 +23,8 @@ class FileCryptoUtil {
         if (!encryptedFile.getName().endsWith(fileExtension)) {
             throw new IllegalStateException("The encrypted file has no valid name!")
         }
-        File decryptedFile = new File(encryptedFile.getCanonicalPath().substring(0, path.lastIndexOf(fileExtension)))
+        File decryptedFile = new File(encryptedFile.getCanonicalPath().substring(
+                0, encryptedFile.getCanonicalPath().lastIndexOf(fileExtension)))
         decryptedFile.createNewFile()
 
         decryptedFile.withWriter { writer ->

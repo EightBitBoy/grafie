@@ -71,7 +71,6 @@ class FileCryptoUtilTest extends Specification {
         encryptedFile.delete()
     }
 
-    @Ignore
     def "encrypt and decrypt a file"() {
         setup:
         File file = new File('file.txt')
