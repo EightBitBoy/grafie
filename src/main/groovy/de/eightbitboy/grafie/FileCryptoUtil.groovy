@@ -26,16 +26,13 @@ class FileCryptoUtil {
         File decryptedFile = new File(encryptedFile.getCanonicalPath().substring(0, path.lastIndexOf(fileExtension)))
         decryptedFile.createNewFile()
 
-        /*
         decryptedFile.withWriter { writer ->
+            String encryptedText = encryptedFile.getText(UTF_8)
+            byte[] encryptedBytes = Base64.getDecoder().decode(encryptedText)
+
             Cipher cipher = setup(processPassword(password), Cipher.DECRYPT_MODE)
+            writer.write(new String(cipher.doFinal(encryptedBytes)))
         }
-        */
-        /*
-        new File(encryptedFile.getCanonicalPath()).withWriter(UTF_8) { writer ->
-            writer.write(Base64.getEncoder().encodeToString(cipher.doFinal(encryptedFile.getText(UTF_8).getBytes(UTF_8))))
-        }
-        */
     }
 
     void encrypt(String password, File decryptedFile) {
