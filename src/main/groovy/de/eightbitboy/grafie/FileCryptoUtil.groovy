@@ -18,12 +18,11 @@ class FileCryptoUtil {
     final static String fileExtension = '.grafie'
 
     void decrypt(String password, File encryptedFile) {
-        Cipher cipher = setup(processPassword(password), Cipher.DECRYPT_MODE)
-
-        if (!encryptedFile.getCanonicalPath().endsWith(fileExtension)) {
-            //TODO Throw some exception!
+        if (!encryptedFile.getName().endsWith(fileExtension)) {
+            throw new IllegalStateException("The encrypted file has no valid name!")
         }
 
+        Cipher cipher = setup(processPassword(password), Cipher.DECRYPT_MODE)
         /*
         new File(encryptedFile.getCanonicalPath()).withWriter(UTF_8) { writer ->
             writer.write(Base64.getEncoder().encodeToString(cipher.doFinal(encryptedFile.getText(UTF_8).getBytes(UTF_8))))
@@ -32,12 +31,18 @@ class FileCryptoUtil {
     }
 
     void encrypt(String password, File decryptedFile) {
+        if (decryptedFile.getName().endsWith(fileExtension)) {
+            throw new IllegalStateException("The encrypted file has no valid name!")
+        }
+
         Cipher cipher = setup(processPassword(password), Cipher.ENCRYPT_MODE)
 
+        /*
         File encryptedFile = new File(decryptedFile.getCanonicalPath() + fileExtension)
         if (!encryptedFile.exists()) {
             encryptedFile.createNewFile()
         }
+        */
     }
 
     /** Create a 128 bit key from an arbitrary password string. */
