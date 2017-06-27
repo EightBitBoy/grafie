@@ -1,5 +1,6 @@
 package de.eightbitboy.grafie
 
+import groovy.util.logging.Log
 import org.apache.commons.codec.digest.DigestUtils
 
 import javax.crypto.Cipher
@@ -13,6 +14,7 @@ https://stackoverflow.com/questions/18362137/encryption-with-aes-256-java
 https://stackoverflow.com/questions/3954611/encrypt-and-decrypt-with-aes-and-base64-encoding
  */
 
+@Log
 class FileCryptoUtil {
     final static String UTF_8 = 'UTF-8'
     final static String fileExtension = '.grafie'
@@ -21,8 +23,14 @@ class FileCryptoUtil {
         if (!encryptedFile.getName().endsWith(fileExtension)) {
             throw new IllegalStateException("The encrypted file has no valid name!")
         }
+        File decryptedFile = new File(encryptedFile.getCanonicalPath().substring(0, path.lastIndexOf(fileExtension)))
+        decryptedFile.createNewFile()
 
-        Cipher cipher = setup(processPassword(password), Cipher.DECRYPT_MODE)
+        /*
+        decryptedFile.withWriter { writer ->
+            Cipher cipher = setup(processPassword(password), Cipher.DECRYPT_MODE)
+        }
+        */
         /*
         new File(encryptedFile.getCanonicalPath()).withWriter(UTF_8) { writer ->
             writer.write(Base64.getEncoder().encodeToString(cipher.doFinal(encryptedFile.getText(UTF_8).getBytes(UTF_8))))
@@ -34,6 +42,8 @@ class FileCryptoUtil {
         if (decryptedFile.getName().endsWith(fileExtension)) {
             throw new IllegalStateException("The encrypted file has no valid name!")
         }
+        File encryptedFile = new File(decryptedFile.getCanonicalPath() + fileExtension)
+        encryptedFile.createNewFile()
 
         Cipher cipher = setup(processPassword(password), Cipher.ENCRYPT_MODE)
 
