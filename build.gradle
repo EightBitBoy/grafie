@@ -10,6 +10,8 @@ buildscript {
         classpath 'com.gradle.publish:plugin-publish-plugin:0.9.7'
         //noinspection GroovyAssignabilityCheck
         classpath 'com.github.ben-manes:gradle-versions-plugin:0.15.0'
+        //noinspection GroovyAssignabilityCheck
+        classpath 'com.jfrog.bintray.gradle:gradle-bintray-plugin:1.7.3'
     }
 }
 
@@ -17,6 +19,7 @@ apply plugin: 'groovy'
 //apply plugin: 'java-gradle-plugin' //https://docs.gradle.org/3.3/userguide/javaGradle_plugin.html
 apply plugin: 'com.gradle.plugin-publish'
 apply plugin: 'com.github.ben-manes.versions'
+apply plugin: 'com.jfrog.bintray'
 
 repositories {
     jcenter()
@@ -35,15 +38,6 @@ group = 'de.eightbitboy'
 version = '0.1.0-SNAPSHOT'
 
 pluginBundle {
-    plugins {
-        greetingsPlugin {
-            id = 'org.samples.greeting'
-            displayName = 'Gradle Greeting plugin'
-        }
-    }
-}
-
-pluginBundle {
     website = 'https://github.com/EightBitBoy/grafie'
     vcsUrl = 'https://github.com/EightBitBoy/grafie'
     description = 'Grafie encrypts and decrypts files in your workspace. Use it to protect sensitive information in your public git repositories!'
@@ -57,3 +51,13 @@ pluginBundle {
         }
     }
 }
+
+bintray {
+    user = System.getenv('bintrayUser')
+    key = System.getenv('bintrayKey')
+}
+
+/*
+https://github.com/bintray/gradle-bintray-plugin#readme
+https://github.com/bintray/bintray-examples/tree/master/gradle-bintray-plugin-examples
+*/
