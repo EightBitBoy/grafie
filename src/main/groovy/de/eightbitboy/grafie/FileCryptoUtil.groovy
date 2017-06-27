@@ -27,10 +27,11 @@ class FileCryptoUtil {
         decryptedFile.createNewFile()
 
         decryptedFile.withWriter { writer ->
+            Cipher cipher = setup(processPassword(password), Cipher.DECRYPT_MODE)
+
             String encryptedText = encryptedFile.getText(UTF_8)
             byte[] encryptedBytes = Base64.getDecoder().decode(encryptedText)
 
-            Cipher cipher = setup(processPassword(password), Cipher.DECRYPT_MODE)
             writer.write(new String(cipher.doFinal(encryptedBytes)))
         }
     }
@@ -42,14 +43,14 @@ class FileCryptoUtil {
         File encryptedFile = new File(decryptedFile.getCanonicalPath() + fileExtension)
         encryptedFile.createNewFile()
 
-        Cipher cipher = setup(processPassword(password), Cipher.ENCRYPT_MODE)
+        encryptedFile.withWriter { writer ->
+            Cipher cipher = setup(processPassword(password), Cipher.ENCRYPT_MODE)
 
-        /*
-        File encryptedFile = new File(decryptedFile.getCanonicalPath() + fileExtension)
-        if (!encryptedFile.exists()) {
-            encryptedFile.createNewFile()
+            String decryptedText = decryptedFile.getText(UTF_8)
+            byte[] encryptedBytes = cipher.doFinal(decryptedText.getBytes(UTF_8))
+
+            writer.write(Base64.getEncoder().encodeToString(encryptedBytes))
         }
-        */
     }
 
     /** Create a 128 bit key from an arbitrary password string. */
