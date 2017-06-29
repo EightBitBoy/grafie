@@ -37,23 +37,30 @@ class FileUtilTest extends Specification {
         file2.canonicalPath == encryptedFile2.canonicalPath.replace('.FileUtilTest', '')
         file1.canonicalPath == new File('file1.txt').canonicalPath
         file2.canonicalPath == new File('foo/file2.txt').canonicalPath
+
+        cleanup:
+        encryptedFile1.delete()
+        encryptedFile2.delete()
+        file1.delete()
+        file2.delete()
     }
 
-    @PendingFeature
     def "get encrypted file from an unencrypted file"() {
         setup:
         File file1 = new File('file1.txt')
         File file2 = new File('foo/file2.txt')
 
         when:
-        File encryptedFile1 = fileUtil.getUnencryptedFile(file1)
-        File encryptedFile2 = fileUtil.getUnencryptedFile(file2)
+        File encryptedFile1 = fileUtil.getEncryptedFile(file1)
+        File encryptedFile2 = fileUtil.getEncryptedFile(file2)
 
         then:
         encryptedFile1.canonicalPath.endsWith('.FileUtilTest')
         encryptedFile2.canonicalPath.endsWith('.FileUtilTest')
         encryptedFile1.canonicalPath == file1.canonicalPath + '.FileUtilTest'
         encryptedFile2.canonicalPath == file2.canonicalPath + '.FileUtilTest'
+        encryptedFile1.canonicalPath == new File('file1.txt.FileUtilTes')
+        encryptedFile2.canonicalPath == new File('foo/file2.txt.FileUtilTes')
     }
 
     def "find all encrypted files"() {
