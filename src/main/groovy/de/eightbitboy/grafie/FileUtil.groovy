@@ -23,7 +23,16 @@ class FileUtil {
     }
 
     List<File> getEncryptedFiles(){
-
+        List<File> files = []
+        // TODO Read about traversion; there might be better ways to find files matching the file extension!
+        // TODO Exclude git and build directories!
+        root.traverse {file->
+            if(file.isFile() && file.name.endsWith(fileExtension)){
+                files.add(file)
+            }
+        }
+        println(files)
+        return files
     }
 
     List<File> getUnencryptedFiles(){
