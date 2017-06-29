@@ -16,9 +16,4 @@ class GrafieTest extends Specification {
         project.tasks.decryptFiles instanceof FileCryptoTask
         project.tasks.encryptFiles instanceof FileCryptoTask
     }
-
-    def "find files for which an encrypted file exists"(){
-        setup:
-        File file1 = new File('file1.txt.grafie')
-    }
 }
