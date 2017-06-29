@@ -36,7 +36,9 @@ class FileUtil {
     }
 
     List<File> getUnencryptedFiles(){
-
+        List<File> encryptedFiles = getEncryptedFiles()
+        List<File> files
+        return files
     }
 
     // TODO Check files for invalid names and file extensions, handle FileFormatExceptions

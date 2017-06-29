@@ -58,6 +58,30 @@ class FileUtilTest extends Specification {
     }
 
     def "find all unencrypted files from encrypted file"() {
+        File file1 = new File('file1.txt.FileUtilTest')
+        File file2 = new File('file2.txt.FileUtilTest')
+        File file3 = new File('foo/file3.txt.FileUtilTest')
+        File file4 = new File('bar/file4.txt.FileUtilTest')
+        file3.getParentFile().mkdirs()
+        file4.getParentFile().mkdirs()
+        file1.createNewFile()
+        file2.createNewFile()
+        file3.createNewFile()
+        file4.createNewFile()
 
+        when:
+        List<File> files = fileUtil.getUnencryptedFiles()
+
+        then:
+        files.find{it.canonicalPath = new File('file1.txt').canonicalPath}
+        files.find{it.canonicalPath = new File('file2.txt').canonicalPath}
+        files.find{it.canonicalPath = new File('foo/file3.txt').canonicalPath}
+        files.find{it.canonicalPath = new File('bar/file4.txt').canonicalPath}
+
+        cleanup:
+        file1.delete()
+        file2.delete()
+        file3.delete()
+        file4.delete()
     }
 }
