@@ -1,6 +1,5 @@
 package de.eightbitboy.grafie
 
-import spock.lang.PendingFeature
 import spock.lang.Specification
 
 class FileUtilTest extends Specification {
@@ -84,7 +83,6 @@ class FileUtilTest extends Specification {
 
         when:
         List<File> files = fileUtil.getEncryptedFiles()
-        println(files)
 
         then:
         files.find { it.canonicalPath == file1.canonicalPath }
@@ -99,7 +97,6 @@ class FileUtilTest extends Specification {
         file4.delete()
     }
 
-    @PendingFeature
     def "find all unencrypted files from encrypted file"() {
         File file1 = new File('file1.txt.FileUtilTest')
         File file2 = new File('file2.txt.FileUtilTest')
@@ -114,13 +111,12 @@ class FileUtilTest extends Specification {
 
         when:
         List<File> files = fileUtil.getUnencryptedFiles()
-        println(files)
 
         then:
-        files.find { it.canonicalPath = new File('file1.txt').canonicalPath }
-        files.find { it.canonicalPath = new File('file2.txt').canonicalPath }
-        files.find { it.canonicalPath = new File('foo/file3.txt').canonicalPath }
-        files.find { it.canonicalPath = new File('bar/file4.txt').canonicalPath }
+        files.find { it.canonicalPath == new File('file1.txt').canonicalPath }
+        files.find { it.canonicalPath == new File('file2.txt').canonicalPath }
+        files.find { it.canonicalPath == new File('foo/file3.txt').canonicalPath }
+        files.find { it.canonicalPath == new File('bar/file4.txt').canonicalPath }
 
         cleanup:
         file1.delete()

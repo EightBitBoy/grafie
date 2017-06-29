@@ -45,7 +45,10 @@ class FileUtil {
 
     List<File> getUnencryptedFiles() {
         List<File> encryptedFiles = getEncryptedFiles()
-        List<File> files
+        List<File> files = []
+        encryptedFiles.each { file ->
+            files.add(getUnencryptedFile(file))
+        }
         return files
     }
 
