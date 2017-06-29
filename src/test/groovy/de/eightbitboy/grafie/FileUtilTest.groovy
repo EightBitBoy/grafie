@@ -20,12 +20,36 @@ class FileUtilTest extends Specification {
         util2.getFileExtension() == '.test2'
     }
 
-    def "get the file name of an unencrypted file from an encrypted file"() {
+    def "get an unencrypted file from an encrypted file"() {
+        setup:
+        File encryptedFile1 = new File('file1.txt.FileUtilTest')
+        File encryptedFile2 = new File('foo/file2.txt.FileUtilTest')
 
+        when:
+        File file1 = fileUtil.getUnencryptedFile(encryptedFile1)
+        File file2 = fileUtil.getUnencryptedFile(encryptedFile2)
+
+        then:
+        !file1.canonicalPath.endsWith('.FileUtilTest')
+        !file2.canonicalPath.endsWith('.FileUtilTest')
+        file1.canonicalPath == encryptedFile1.canonicalPath.replace('.FileUtilTest', '')
+        file2.canonicalPath == encryptedFile1.canonicalPath.replace('.FileUtilTest', '')
     }
 
-    def "get the file name of an encrypted file from an unencrypted file"() {
+    def "get encrypted file from an unencrypted file"() {
+        setup:
+        File file1 = new File('file1.txt')
+        File file2 = new File('foo/file2.txt')
 
+        when:
+        File encryptedFile1 = fileUtil.getUnencryptedFile(file1)
+        File encryptedFile2 = fileUtil.getUnencryptedFile(file2)
+
+        then:
+        encryptedFile1.canonicalPath.endsWith('.FileUtilTest')
+        encryptedFile2.canonicalPath.endsWith('.FileUtilTest')
+        encryptedFile1.canonicalPath == file1.canonicalPath + '.FileUtilTest'
+        encryptedFile2.canonicalPath == file2.canonicalPath + '.FileUtilTest'
     }
 
     def "find all encrypted files"() {
@@ -45,10 +69,10 @@ class FileUtilTest extends Specification {
         List<File> files = fileUtil.getEncryptedFiles()
 
         then:
-        files.find{it.canonicalPath == file1.canonicalPath}
-        files.find{it.canonicalPath == file2.canonicalPath}
-        files.find{it.canonicalPath == file3.canonicalPath}
-        files.find{it.canonicalPath == file4.canonicalPath}
+        files.find { it.canonicalPath == file1.canonicalPath }
+        files.find { it.canonicalPath == file2.canonicalPath }
+        files.find { it.canonicalPath == file3.canonicalPath }
+        files.find { it.canonicalPath == file4.canonicalPath }
 
         cleanup:
         file1.delete()
@@ -73,10 +97,10 @@ class FileUtilTest extends Specification {
         List<File> files = fileUtil.getUnencryptedFiles()
 
         then:
-        files.find{it.canonicalPath = new File('file1.txt').canonicalPath}
-        files.find{it.canonicalPath = new File('file2.txt').canonicalPath}
-        files.find{it.canonicalPath = new File('foo/file3.txt').canonicalPath}
-        files.find{it.canonicalPath = new File('bar/file4.txt').canonicalPath}
+        files.find { it.canonicalPath = new File('file1.txt').canonicalPath }
+        files.find { it.canonicalPath = new File('file2.txt').canonicalPath }
+        files.find { it.canonicalPath = new File('foo/file3.txt').canonicalPath }
+        files.find { it.canonicalPath = new File('bar/file4.txt').canonicalPath }
 
         cleanup:
         file1.delete()

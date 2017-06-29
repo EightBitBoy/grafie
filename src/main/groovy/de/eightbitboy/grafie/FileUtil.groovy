@@ -22,6 +22,14 @@ class FileUtil {
         }
     }
 
+    File getUnencryptedFile(File encryptedFile){
+
+    }
+
+    File getEncryptedFile(File unencryptedFile){
+
+    }
+
     List<File> getEncryptedFiles(){
         List<File> files = []
         // TODO Read about traversion; there might be better ways to find files matching the file extension!
@@ -31,7 +39,6 @@ class FileUtil {
                 files.add(file)
             }
         }
-        println(files)
         return files
     }
 
