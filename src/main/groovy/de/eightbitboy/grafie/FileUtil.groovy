@@ -2,9 +2,11 @@ package de.eightbitboy.grafie
 
 class FileUtil {
     private String fileExtension
+    private File root
 
-    FileUtil(String fileExtension) {
+    FileUtil(String fileExtension, File root) {
         this.fileExtension = checkFileExtension(fileExtension)
+        this.root = root
     }
 
     String getFileExtension(){
@@ -18,6 +20,14 @@ class FileUtil {
         } else {
             return fileExtension
         }
+    }
+
+    List<File> getEncryptedFiles(){
+
+    }
+
+    List<File> getUnencryptedFiles(){
+
     }
 
     // TODO Check files for invalid names and file extensions, handle FileFormatExceptions
