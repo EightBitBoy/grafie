@@ -65,8 +65,8 @@ publishing {
 }
 
 bintray {
-    user = bintrayUser
-    key = bintrayKey
+    user = findProperty('bintrayUser')
+    key = findProperty('bintrayKey')
 
     publications = ['GrafiePublication']
 
