@@ -19,6 +19,10 @@ class FileCryptoUtil {
     final static String UTF_8 = 'UTF-8'
     final static String fileExtension = '.grafie'
 
+    FileCryptoUtil(String fileExtension) {
+
+    }
+
     void decrypt(String password, File encryptedFile) {
         if (!encryptedFile.getName().endsWith(fileExtension)) {
             throw new IllegalStateException("The encrypted file has no valid name!")
