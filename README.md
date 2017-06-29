@@ -9,3 +9,8 @@
 * [Gradle documentation: Writing custom plugins](https://docs.gradle.org/3.3/userguide/custom_plugins.html)
 * [Gradle sample: Custom plugin](https://github.com/gradle/gradle/tree/master/subprojects/docs/src/samples/customPlugin)
 * [jonathanhood's gradle-plugin-example](https://github.com/jonathanhood/gradle-plugin-example)
+
+## Changelog
+
+### 0.1.0 - not yet released
+* Initial release
