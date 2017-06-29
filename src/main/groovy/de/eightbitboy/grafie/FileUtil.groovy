@@ -28,7 +28,7 @@ class FileUtil {
     }
 
     File getEncryptedFile(File unencryptedFile) {
-
+        return new File(unencryptedFile.getCanonicalPath() + fileExtension)
     }
 
     List<File> getEncryptedFiles() {

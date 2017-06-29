@@ -59,8 +59,14 @@ class FileUtilTest extends Specification {
         encryptedFile2.canonicalPath.endsWith('.FileUtilTest')
         encryptedFile1.canonicalPath == file1.canonicalPath + '.FileUtilTest'
         encryptedFile2.canonicalPath == file2.canonicalPath + '.FileUtilTest'
-        encryptedFile1.canonicalPath == new File('file1.txt.FileUtilTes')
-        encryptedFile2.canonicalPath == new File('foo/file2.txt.FileUtilTes')
+        encryptedFile1.canonicalPath == new File('file1.txt.FileUtilTest').canonicalPath
+        encryptedFile2.canonicalPath == new File('foo/file2.txt.FileUtilTest').canonicalPath
+
+        cleanup:
+        file1.delete()
+        file2.delete()
+        encryptedFile1.delete()
+        encryptedFile2.delete()
     }
 
     def "find all encrypted files"() {
