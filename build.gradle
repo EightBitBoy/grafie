@@ -71,7 +71,7 @@ bintray {
     publications = ['GrafiePublication']
 
     publish = true
-    override = true
+    override = false
 
     pkg {
         repo = 'projects'
