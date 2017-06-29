@@ -1,5 +1,6 @@
 package de.eightbitboy.grafie
 
+import spock.lang.PendingFeature
 import spock.lang.Specification
 
 class FileUtilTest extends Specification {
@@ -33,9 +34,12 @@ class FileUtilTest extends Specification {
         !file1.canonicalPath.endsWith('.FileUtilTest')
         !file2.canonicalPath.endsWith('.FileUtilTest')
         file1.canonicalPath == encryptedFile1.canonicalPath.replace('.FileUtilTest', '')
-        file2.canonicalPath == encryptedFile1.canonicalPath.replace('.FileUtilTest', '')
+        file2.canonicalPath == encryptedFile2.canonicalPath.replace('.FileUtilTest', '')
+        file1.canonicalPath == new File('file1.txt').canonicalPath
+        file2.canonicalPath == new File('foo/file2.txt').canonicalPath
     }
 
+    @PendingFeature
     def "get encrypted file from an unencrypted file"() {
         setup:
         File file1 = new File('file1.txt')
@@ -67,6 +71,7 @@ class FileUtilTest extends Specification {
 
         when:
         List<File> files = fileUtil.getEncryptedFiles()
+        println(files)
 
         then:
         files.find { it.canonicalPath == file1.canonicalPath }
@@ -81,6 +86,7 @@ class FileUtilTest extends Specification {
         file4.delete()
     }
 
+    @PendingFeature
     def "find all unencrypted files from encrypted file"() {
         File file1 = new File('file1.txt.FileUtilTest')
         File file2 = new File('file2.txt.FileUtilTest')
@@ -95,6 +101,7 @@ class FileUtilTest extends Specification {
 
         when:
         List<File> files = fileUtil.getUnencryptedFiles()
+        println(files)
 
         then:
         files.find { it.canonicalPath = new File('file1.txt').canonicalPath }

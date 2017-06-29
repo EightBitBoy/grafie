@@ -9,7 +9,7 @@ class FileUtil {
         this.root = root
     }
 
-    String getFileExtension(){
+    String getFileExtension() {
         return fileExtension
     }
 
@@ -22,27 +22,28 @@ class FileUtil {
         }
     }
 
-    File getUnencryptedFile(File encryptedFile){
+    File getUnencryptedFile(File encryptedFile) {
+        return new File(encryptedFile.getCanonicalPath().substring(
+                0, encryptedFile.getCanonicalPath().lastIndexOf(fileExtension)))
+    }
+
+    File getEncryptedFile(File unencryptedFile) {
 
     }
 
-    File getEncryptedFile(File unencryptedFile){
-
-    }
-
-    List<File> getEncryptedFiles(){
+    List<File> getEncryptedFiles() {
         List<File> files = []
         // TODO Read about traversion; there might be better ways to find files matching the file extension!
         // TODO Exclude git and build directories!
-        root.traverse {file->
-            if(file.isFile() && file.name.endsWith(fileExtension)){
+        root.traverse { file ->
+            if (file.isFile() && file.name.endsWith(fileExtension)) {
                 files.add(file)
             }
         }
         return files
     }
 
-    List<File> getUnencryptedFiles(){
+    List<File> getUnencryptedFiles() {
         List<File> encryptedFiles = getEncryptedFiles()
         List<File> files
         return files
