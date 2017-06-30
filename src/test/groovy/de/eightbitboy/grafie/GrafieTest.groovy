@@ -1,13 +1,35 @@
 package de.eightbitboy.grafie
 
+import org.apache.commons.io.FileUtils
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
 import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome
+import spock.lang.PendingFeature
 import spock.lang.Specification
 
 class GrafieTest extends Specification {
+
+    File projectDir
+    File buildFile
+
+    def setup() {
+        projectDir = new File('./testProject')
+        projectDir.mkdirs()
+
+        buildFile = new File(projectDir, 'build.gradle')
+        buildFile << """
+plugins {
+    id 'de.eightbitboy.grafie'
+}
+"""
+    }
+
+    def cleanup() {
+        FileUtils.deleteDirectory(projectDir)
+    }
+
     def "add the plugin to a mocked project"() {
         setup:
         Project project = ProjectBuilder.builder().build()
@@ -26,30 +48,15 @@ class GrafieTest extends Specification {
      */
 
     def "add the plugin to a real project"() {
-        setup:
-        File projectDir = new File('./testProject')
-        projectDir.mkdirs()
-        File buildFile = new File(projectDir, 'build.gradle')
-        String buildScript = """
-plugins {
-    id 'de.eightbitboy.grafie'
-}
-"""
-        buildFile.write(buildScript)
-
         when:
         BuildResult result = GradleRunner.create()
                 .withProjectDir(projectDir)
-                .withArguments('encryptFiles')
                 .withPluginClasspath()
+                .withArguments('encryptFiles')
                 .build()
 
         then:
-        //result.getOutput().contains('### foobar')
         result.task(':encryptFiles').getOutcome() == TaskOutcome.SUCCESS
-
-        cleanup:
-        projectDir.delete()
     }
 
     /*
@@ -63,23 +70,21 @@ plugins {
     https://discuss.gradle.org/t/how-to-execute-a-task-in-unit-test-for-custom-plugin/6771/3
      */
 
+    @PendingFeature
     def "encrypt a file"() {
         setup:
-        File projectDir = new File('./testProject')
-        projectDir.mkdirs()
-        File buildFile = new File(projectDir, 'build.gradle')
-        String buildScript = """\
+        buildFile << """
 task fooBar{
     doLast{
         println('### foobar')
     }
 }
 """
-        buildFile.write(buildScript)
 
         when:
         BuildResult result = GradleRunner.create()
                 .withProjectDir(projectDir)
+                .withPluginClasspath()
                 .withArguments('fooBar')
                 .build()
 
