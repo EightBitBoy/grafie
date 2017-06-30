@@ -7,17 +7,25 @@ import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome
 import spock.lang.Ignore
+import spock.lang.Shared
 import spock.lang.Specification
 
 class GrafieTest extends Specification {
 
+    @Shared
     File projectDir
     File buildFile
 
-    def setup() {
+    def setupSpec() {
         projectDir = new File('./testProject')
         projectDir.mkdirs()
+    }
 
+    def cleanupSpec() {
+        FileUtils.deleteDirectory(projectDir)
+    }
+
+    def setup() {
         buildFile = new File(projectDir, 'build.gradle')
         buildFile << """
 plugins {
@@ -27,7 +35,7 @@ plugins {
     }
 
     def cleanup() {
-        FileUtils.deleteDirectory(projectDir)
+        buildFile.delete()
     }
 
     def "add the plugin to a mocked project"() {
@@ -66,7 +74,7 @@ plugins {
         result.output.contains('decryptFiles')
         result.output.contains('encryptFiles')
     }
-    
+
     def "encrypt a file"() {
         setup:
         buildFile << """
