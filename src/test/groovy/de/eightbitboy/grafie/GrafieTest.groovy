@@ -2,6 +2,8 @@ package de.eightbitboy.grafie
 
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
+import org.gradle.testkit.runner.BuildResult
+import org.gradle.testkit.runner.GradleRunner
 import spock.lang.Specification
 
 class GrafieTest extends Specification {
@@ -34,6 +36,16 @@ task fooBar{
 }
 """
         buildFile.write(buildScript)
+
+        when:
+        BuildResult result = GradleRunner.create()
+                .withProjectDir(projectDir)
+                .withArguments('fooBar')
+                .build()
+
+        then:
+        result.getOutput().contains('### foobar')
+        //result.task(':fooBar').getOutcome() == SUCCESS
 
         cleanup:
         buildFile.delete()
