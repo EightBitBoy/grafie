@@ -2,7 +2,6 @@ package de.eightbitboy.grafie
 
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
-import spock.lang.PendingFeature
 import spock.lang.Specification
 
 class GrafieTest extends Specification {
@@ -23,12 +22,25 @@ class GrafieTest extends Specification {
     https://github.com/ysb33r/gradleTest
     https://github.com/eriwen/gradle-js-plugin/tree/master/src/test/groovy/com/eriwen/gradle/js/util
      */
-    @PendingFeature
+
     def "encrypt a file"() {
+        setup:
+        File projectDir = new File('./testProject')
+        projectDir.mkdirs()
+        File buildFile = new File(projectDir, 'build.gradle')
+        String buildScript = """\
+task fooBar{
+    println('### foobar')
+}
+"""
+        buildFile.write(buildScript)
+
+        cleanup:
+        buildFile.delete()
+        projectDir.delete()
     }
 
-    @PendingFeature
-    def "decrypt a file"(){
+    def "decrypt a file"() {
 
     }
 }
