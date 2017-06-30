@@ -8,7 +8,7 @@ import org.gradle.testkit.runner.TaskOutcome
 import spock.lang.Specification
 
 class GrafieTest extends Specification {
-    def "add the plugin to a project"() {
+    def "add the plugin to a mocked project"() {
         setup:
         Project project = ProjectBuilder.builder().build()
 
@@ -20,7 +20,11 @@ class GrafieTest extends Specification {
         project.tasks.encryptFiles instanceof FileCryptoTask
     }
 
+    def "add the plugin to a real project"(){
+    }
+
     /*
+    https://github.com/gradle/gradle/blob/master/design-docs/testing-toolkit.md#milestone-3
     https://blog.gradle.org/introducing-testkit
     https://docs.gradle.org/current/userguide/test_kit.html
     https://github.com/ysb33r/gradleTest

@@ -27,6 +27,18 @@ repositories {
     mavenCentral()
 }
 
+task('createClasspathManifest') {
+    def outputDir = file("$buildDir/$name")
+
+    inputs.files sourceSets.main.runtimeClasspath
+    outputs.dir outputDir
+
+    doLast {
+        outputDir.mkdirs()
+        file("$outputDir/plugin-classpath.txt").text = sourceSets.main.runtimeClasspath.join("\n")
+    }
+}
+
 dependencies {
     compile gradleApi()
     compile 'org.codehaus.groovy:groovy-all:2.4.11'
@@ -34,6 +46,7 @@ dependencies {
     testCompile gradleTestKit()
     testCompile 'org.spockframework:spock-core:1.1-groovy-2.4'
     testCompile 'org.apache.commons:commons-lang3:3.6'
+    testRuntime files(createClasspathManifest)
 }
 
 group = 'de.eightbitboy'
