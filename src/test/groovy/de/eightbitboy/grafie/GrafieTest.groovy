@@ -4,6 +4,7 @@ import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
 import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.GradleRunner
+import org.gradle.testkit.runner.TaskOutcome
 import spock.lang.Specification
 
 class GrafieTest extends Specification {
@@ -20,9 +21,13 @@ class GrafieTest extends Specification {
     }
 
     /*
+    https://blog.gradle.org/introducing-testkit
     https://docs.gradle.org/current/userguide/test_kit.html
     https://github.com/ysb33r/gradleTest
     https://github.com/eriwen/gradle-js-plugin/tree/master/src/test/groovy/com/eriwen/gradle/js/util
+    https://discuss.gradle.org/t/separate-execution-for-java-unit-and-integration-tests/8713
+    https://discuss.gradle.org/t/how-do-i-unit-test-custom-tasks/3815
+    https://discuss.gradle.org/t/how-to-execute-a-task-in-unit-test-for-custom-plugin/6771/3
      */
 
     def "encrypt a file"() {
@@ -32,7 +37,9 @@ class GrafieTest extends Specification {
         File buildFile = new File(projectDir, 'build.gradle')
         String buildScript = """\
 task fooBar{
-    println('### foobar')
+    doLast{
+        println('### foobar')
+    }
 }
 """
         buildFile.write(buildScript)
@@ -45,7 +52,7 @@ task fooBar{
 
         then:
         result.getOutput().contains('### foobar')
-        //result.task(':fooBar').getOutcome() == SUCCESS
+        result.task(':fooBar').getOutcome() == TaskOutcome.SUCCESS
 
         cleanup:
         buildFile.delete()
