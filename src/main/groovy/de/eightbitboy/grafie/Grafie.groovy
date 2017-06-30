@@ -29,16 +29,4 @@ class Grafie implements Plugin<Project> {
             mode = FileCryptoTask.Mode.ENCRYPT
         }
     }
-
-    /**
-     * Find all files for which an encrypted file exists.
-     */
-    void findAllUnencryptedFiles(Project project) {
-        List<File> encryptedFiles = []
-        File root = project.getRootDir().traverse { file ->
-            if (file.isFile()) {
-
-            }
-        }
-    }
 }
