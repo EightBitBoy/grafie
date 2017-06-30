@@ -101,7 +101,13 @@ bintray {
     }
 }
 
-test.outputs.upToDateWhen { false }
+test {
+    outputs.upToDateWhen { false }
+    testLogging {
+        exceptionFormat = 'full'
+        events 'failed', 'passed', 'skipped', 'standardOut'
+    }
+}
 
 /*
 https://github.com/bintray/gradle-bintray-plugin#readme
