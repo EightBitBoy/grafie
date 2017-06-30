@@ -31,7 +31,9 @@ class GrafieTest extends Specification {
         projectDir.mkdirs()
         File buildFile = new File(projectDir, 'build.gradle')
         String buildScript = """
-apply plugin: 'de.eightbitboy.grafie'
+plugins {
+    id 'de.eightbitboy.grafie'
+}
 """
         buildFile.write(buildScript)
 
@@ -39,7 +41,7 @@ apply plugin: 'de.eightbitboy.grafie'
         BuildResult result = GradleRunner.create()
                 .withProjectDir(projectDir)
                 .withArguments('encryptFiles')
-                //.withPluginClasspath()
+                .withPluginClasspath()
                 .build()
 
         then:
