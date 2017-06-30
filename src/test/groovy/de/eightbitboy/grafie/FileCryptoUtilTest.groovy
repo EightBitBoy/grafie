@@ -106,6 +106,15 @@ class FileCryptoUtilTest extends Specification {
 
     @PendingFeature
     def "encrypt and decrypt files of arbitrary length"() {
+        //TODO
+    }
 
+    /**
+     * This test ensures that the encryption is constant, there is no other factor than the
+     * password that influences the encryption result.
+     */
+    @PendingFeature
+    def "encrypt a file multiple times, the encrypted text should not change"() {
+        //TODO
     }
 }

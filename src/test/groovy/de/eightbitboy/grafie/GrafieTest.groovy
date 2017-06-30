@@ -7,6 +7,7 @@ import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome
 import spock.lang.Ignore
+import spock.lang.PendingFeature
 import spock.lang.Shared
 import spock.lang.Specification
 
@@ -75,33 +76,31 @@ plugins {
         result.output.contains('encryptFiles')
     }
 
+    @PendingFeature
     def "encrypt a file"() {
-        setup:
-        buildFile << """
-task fooBar{
-    doLast{
-        println('### foobar')
-    }
-}
-"""
-
         when:
         BuildResult result = GradleRunner.create()
                 .withProjectDir(projectDir)
                 .withPluginClasspath()
-                .withArguments('fooBar')
+                .withArguments('encryptFiles')
                 .build()
 
         then:
-        result.getOutput().contains('### foobar')
-        result.task(':fooBar').getOutcome() == TaskOutcome.SUCCESS
-
-        cleanup:
-        buildFile.delete()
-        projectDir.delete()
+        result.getOutput().contains('### encrypt')
+        result.task(':encryptFiles').getOutcome() == TaskOutcome.SUCCESS
     }
 
+    @PendingFeature
     def "decrypt a file"() {
+        when:
+        BuildResult result = GradleRunner.create()
+                .withProjectDir(projectDir)
+                .withPluginClasspath()
+                .withArguments('decryptFiles')
+                .build()
 
+        then:
+        result.getOutput().contains('### decrypt')
+        result.task(':decryptFiles').getOutcome() == TaskOutcome.SUCCESS
     }
 }

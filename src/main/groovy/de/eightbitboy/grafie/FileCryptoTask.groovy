@@ -15,6 +15,7 @@ class FileCryptoTask extends DefaultTask {
 
     @TaskAction
     void cryptoAction() {
+        /*
         doLast {
             println(project.projectDir)
 
@@ -26,6 +27,7 @@ class FileCryptoTask extends DefaultTask {
                 //cryptoUtil.encrypt()
             }
         }
+        */
     }
 
     /** Get the encryption/decryption key. */

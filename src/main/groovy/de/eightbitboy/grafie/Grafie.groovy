@@ -20,13 +20,19 @@ class Grafie implements Plugin<Project> {
         project.task('decryptFiles', type: FileCryptoTask) {
             group = GROUP
             description = 'Decrypt all files which have the encryption file name extension, the default is \'.grafie\'.'
-            //mode = FileCryptoTask.Mode.DECRYPT
+            mode = FileCryptoTask.Mode.DECRYPT
+            doLast {
+                println('### decrypt')
+            }
         }
 
         project.task('encryptFiles', type: FileCryptoTask) {
             group = GROUP
             description = 'Encrypt all files for which a file with the same name and encryption file name extension exists, the default is \'.grafie\'.'
-            //mode = FileCryptoTask.Mode.ENCRYPT
+            mode = FileCryptoTask.Mode.ENCRYPT
+            doLast {
+                println('### encrypt')
+            }
         }
     }
 }
