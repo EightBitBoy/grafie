@@ -20,7 +20,34 @@ class GrafieTest extends Specification {
         project.tasks.encryptFiles instanceof FileCryptoTask
     }
 
-    def "add the plugin to a real project"(){
+    /*
+    https://docs.gradle.org/3.3/userguide/test_kit.html
+    https://github.com/gradle/gradle/tree/master/subprojects/docs/src/samples/testKit/gradleRunner
+     */
+
+    def "add the plugin to a real project"() {
+        setup:
+        File projectDir = new File('./testProject')
+        projectDir.mkdirs()
+        File buildFile = new File(projectDir, 'build.gradle')
+        String buildScript = """
+apply plugin: 'de.eightbitboy.grafie'
+"""
+        buildFile.write(buildScript)
+
+        when:
+        BuildResult result = GradleRunner.create()
+                .withProjectDir(projectDir)
+                .withArguments('encryptFiles')
+                //.withPluginClasspath()
+                .build()
+
+        then:
+        //result.getOutput().contains('### foobar')
+        result.task(':encryptFiles').getOutcome() == TaskOutcome.SUCCESS
+
+        cleanup:
+        projectDir.delete()
     }
 
     /*
