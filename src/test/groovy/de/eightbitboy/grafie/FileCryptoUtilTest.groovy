@@ -10,7 +10,7 @@ class FileCryptoUtilTest extends Specification {
     FileCryptoUtil cryptoUtil
 
     def setup() {
-        cryptoUtil = new FileCryptoUtil()
+        cryptoUtil = new FileCryptoUtil('.FileCryptoUtilTest')
     }
 
     def "a password must not be null"() {
@@ -62,7 +62,7 @@ class FileCryptoUtilTest extends Specification {
         cryptoUtil.encrypt('password', file)
 
         then:
-        File encryptedFile = new File('file.txt.grafie')
+        File encryptedFile = new File('file.txt.FileCryptoUtilTest')
         encryptedFile.exists()
         !encryptedFile.getText('UTF-8').isEmpty()
 
@@ -76,7 +76,7 @@ class FileCryptoUtilTest extends Specification {
         File file = new File('file.txt')
         file.write('This is a test.')
 
-        File encryptedFile = new File('file.txt.grafie')
+        File encryptedFile = new File('file.txt.FileCryptoUtilTest')
         assert !encryptedFile.exists()
 
         when:

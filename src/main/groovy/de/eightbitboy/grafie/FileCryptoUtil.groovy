@@ -16,11 +16,16 @@ https://stackoverflow.com/questions/3954611/encrypt-and-decrypt-with-aes-and-bas
 
 @Log
 class FileCryptoUtil {
-    final static String UTF_8 = 'UTF-8'
-    final static String fileExtension = '.grafie'
+    private String encoding = 'UTF-8'
+    private String fileExtension
 
     FileCryptoUtil(String fileExtension) {
+        this.fileExtension = fileExtension
+    }
 
+    FileCryptoUtil(String fileExtension, String encoding) {
+        this.fileExtension = fileExtension
+        this.encoding = encoding
     }
 
     void decrypt(String password, File encryptedFile) {
@@ -34,7 +39,7 @@ class FileCryptoUtil {
         decryptedFile.withWriter { writer ->
             Cipher cipher = setup(processPassword(password), Cipher.DECRYPT_MODE)
 
-            String encryptedText = encryptedFile.getText(UTF_8)
+            String encryptedText = encryptedFile.getText(encoding)
             byte[] encryptedBytes = Base64.getDecoder().decode(encryptedText)
 
             writer.write(new String(cipher.doFinal(encryptedBytes)))
@@ -51,8 +56,8 @@ class FileCryptoUtil {
         encryptedFile.withWriter { writer ->
             Cipher cipher = setup(processPassword(password), Cipher.ENCRYPT_MODE)
 
-            String decryptedText = decryptedFile.getText(UTF_8)
-            byte[] encryptedBytes = cipher.doFinal(decryptedText.getBytes(UTF_8))
+            String decryptedText = decryptedFile.getText(encoding)
+            byte[] encryptedBytes = cipher.doFinal(decryptedText.getBytes(encoding))
 
             writer.write(Base64.getEncoder().encodeToString(encryptedBytes))
         }
