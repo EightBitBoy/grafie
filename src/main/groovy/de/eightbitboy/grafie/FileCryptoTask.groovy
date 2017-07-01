@@ -11,7 +11,7 @@ class FileCryptoTask extends DefaultTask {
     }
 
     Mode mode = Mode.ENCRYPT
-    final String GRAFIE_KEY = "grafieKey"
+    final String GRAFIE_PASSWORD = "grafiePassword"
 
     @TaskAction
     void cryptoAction() {
@@ -32,9 +32,9 @@ class FileCryptoTask extends DefaultTask {
 
     /** Get the encryption/decryption key. */
     String getKey() {
-        if (project.hasProperty(GRAFIE_KEY)) {
-            if (project.property(GRAFIE_KEY)) {
-                return project.property(GRAFIE_KEY)
+        if (project.hasProperty(GRAFIE_PASSWORD)) {
+            if (project.property(GRAFIE_PASSWORD)) {
+                return project.property(GRAFIE_PASSWORD)
             } else {
                 throw new InvalidUserDataException("The property 'grafieKey' has no value!")
             }
