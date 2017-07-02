@@ -17,6 +17,10 @@ class Grafie implements Plugin<Project> {
     void apply(Project project) {
         project.extensions.create('grafie', GrafieExtension)
 
+        project.task('doSomething') {
+            doLast { println('### Doing something!') }
+        }
+
         project.task('decryptFiles', type: FileCryptoTask) {
             group = GROUP
             description = 'Decrypt all files which have the encryption file name extension, the default is \'.grafie\'.'
