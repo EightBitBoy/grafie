@@ -101,9 +101,11 @@ plugins {
         result.task(':decryptFiles').getOutcome() == TaskOutcome.SUCCESS
     }
 
-    @PendingFeature
     def "encrypt a file"() {
+        println(System.getProperty('user.dir'))
 
+        expect:
+        'foo' == 'bar'
     }
 
     @PendingFeature
