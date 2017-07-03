@@ -17,6 +17,7 @@ class GrafieTest extends Specification {
     File buildFile
 
     def setupSpec() {
+        //TODO use System.getProperty('user.dir')
         projectDir = new File('./testProject')
         projectDir.mkdirs()
     }
@@ -101,15 +102,11 @@ plugins {
         result.task(':decryptFiles').getOutcome() == TaskOutcome.SUCCESS
     }
 
+    @PendingFeature
     def "encrypt a file"() {
-        println(System.getProperty('user.dir'))
-
-        expect:
-        'foo' == 'bar'
     }
 
     @PendingFeature
     def "decrypt a file"() {
-
     }
 }
