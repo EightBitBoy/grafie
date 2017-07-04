@@ -11,6 +11,7 @@ class FileCryptoTask extends DefaultTask {
     }
 
     Mode mode = Mode.ENCRYPT
+    String password = ''
     final String GRAFIE_PASSWORD = "grafiePassword"
 
     @TaskAction
