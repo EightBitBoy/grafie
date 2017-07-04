@@ -1,6 +1,7 @@
 package de.eightbitboy.grafie
 
 class GrafieExtension {
-    String fileExtension = 'grafie'
+    String password = ''
+    //String fileExtension = 'grafie'
     //List<String> files = []
 }
