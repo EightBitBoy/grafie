@@ -107,4 +107,8 @@ plugins {
     @PendingFeature
     def "decrypt a file"() {
     }
+
+    @PendingFeature
+    def "executing a task without a password should fail"() {
+    }
 }
