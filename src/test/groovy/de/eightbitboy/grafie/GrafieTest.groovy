@@ -85,7 +85,6 @@ plugins {
                 .build()
 
         then:
-        result.getOutput().contains('### encrypt')
         result.task(':encryptFiles').getOutcome() == TaskOutcome.SUCCESS
     }
 
@@ -98,7 +97,6 @@ plugins {
                 .build()
 
         then:
-        result.getOutput().contains('### decrypt')
         result.task(':decryptFiles').getOutcome() == TaskOutcome.SUCCESS
     }
 
