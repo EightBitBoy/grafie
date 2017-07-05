@@ -42,6 +42,7 @@ class FileUtilTest extends Specification {
         encryptedFile2.delete()
         file1.delete()
         file2.delete()
+        new File('foo').delete()
     }
 
     def "get encrypted file from an unencrypted file"() {
@@ -66,6 +67,7 @@ class FileUtilTest extends Specification {
         file2.delete()
         encryptedFile1.delete()
         encryptedFile2.delete()
+        new File('foo').delete()
     }
 
     def "find all encrypted files"() {
@@ -95,6 +97,8 @@ class FileUtilTest extends Specification {
         file2.delete()
         file3.delete()
         file4.delete()
+        new File('foo').delete()
+        new File('bar').delete()
     }
 
     def "find all unencrypted files from encrypted file"() {
@@ -123,5 +127,7 @@ class FileUtilTest extends Specification {
         file2.delete()
         file3.delete()
         file4.delete()
+        new File('foo').delete()
+        new File('bar').delete()
     }
 }
