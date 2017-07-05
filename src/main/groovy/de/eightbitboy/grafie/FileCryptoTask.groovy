@@ -16,19 +16,12 @@ class FileCryptoTask extends DefaultTask {
 
     @TaskAction
     void cryptoAction() {
-        /*
-        doLast {
-            println(project.projectDir)
+        FileCryptoUtil cryptoUtil = new FileCryptoUtil(password)
 
-            FileCryptoUtil cryptoUtil = new FileCryptoUtil()
-            if (mode == Mode.DECRYPT) {
-                //cryptoUtil.decrypt()
-            }
-            if (mode == Mode.ENCRYPT) {
-                //cryptoUtil.encrypt()
-            }
+        if (mode == Mode.DECRYPT) {
         }
-        */
+        if (mode == Mode.ENCRYPT) {
+        }
     }
 
     /** Get the encryption/decryption key. */
