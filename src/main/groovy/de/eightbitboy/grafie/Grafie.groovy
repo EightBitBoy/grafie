@@ -20,6 +20,9 @@ class Grafie implements Plugin<Project> {
 
         //TODO use project.file in tasks to access files
 
+        //TODO use project.files !!!11!!!1!
+        // see https://docs.gradle.org/3.3/userguide/working_with_files.html
+
         project.task('decryptFiles', type: FileCryptoTask) {
             group = GROUP
             description = 'Decrypt all files which have the encryption file name extension, the default is \'.grafie\'.'
@@ -35,8 +38,8 @@ class Grafie implements Plugin<Project> {
         }
     }
 
-    void validateExtension(Project project){
-        if(!project.grafie.password){
+    void validateExtension(Project project) {
+        if (!project.grafie.password) {
             throw new IllegalStateException('No password has been provided for the Grafie plugin!')
         }
     }

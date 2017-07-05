@@ -14,6 +14,8 @@ class FileCryptoTask extends DefaultTask {
     String password = ''
     final String GRAFIE_PASSWORD = "grafiePassword"
 
+    //TODO use this.logger
+    
     @TaskAction
     void cryptoAction() {
         FileCryptoUtil cryptoUtil = new FileCryptoUtil(password)
