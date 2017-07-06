@@ -12,10 +12,12 @@ class FileCryptoTask extends DefaultTask {
 
     Mode mode = Mode.ENCRYPT
     String password = ''
+    String suffix = ''
+
     final String GRAFIE_PASSWORD = "grafiePassword"
 
     //TODO use this.logger
-    
+
     @TaskAction
     void cryptoAction() {
         FileCryptoUtil cryptoUtil = new FileCryptoUtil(password)

@@ -17,23 +17,23 @@ https://stackoverflow.com/questions/3954611/encrypt-and-decrypt-with-aes-and-bas
 @Log
 class FileCryptoUtil {
     private String encoding = 'UTF-8'
-    private String fileExtension
+    private String fileSuffix
 
-    FileCryptoUtil(String fileExtension) {
-        this.fileExtension = fileExtension
+    FileCryptoUtil(String fileSuffix) {
+        this.fileSuffix = fileSuffix
     }
 
-    FileCryptoUtil(String fileExtension, String encoding) {
-        this.fileExtension = fileExtension
+    FileCryptoUtil(String fileSuffix, String encoding) {
+        this.fileSuffix = fileSuffix
         this.encoding = encoding
     }
 
     void decrypt(String password, File encryptedFile) {
-        if (!encryptedFile.getName().endsWith(fileExtension)) {
+        if (!encryptedFile.getName().endsWith(fileSuffix)) {
             throw new IllegalStateException("The encrypted file has no valid name!")
         }
         File decryptedFile = new File(encryptedFile.getCanonicalPath().substring(
-                0, encryptedFile.getCanonicalPath().lastIndexOf(fileExtension)))
+                0, encryptedFile.getCanonicalPath().lastIndexOf(fileSuffix)))
         decryptedFile.createNewFile()
 
         decryptedFile.withWriter { writer ->
@@ -47,10 +47,10 @@ class FileCryptoUtil {
     }
 
     void encrypt(String password, File decryptedFile) {
-        if (decryptedFile.getName().endsWith(fileExtension)) {
+        if (decryptedFile.getName().endsWith(fileSuffix)) {
             throw new IllegalStateException("The encrypted file has no valid name!")
         }
-        File encryptedFile = new File(decryptedFile.getCanonicalPath() + fileExtension)
+        File encryptedFile = new File(decryptedFile.getCanonicalPath() + fileSuffix)
         encryptedFile.createNewFile()
 
         encryptedFile.withWriter { writer ->

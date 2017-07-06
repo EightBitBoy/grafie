@@ -1,34 +1,34 @@
 package de.eightbitboy.grafie
 
 class FileUtil {
-    private String fileExtension
+    private String fileSuffix
     private File root
 
-    FileUtil(String fileExtension, File root) {
-        this.fileExtension = checkFileExtension(fileExtension)
+    FileUtil(String fileSuffix, File root) {
+        this.fileSuffix = checkFileSuffixn(fileSuffix)
         this.root = root
     }
 
     String getFileExtension() {
-        return fileExtension
+        return fileSuffix
     }
 
     // TODO Some more checks for "forbidden" symbols might be necessary
-    private String checkFileExtension(String fileExtension) {
-        if (!fileExtension.startsWith('.')) {
-            return '.' + fileExtension
+    private String checkFileSuffixn(String fileSuffix) {
+        if (!fileSuffix.startsWith('.')) {
+            return '.' + fileSuffix
         } else {
-            return fileExtension
+            return fileSuffix
         }
     }
 
     File getUnencryptedFile(File encryptedFile) {
         return new File(encryptedFile.getCanonicalPath().substring(
-                0, encryptedFile.getCanonicalPath().lastIndexOf(fileExtension)))
+                0, encryptedFile.getCanonicalPath().lastIndexOf(fileSuffix)))
     }
 
     File getEncryptedFile(File unencryptedFile) {
-        return new File(unencryptedFile.getCanonicalPath() + fileExtension)
+        return new File(unencryptedFile.getCanonicalPath() + fileSuffix)
     }
 
     List<File> getEncryptedFiles() {
@@ -36,7 +36,7 @@ class FileUtil {
         // TODO Read about traversion; there might be better ways to find files matching the file extension!
         // TODO Exclude git and build directories!
         root.traverse { file ->
-            if (file.isFile() && file.name.endsWith(fileExtension)) {
+            if (file.isFile() && file.name.endsWith(fileSuffix)) {
                 files.add(file)
             }
         }

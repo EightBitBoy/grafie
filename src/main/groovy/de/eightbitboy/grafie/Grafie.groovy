@@ -13,6 +13,7 @@ https://speakerdeck.com/bmuschko/gradle-plugin-best-practices-by-example
 class Grafie implements Plugin<Project> {
     final static String ID = 'de.eightbitboy.grafie'
     final static String GROUP = 'Grafie'
+    final static String suffix = '.grafie'
 
     void apply(Project project) {
         project.extensions.create('grafie', GrafieExtension)
