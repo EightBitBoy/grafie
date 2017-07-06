@@ -5,7 +5,7 @@ class FileUtil {
     private File root
 
     FileUtil(String fileSuffix, File root) {
-        this.fileSuffix = checkFileSuffixn(fileSuffix)
+        this.fileSuffix = checkFileSuffix(fileSuffix)
         this.root = root
     }
 
@@ -13,13 +13,9 @@ class FileUtil {
         return fileSuffix
     }
 
-    // TODO Some more checks for "forbidden" symbols might be necessary
-    private String checkFileSuffixn(String fileSuffix) {
-        if (!fileSuffix.startsWith('.')) {
-            return '.' + fileSuffix
-        } else {
-            return fileSuffix
-        }
+    private String checkFileSuffix(String fileSuffix) {
+        // TODO Some checks for "forbidden" symbols might be necessary!
+        return fileSuffix
     }
 
     File getUnencryptedFile(File encryptedFile) {
