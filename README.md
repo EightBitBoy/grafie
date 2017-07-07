@@ -1,6 +1,10 @@
 # grafie - Gradle File Encryption Plugin
 [![Build Status](https://travis-ci.org/EightBitBoy/grafie.svg?branch=master)](https://travis-ci.org/EightBitBoy/grafie)
 
+# ATTENTION
+
+**The plugin has not been released yet! Everything below is still work in progress!**
+
 ## About
 
 ## Usage
@@ -9,7 +13,7 @@ Include **grafie** in your build file:
 ```
 ```
 
-For every file you want to encrypt create an empty file with the same name and the added extension **.grafie**:
+For every file you want to encrypt create an empty file with the same name and the added extension "**.grafie**":
 ```
 $>ls
 build.gradle
