@@ -1,5 +1,6 @@
 package de.eightbitboy.grafie
 
+import spock.lang.PendingFeature
 import spock.lang.Specification
 
 class FileUtilTest extends Specification {
@@ -10,14 +11,19 @@ class FileUtilTest extends Specification {
         fileUtil = new FileUtil('.FileUtilTest', new File('.'))
     }
 
-    def "check the file extension"() {
+    def "check the file suffix"() {
         when:
-        FileUtil util1 = new FileUtil('test1', new File('.'))
-        FileUtil util2 = new FileUtil('.test2', new File('.'))
+        FileUtil util1 = new FileUtil('.test1', new File('.'))
+        FileUtil util2 = new FileUtil('_test2', new File('.'))
 
         then:
-        util1.getFileExtension() == '.test1'
-        util2.getFileExtension() == '.test2'
+        util1.getFileSuffix() == '.test1'
+        util2.getFileSuffix() == '_test2'
+    }
+
+    @PendingFeature
+    def "throw an error on invalid file suffix"() {
+        //TODO
     }
 
     def "get an unencrypted file from an encrypted file"() {

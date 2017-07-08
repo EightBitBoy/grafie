@@ -9,7 +9,7 @@ class FileUtil {
         this.root = root
     }
 
-    String getFileExtension() {
+    String getFileSuffix() {
         return fileSuffix
     }
 
