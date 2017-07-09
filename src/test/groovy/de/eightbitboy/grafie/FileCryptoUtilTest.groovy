@@ -109,12 +109,34 @@ class FileCryptoUtilTest extends Specification {
         //TODO
     }
 
-    /**
-     * This test ensures that the encryption is constant, there is no other factor than the
-     * password that influences the encryption result.
-     */
-    @PendingFeature
-    def "encrypt a file multiple times, the encrypted text should not change"() {
+    def "encrypt a text multiple times, the encrypted text should not change"() {
+        setup:
+        File file1 = new File('file1.txt')
+        file1.write('This is an encryption test!')
+        File file2 = new File('file2.txt')
+        file2.write('This is an encryption test!')
+
+        cryptoUtil.encrypt('password', file1)
+        cryptoUtil.encrypt('password', file2)
+
+        File encryptedFile1 = new File('file1.txt.FileCryptoUtilTest')
+        File encryptedfile2 = new File('file2.txt.FileCryptoUtilTest')
+
+        file1.delete()
+        file2.delete()
+
+        expect:
+        !file1.exists()
+        !file2.exists()
+        encryptedFile1.exists()
+        encryptedFile1.exists()
+
         //TODO
+
+        cleanup:
+        file1.delete()
+        file2.delete()
+        encryptedFile1.delete()
+        encryptedfile2.delete()
     }
 }
