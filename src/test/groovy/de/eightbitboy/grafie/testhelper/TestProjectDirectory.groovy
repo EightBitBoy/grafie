@@ -1,4 +1,4 @@
-package de.eightbitboy.grafie.helper
+package de.eightbitboy.grafie.testhelper
 
 import org.apache.commons.io.FileUtils
 
