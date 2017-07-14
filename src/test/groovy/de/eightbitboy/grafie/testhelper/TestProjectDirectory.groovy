@@ -1,14 +1,21 @@
 package de.eightbitboy.grafie.testhelper
 
-import org.apache.commons.io.FileUtils
-
 class TestProjectDirectory extends File {
-    public TestProjectDirectory() {
-        super([System.getProperty('user.dir'), 'build', 'testProject'].join(separator))
-        mkdirs()
+
+    static final FILE_PATH = [System.getProperty('user.dir'), 'build', 'testProject'].join(separator)
+
+    TestProjectDirectory() {
+        super(FILE_PATH)
     }
 
-    public void deleteRecursively() {
-        FileUtils.deleteDirectory(this)
+    void deleteRecursively() {
+        deleteDirectory(this)
+    }
+
+    private void deleteDirectory(File directory) {
+        directory.listFiles() { File file ->
+            deleteDirectory(file)
+        }
+        directory.delete()
     }
 }

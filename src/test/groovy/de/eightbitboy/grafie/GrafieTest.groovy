@@ -1,6 +1,6 @@
 package de.eightbitboy.grafie
 
-import org.apache.commons.io.FileUtils
+import de.eightbitboy.grafie.testhelper.TestProjectDirectory
 import org.gradle.api.Project
 import org.gradle.testfixtures.ProjectBuilder
 import org.gradle.testkit.runner.BuildResult
@@ -13,17 +13,16 @@ import spock.lang.Specification
 class GrafieTest extends Specification {
 
     @Shared
-    File projectDir
+    TestProjectDirectory projectDir
     File buildFile
 
     def setupSpec() {
-        //TODO use System.getProperty('user.dir')
-        projectDir = new File('./testProject')
+        projectDir = new TestProjectDirectory()
         projectDir.mkdirs()
     }
 
     def cleanupSpec() {
-        FileUtils.deleteDirectory(projectDir)
+        projectDir.deleteRecursively()
     }
 
     def setup() {
