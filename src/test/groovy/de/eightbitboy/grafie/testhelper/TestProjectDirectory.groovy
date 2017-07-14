@@ -13,7 +13,7 @@ class TestProjectDirectory extends File {
     }
 
     private void deleteDirectory(File directory) {
-        directory.listFiles() { File file ->
+        directory.listFiles().each { File file ->
             deleteDirectory(file)
         }
         directory.delete()
