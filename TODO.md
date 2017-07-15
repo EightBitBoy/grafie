@@ -10,3 +10,5 @@ https://github.com/eriwen/gradle-js-plugin/tree/master/src/test/groovy/com/eriwe
 https://discuss.gradle.org/t/separate-execution-for-java-unit-and-integration-tests/8713
 https://discuss.gradle.org/t/how-do-i-unit-test-custom-tasks/3815
 https://discuss.gradle.org/t/how-to-execute-a-task-in-unit-test-for-custom-plugin/6771/3
+
+//TODO https://docs.gradle.org/current/userguide/custom_plugins.html#sec:mapping_extension_properties_to_task_properties
