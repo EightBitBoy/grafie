@@ -12,3 +12,8 @@ https://discuss.gradle.org/t/how-do-i-unit-test-custom-tasks/3815
 https://discuss.gradle.org/t/how-to-execute-a-task-in-unit-test-for-custom-plugin/6771/3
 
 //TODO https://docs.gradle.org/current/userguide/custom_plugins.html#sec:mapping_extension_properties_to_task_properties
+
+https://guides.gradle.org/writing-gradle-plugins/
+https://guides.gradle.org/implementing-gradle-plugins/
+https://github.com/gradle/gradle/tree/master/subprojects
+https://speakerdeck.com/bmuschko/gradle-plugin-best-practices-by-example
