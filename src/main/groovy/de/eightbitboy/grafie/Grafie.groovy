@@ -10,14 +10,7 @@ class Grafie implements Plugin<Project> {
 
     void apply(Project project) {
         project.extensions.create('grafie', GrafieExtension)
-        //validateExtension(project) //FIXME Make sure a password is provided!
 
-        //TODO use project.file in tasks to access files
-
-        //TODO use project.files !!!11!!!1!
-        // see https://docs.gradle.org/3.3/userguide/working_with_files.html
-
-        //TODO read about input / output annotation
         project.task('decryptFiles', type: FileCryptoTask) {
             group = GROUP
             description = 'Decrypt all files which have the encryption file name extension, the default is \'.grafie\'.'
