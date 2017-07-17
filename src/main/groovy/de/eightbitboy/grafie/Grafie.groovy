@@ -15,6 +15,7 @@ class Grafie implements Plugin<Project> {
             group = GROUP
             description = 'Decrypt all files which have the encryption file name extension, ' +
                     'the default is \'.grafie\'.'
+
             mode = FileCryptoTask.Mode.DECRYPT
             password = project.grafie.password
             fileSuffix = suffix
@@ -24,16 +25,19 @@ class Grafie implements Plugin<Project> {
             group = GROUP
             description = 'Encrypt all files for which a file with the same name ' +
                     'and encryption file name extension exists, the default is \'.grafie\'.'
+
             mode = FileCryptoTask.Mode.ENCRYPT
             password = project.grafie.password
             fileSuffix = suffix
         }
     }
 
+    /*
     void validateExtension(Project project) {
         if (!project.grafie.password) {
             throw new IllegalStateException(
                     'No password has been provided for the Grafie plugin!')
         }
     }
+    */
 }
