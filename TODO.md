@@ -2,6 +2,7 @@
 
 ## Development
 * Use new syntax for applying plugins
+* Make sure the password is set and not empty
 
 ## Links
 
