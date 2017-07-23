@@ -1,7 +1,6 @@
 package de.eightbitboy.grafie
 
 import org.gradle.api.DefaultTask
-import org.gradle.api.InvalidUserDataException
 import org.gradle.api.tasks.TaskAction
 
 class FileCryptoTask extends DefaultTask {
@@ -14,10 +13,6 @@ class FileCryptoTask extends DefaultTask {
     String password = ''
     String fileSuffix = ''
 
-    final String GRAFIE_PASSWORD = "grafiePassword"
-
-    //TODO use this.logger
-
     @TaskAction
     void cryptoAction() {
         FileCryptoUtil cryptoUtil = new FileCryptoUtil(password)
@@ -25,19 +20,6 @@ class FileCryptoTask extends DefaultTask {
         if (mode == Mode.DECRYPT) {
         }
         if (mode == Mode.ENCRYPT) {
-        }
-    }
-
-    /** Get the encryption/decryption key. */
-    String getKey() {
-        if (project.hasProperty(GRAFIE_PASSWORD)) {
-            if (project.property(GRAFIE_PASSWORD)) {
-                return project.property(GRAFIE_PASSWORD)
-            } else {
-                throw new InvalidUserDataException("The property 'grafieKey' has no value!")
-            }
-        } else {
-            throw new InvalidUserDataException("No encryption/decryption key is provided via gradle.properties! Add 'grafieKey=YOUR_KEY' to the gradle.properties!")
         }
     }
 }
