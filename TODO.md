@@ -4,6 +4,7 @@
 * Use the new syntax for applying plugins.
 * Make sure the password is set and not empty.
 * Look in properties for a default password location?
+* Support custom file encodings.
 
 ## Links
 
@@ -31,3 +32,4 @@ https://speakerdeck.com/bmuschko/gradle-plugin-best-practices-by-example
 
 
 //TODO use this.logger in FileCryptoTask
+

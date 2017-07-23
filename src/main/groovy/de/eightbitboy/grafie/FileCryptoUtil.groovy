@@ -23,11 +23,6 @@ class FileCryptoUtil {
         this.fileSuffix = fileSuffix
     }
 
-    FileCryptoUtil(String fileSuffix, String encoding) {
-        this.fileSuffix = fileSuffix
-        this.encoding = encoding
-    }
-
     void decrypt(String password, File encryptedFile) {
         if (!encryptedFile.getName().endsWith(fileSuffix)) {
             throw new IllegalStateException("The encrypted file has no valid name!")
