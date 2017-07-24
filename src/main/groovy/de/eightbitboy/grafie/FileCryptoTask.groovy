@@ -15,11 +15,13 @@ class FileCryptoTask extends DefaultTask {
 
     @TaskAction
     void cryptoAction() {
-        FileCryptoUtil cryptoUtil = new FileCryptoUtil(password)
+        FileCryptoUtil cryptoUtil = new FileCryptoUtil(password, fileSuffix)
 
         if (mode == Mode.DECRYPT) {
+            cryptoUtil.decryptFilesWithSuffix()
         }
         if (mode == Mode.ENCRYPT) {
+            cryptoUtil.encryptFilesWithSuffix()
         }
     }
 }

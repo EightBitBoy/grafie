@@ -17,13 +17,23 @@ https://stackoverflow.com/questions/3954611/encrypt-and-decrypt-with-aes-and-bas
 @Log
 class FileCryptoUtil {
     private String encoding = 'UTF-8'
+    private String password
     private String fileSuffix
 
-    FileCryptoUtil(String fileSuffix) {
+    FileCryptoUtil(String password, String fileSuffix) {
+        this.password = password
         this.fileSuffix = fileSuffix
     }
 
-    void decrypt(String password, File encryptedFile) {
+    void encryptFilesWithSuffix() {
+
+    }
+
+    void decryptFilesWithSuffix() {
+
+    }
+
+    void decrypt(File encryptedFile) {
         if (!encryptedFile.getName().endsWith(fileSuffix)) {
             throw new IllegalStateException("The encrypted file has no valid name!")
         }
@@ -41,7 +51,7 @@ class FileCryptoUtil {
         }
     }
 
-    void encrypt(String password, File decryptedFile) {
+    void encrypt(File decryptedFile) {
         if (decryptedFile.getName().endsWith(fileSuffix)) {
             throw new IllegalStateException("The encrypted file has no valid name!")
         }
