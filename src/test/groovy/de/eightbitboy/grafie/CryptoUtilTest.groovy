@@ -6,10 +6,10 @@ import spock.lang.PendingFeature
 import spock.lang.Specification
 
 class CryptoUtilTest extends Specification {
-    CryptoUtil cryptoUtil
+    FileCryptoUtil cryptoUtil
 
     def setup() {
-        cryptoUtil = new CryptoUtil('password', '.encrypted')
+        cryptoUtil = new FileCryptoUtil('password', '.encrypted')
     }
 
     def "a password must not be null"() {

@@ -15,7 +15,7 @@ class FileCryptoTask extends DefaultTask {
 
     @TaskAction
     void cryptoAction() {
-        CryptoUtil cryptoUtil = new CryptoUtil(password, fileSuffix)
+        FileCryptoUtil cryptoUtil = new FileCryptoUtil(password, fileSuffix)
 
         if (mode == Mode.DECRYPT) {
             cryptoUtil.decryptFilesWithSuffix()

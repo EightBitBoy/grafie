@@ -7,12 +7,12 @@ import javax.crypto.Cipher
 import javax.crypto.spec.SecretKeySpec
 
 @Log
-class CryptoUtil {
+class FileCryptoUtil {
     private String encoding = 'UTF-8'
     private String password
     private String fileSuffix
 
-    CryptoUtil(String password, String fileSuffix) {
+    FileCryptoUtil(String password, String fileSuffix) {
         this.password = password
         this.fileSuffix = fileSuffix
     }
