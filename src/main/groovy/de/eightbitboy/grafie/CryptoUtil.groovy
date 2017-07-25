@@ -6,21 +6,13 @@ import org.apache.commons.codec.digest.DigestUtils
 import javax.crypto.Cipher
 import javax.crypto.spec.SecretKeySpec
 
-/*
-https://stackoverflow.com/questions/15554296/simple-java-aes-encrypt-decrypt-example
-PBESpec
-https://stackoverflow.com/questions/3451670/java-aes-and-using-my-own-key
-https://stackoverflow.com/questions/18362137/encryption-with-aes-256-java
-https://stackoverflow.com/questions/3954611/encrypt-and-decrypt-with-aes-and-base64-encoding
- */
-
 @Log
-class FileCryptoUtil {
+class CryptoUtil {
     private String encoding = 'UTF-8'
     private String password
     private String fileSuffix
 
-    FileCryptoUtil(String password, String fileSuffix) {
+    CryptoUtil(String password, String fileSuffix) {
         this.password = password
         this.fileSuffix = fileSuffix
     }
