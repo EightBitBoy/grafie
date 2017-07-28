@@ -1,11 +1,9 @@
 package de.eightbitboy.grafie
 
-import org.apache.commons.lang3.ArrayUtils
-import org.gradle.internal.impldep.org.apache.commons.lang.RandomStringUtils
 import spock.lang.PendingFeature
 import spock.lang.Specification
 
-class CryptoUtilTest extends Specification {
+class FileCryptoUtilTest extends Specification {
     FileCryptoUtil cryptoUtil
 
     def setup() {
@@ -21,7 +19,7 @@ class CryptoUtilTest extends Specification {
         cryptoUtil.encrypt('password', file)
 
         then:
-        File encryptedFile = new File('file.txt.CryptoUtilTest')
+        File encryptedFile = new File('file.txt.FileCryptoUtilTest')
         encryptedFile.exists()
         !encryptedFile.getText('UTF-8').isEmpty()
 
@@ -35,7 +33,7 @@ class CryptoUtilTest extends Specification {
         File file = new File('file.txt')
         file.write('This is a test.')
 
-        File encryptedFile = new File('file.txt.CryptoUtilTest')
+        File encryptedFile = new File('file.txt.FileCryptoUtilTest')
         assert !encryptedFile.exists()
 
         when:
@@ -78,8 +76,8 @@ class CryptoUtilTest extends Specification {
         cryptoUtil.encrypt('password', file1)
         cryptoUtil.encrypt('password', file2)
 
-        File encryptedFile1 = new File('file1.txt.CryptoUtilTest')
-        File encryptedfile2 = new File('file2.txt.CryptoUtilTest')
+        File encryptedFile1 = new File('file1.txt.FileCryptoUtilTest')
+        File encryptedfile2 = new File('file2.txt.FileCryptoUtilTest')
 
         file1.delete()
         file2.delete()
