@@ -4,10 +4,10 @@ import org.apache.commons.lang3.ArrayUtils
 import org.gradle.internal.impldep.org.apache.commons.lang.RandomStringUtils
 import spock.lang.Specification
 
-class PasswordConverterTest extends Specification {
+class EncryptionKeyTest extends Specification {
     def "a password must not be null"() {
         when:
-        PasswordConverter.convert(null)
+        EncryptionKey.fromPassword(null)
 
         then:
         thrown(IllegalArgumentException)
@@ -15,32 +15,32 @@ class PasswordConverterTest extends Specification {
 
     def "a password must not be empty"() {
         when:
-        PasswordConverter.convert('')
+        EncryptionKey.fromPassword('')
 
         then:
         thrown(IllegalArgumentException)
     }
 
-    def "a converted password is not null or empty"() {
+    def "a key is not null or empty"() {
         when:
-        byte[] key = PasswordConverter.convert('secret')
+        byte[] key = EncryptionKey.fromPassword('secret')
 
         then:
         key != null
         ArrayUtils.isNotEmpty(key)
     }
 
-    def "a converted password has a length of 16 byte"() {
+    def "a key has a length of 16 byte"() {
         when:
-        byte[] key = PasswordConverter.convert('secret')
+        byte[] key = EncryptionKey.fromPassword('secret')
 
         then:
         key.length == 16
     }
 
-    def "convert passwords of arbitrary length"() {
+    def "get keys from passwords of arbitrary length"() {
         when:
-        byte[] key = PasswordConverter.convert(password)
+        byte[] key = EncryptionKey.fromPassword(password)
 
         then:
         key != null

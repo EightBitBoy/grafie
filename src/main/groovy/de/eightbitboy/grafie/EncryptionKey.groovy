@@ -2,8 +2,8 @@ package de.eightbitboy.grafie
 
 import org.apache.commons.codec.digest.DigestUtils
 
-class PasswordConverter {
-    static byte[] convert(String password) {
+class EncryptionKey {
+    static byte[] fromPassword(String password) {
         if (!password) {
             throw new IllegalArgumentException("The provided password is null or empty!")
         }
