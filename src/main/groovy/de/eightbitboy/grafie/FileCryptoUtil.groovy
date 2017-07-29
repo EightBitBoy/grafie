@@ -25,6 +25,14 @@ class FileCryptoUtil {
 
     }
 
+    void encryptFile(File file) {
+
+    }
+
+    void decryptFile(File file) {
+        
+    }
+
     void decrypt(File encryptedFile) {
         if (!encryptedFile.getName().endsWith(fileSuffix)) {
             throw new IllegalStateException("The encrypted file has no valid name!")

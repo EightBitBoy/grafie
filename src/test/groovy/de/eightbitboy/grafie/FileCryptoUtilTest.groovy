@@ -16,7 +16,7 @@ class FileCryptoUtilTest extends Specification {
         file.write('This is a test.')
 
         when:
-        cryptoUtil.encrypt('password', file)
+        cryptoUtil.encryptFile(file)
 
         then:
         File encryptedFile = new File('file.txt.FileCryptoUtilTest')
@@ -37,7 +37,7 @@ class FileCryptoUtilTest extends Specification {
         assert !encryptedFile.exists()
 
         when:
-        cryptoUtil.encrypt('password', file)
+        cryptoUtil.encryptFile(file)
 
         then:
         encryptedFile.exists()
@@ -49,7 +49,7 @@ class FileCryptoUtilTest extends Specification {
         !file.exists()
 
         when:
-        cryptoUtil.decrypt('password', encryptedFile)
+        cryptoUtil.decryptFile(encryptedFile)
         file = new File('file.txt')
 
         then:
@@ -73,11 +73,11 @@ class FileCryptoUtilTest extends Specification {
         File file2 = new File('file2.txt')
         file2.write('This is an encryption test!')
 
-        cryptoUtil.encrypt('password', file1)
-        cryptoUtil.encrypt('password', file2)
+        cryptoUtil.encryptFile(file1)
+        cryptoUtil.encryptFile(file2)
 
         File encryptedFile1 = new File('file1.txt.FileCryptoUtilTest')
-        File encryptedfile2 = new File('file2.txt.FileCryptoUtilTest')
+        File encryptedFile2 = new File('file2.txt.FileCryptoUtilTest')
 
         file1.delete()
         file2.delete()
@@ -94,6 +94,6 @@ class FileCryptoUtilTest extends Specification {
         file1.delete()
         file2.delete()
         encryptedFile1.delete()
-        encryptedfile2.delete()
+        encryptedFile2.delete()
     }
 }
