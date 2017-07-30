@@ -40,6 +40,7 @@ class EncryptionKeyTest extends Specification {
 
     def "get keys from passwords of arbitrary length"() {
         when:
+        println(password)
         byte[] key = EncryptionKey.fromPassword(password)
 
         then:
@@ -48,6 +49,7 @@ class EncryptionKeyTest extends Specification {
         key.length == 16
 
         where:
+        //TODO use RandomStringGenerator
         password << (1..200).collect() { RandomStringUtils.random(it) }
     }
 }
