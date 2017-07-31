@@ -40,7 +40,18 @@ class FileCryptoUtil {
     }
 
     void decryptFile(File file) {
+        File decryptedFile = new File(file.getCanonicalPath().substring(
+                0, file.getCanonicalPath().lastIndexOf(fileSuffix)))
+        decryptedFile.createNewFile()
 
+        decryptedFile.withWriter { writer ->
+            Cipher cipher = setup(processPassword(password), Cipher.DECRYPT_MODE)
+
+            String encryptedText = file.getText(encoding)
+            byte[] encryptedBytes = Base64.getDecoder().decode(encryptedText)
+
+            writer.write(new String(cipher.doFinal(encryptedBytes)))
+        }
     }
 
     void encrypt(File decryptedFile) {
@@ -49,17 +60,6 @@ class FileCryptoUtil {
             throw new IllegalStateException("The encrypted file has no valid name!")
         }
         */
-        File encryptedFile = new File(decryptedFile.getCanonicalPath() + fileSuffix)
-        encryptedFile.createNewFile()
-
-        encryptedFile.withWriter { writer ->
-            Cipher cipher = setup(processPassword(password), Cipher.ENCRYPT_MODE)
-
-            String decryptedText = decryptedFile.getText(encoding)
-            byte[] encryptedBytes = cipher.doFinal(decryptedText.getBytes(encoding))
-
-            writer.write(Base64.getEncoder().encodeToString(encryptedBytes))
-        }
     }
 
     void decrypt(File encryptedFile) {
@@ -68,18 +68,6 @@ class FileCryptoUtil {
             throw new IllegalStateException("The encrypted file has no valid name!")
         }
         */
-        File decryptedFile = new File(encryptedFile.getCanonicalPath().substring(
-                0, encryptedFile.getCanonicalPath().lastIndexOf(fileSuffix)))
-        decryptedFile.createNewFile()
-
-        decryptedFile.withWriter { writer ->
-            Cipher cipher = setup(processPassword(password), Cipher.DECRYPT_MODE)
-
-            String encryptedText = encryptedFile.getText(encoding)
-            byte[] encryptedBytes = Base64.getDecoder().decode(encryptedText)
-
-            writer.write(new String(cipher.doFinal(encryptedBytes)))
-        }
     }
 
     /** Create a 128 bit key from an arbitrary password string. */

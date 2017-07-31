@@ -41,35 +41,30 @@ class FileCryptoUtilTest extends Specification {
 
     def "encrypt and decrypt a file"() {
         setup:
-        File file = new File('file.txt')
-        file.write('This is a test.')
+        File file = new File(projectDir, 'encryptMeToo.txt')
+        file.write('This is another test.')
 
-        File encryptedFile = new File('file.txt.FileCryptoUtilTest')
-        assert !encryptedFile.exists()
+        File encryptedFile = new File(projectDir, 'encryptMeToo.txt.encrypted')
+
+        expect:
+        !encryptedFile.exists()
 
         when:
         cryptoUtil.encryptFile(file)
-
         then:
         encryptedFile.exists()
 
         when:
         file.delete()
-
         then:
         !file.exists()
 
         when:
         cryptoUtil.decryptFile(encryptedFile)
-        file = new File('file.txt')
-
+        file = new File(projectDir, 'encryptMeToo.txt')
         then:
         file.exists()
-        file.getText('UTF-8') == 'This is a test.'
-
-        cleanup:
-        file.delete()
-        encryptedFile.delete()
+        file.getText('UTF-8') == 'This is another test.'
     }
 
     @PendingFeature
