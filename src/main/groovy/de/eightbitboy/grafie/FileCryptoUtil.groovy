@@ -30,13 +30,34 @@ class FileCryptoUtil {
     }
 
     void decryptFile(File file) {
-        
+
+    }
+
+    void encrypt(File decryptedFile) {
+        /*
+        if (decryptedFile.getName().endsWith(fileSuffix)) {
+            throw new IllegalStateException("The encrypted file has no valid name!")
+        }
+        */
+        File encryptedFile = new File(decryptedFile.getCanonicalPath() + fileSuffix)
+        encryptedFile.createNewFile()
+
+        encryptedFile.withWriter { writer ->
+            Cipher cipher = setup(processPassword(password), Cipher.ENCRYPT_MODE)
+
+            String decryptedText = decryptedFile.getText(encoding)
+            byte[] encryptedBytes = cipher.doFinal(decryptedText.getBytes(encoding))
+
+            writer.write(Base64.getEncoder().encodeToString(encryptedBytes))
+        }
     }
 
     void decrypt(File encryptedFile) {
+        /*
         if (!encryptedFile.getName().endsWith(fileSuffix)) {
             throw new IllegalStateException("The encrypted file has no valid name!")
         }
+        */
         File decryptedFile = new File(encryptedFile.getCanonicalPath().substring(
                 0, encryptedFile.getCanonicalPath().lastIndexOf(fileSuffix)))
         decryptedFile.createNewFile()
@@ -48,23 +69,6 @@ class FileCryptoUtil {
             byte[] encryptedBytes = Base64.getDecoder().decode(encryptedText)
 
             writer.write(new String(cipher.doFinal(encryptedBytes)))
-        }
-    }
-
-    void encrypt(File decryptedFile) {
-        if (decryptedFile.getName().endsWith(fileSuffix)) {
-            throw new IllegalStateException("The encrypted file has no valid name!")
-        }
-        File encryptedFile = new File(decryptedFile.getCanonicalPath() + fileSuffix)
-        encryptedFile.createNewFile()
-
-        encryptedFile.withWriter { writer ->
-            Cipher cipher = setup(processPassword(password), Cipher.ENCRYPT_MODE)
-
-            String decryptedText = decryptedFile.getText(encoding)
-            byte[] encryptedBytes = cipher.doFinal(decryptedText.getBytes(encoding))
-
-            writer.write(Base64.getEncoder().encodeToString(encryptedBytes))
         }
     }
 

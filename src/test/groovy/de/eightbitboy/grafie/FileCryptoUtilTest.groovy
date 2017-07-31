@@ -96,4 +96,14 @@ class FileCryptoUtilTest extends Specification {
         encryptedFile1.delete()
         encryptedFile2.delete()
     }
+
+    @PendingFeature
+    def "encrypting a file which already has the file suffix is not possible"() {
+
+    }
+
+    @PendingFeature
+    def "decrypting a file which has no file suffix is not possible"() {
+
+    }
 }
