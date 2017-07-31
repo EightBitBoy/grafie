@@ -42,7 +42,7 @@ class FileCryptoUtil {
     }
 
     void decryptFile(File file) {
-        checkEncryptedFileName()
+        checkEncryptedFileName(file)
 
         File decryptedFile = new File(file.getCanonicalPath().substring(
                 0, file.getCanonicalPath().lastIndexOf(fileSuffix)))

@@ -101,7 +101,7 @@ class FileCryptoUtilTest extends Specification {
         file.write('This is some encrypted text!')
 
         when:
-        cryptoUtil.encrypt(file)
+        cryptoUtil.encryptFile(file)
 
         then:
         thrown(IllegalStateException)
@@ -113,7 +113,7 @@ class FileCryptoUtilTest extends Specification {
         file.write('The brown fox jumps over the lazy dog!')
 
         when:
-        cryptoUtil.decrypt(file)
+        cryptoUtil.decryptFile(file)
 
         then:
         thrown(IllegalStateException)
