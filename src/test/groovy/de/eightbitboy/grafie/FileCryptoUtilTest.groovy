@@ -74,16 +74,16 @@ class FileCryptoUtilTest extends Specification {
 
     def "encrypt a text multiple times, the encrypted text should not change"() {
         setup:
-        File file1 = new File('file1.txt')
+        File file1 = new File(projectDir, 'aFile.txt')
         file1.write('This is an encryption test!')
-        File file2 = new File('file2.txt')
+        File file2 = new File(projectDir, 'anotherFile.txt')
         file2.write('This is an encryption test!')
 
         cryptoUtil.encryptFile(file1)
         cryptoUtil.encryptFile(file2)
 
-        File encryptedFile1 = new File('file1.txt.FileCryptoUtilTest')
-        File encryptedFile2 = new File('file2.txt.FileCryptoUtilTest')
+        File encryptedFile1 = new File(projectDir, 'aFile.txt.encrypted')
+        File encryptedFile2 = new File(projectDir, 'anotherFile.txt.encrypted')
 
         file1.delete()
         file2.delete()
@@ -92,15 +92,12 @@ class FileCryptoUtilTest extends Specification {
         !file1.exists()
         !file2.exists()
         encryptedFile1.exists()
-        encryptedFile1.exists()
+        encryptedFile2.exists()
 
-        //TODO
-
-        cleanup:
-        file1.delete()
-        file2.delete()
-        encryptedFile1.delete()
-        encryptedFile2.delete()
+        and:
+        !encryptedFile1.getText('UTF-8').isEmpty()
+        !encryptedFile2.getText('UTF-8').isEmpty()
+        encryptedFile1.getText('UTF-8') == encryptedFile2.getText('UTF-8')
     }
 
     @PendingFeature
