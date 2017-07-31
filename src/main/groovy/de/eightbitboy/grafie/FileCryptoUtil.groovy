@@ -26,6 +26,8 @@ class FileCryptoUtil {
     }
 
     void encryptFile(File file) {
+        checkUnencryptedFileName(file)
+
         File encryptedFile = new File(file.getCanonicalPath() + fileSuffix)
         encryptedFile.createNewFile()
 
@@ -40,6 +42,8 @@ class FileCryptoUtil {
     }
 
     void decryptFile(File file) {
+        checkEncryptedFileName()
+
         File decryptedFile = new File(file.getCanonicalPath().substring(
                 0, file.getCanonicalPath().lastIndexOf(fileSuffix)))
         decryptedFile.createNewFile()
@@ -54,20 +58,18 @@ class FileCryptoUtil {
         }
     }
 
-    void encrypt(File decryptedFile) {
-        /*
-        if (decryptedFile.getName().endsWith(fileSuffix)) {
-            throw new IllegalStateException("The encrypted file has no valid name!")
+    void checkUnencryptedFileName(File file) {
+        if (file.getName().endsWith(fileSuffix)) {
+            throw new IllegalStateException(
+                    "The unencrypted file already has the file suffix for encrypted files!")
         }
-        */
     }
 
-    void decrypt(File encryptedFile) {
-        /*
-        if (!encryptedFile.getName().endsWith(fileSuffix)) {
-            throw new IllegalStateException("The encrypted file has no valid name!")
+    void checkEncryptedFileName(File file) {
+        if (!file.getName().endsWith(fileSuffix)) {
+            throw new IllegalStateException(
+                    "The encrypted file does not have a valid file suffix!")
         }
-        */
     }
 
     /** Create a 128 bit key from an arbitrary password string. */

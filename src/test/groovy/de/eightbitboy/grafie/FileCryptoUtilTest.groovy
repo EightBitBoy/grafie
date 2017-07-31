@@ -95,13 +95,27 @@ class FileCryptoUtilTest extends Specification {
         encryptedFile1.getText('UTF-8') == encryptedFile2.getText('UTF-8')
     }
 
-    @PendingFeature
     def "encrypting a file which already has the file suffix is not possible"() {
+        setup:
+        File file = new File(projectDir, 'boom.txt.encrypted')
+        file.write('This is some encrypted text!')
 
+        when:
+        cryptoUtil.encrypt(file)
+
+        then:
+        thrown(IllegalStateException)
     }
 
-    @PendingFeature
     def "decrypting a file which has no file suffix is not possible"() {
+        setup:
+        File file = new File(projectDir, 'dog.txt')
+        file.write('The brown fox jumps over the lazy dog!')
 
+        when:
+        cryptoUtil.decrypt(file)
+
+        then:
+        thrown(IllegalStateException)
     }
 }
