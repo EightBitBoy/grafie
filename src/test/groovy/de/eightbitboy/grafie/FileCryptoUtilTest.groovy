@@ -67,11 +67,6 @@ class FileCryptoUtilTest extends Specification {
         file.getText('UTF-8') == 'This is another test.'
     }
 
-    @PendingFeature
-    def "encrypt and decrypt files of arbitrary length"() {
-        //TODO
-    }
-
     def "encrypt a text multiple times, the encrypted text should not change"() {
         setup:
         File file1 = new File(projectDir, 'aFile.txt')
