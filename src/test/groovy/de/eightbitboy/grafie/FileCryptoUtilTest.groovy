@@ -1,10 +1,25 @@
 package de.eightbitboy.grafie
 
+import de.eightbitboy.grafie.testhelper.TestProjectDirectory
 import spock.lang.PendingFeature
+import spock.lang.Shared
 import spock.lang.Specification
 
 class FileCryptoUtilTest extends Specification {
+
+    @Shared
+    TestProjectDirectory projectDir
+
     FileCryptoUtil cryptoUtil
+
+    def setupSpec() {
+        projectDir = new TestProjectDirectory()
+        projectDir.mkdirs()
+    }
+
+    def cleanupSpec() {
+        projectDir.deleteRecursively()
+    }
 
     def setup() {
         cryptoUtil = new FileCryptoUtil('password', '.encrypted')
@@ -12,20 +27,16 @@ class FileCryptoUtilTest extends Specification {
 
     def "encrypt a file"() {
         setup:
-        File file = new File('file.txt')
+        File file = new File(projectDir, 'encryptMe.txt')
         file.write('This is a test.')
 
         when:
         cryptoUtil.encryptFile(file)
 
         then:
-        File encryptedFile = new File('file.txt.FileCryptoUtilTest')
+        File encryptedFile = new File(projectDir, 'encryptMe.txt.encrypted')
         encryptedFile.exists()
         !encryptedFile.getText('UTF-8').isEmpty()
-
-        cleanup:
-        file.delete()
-        encryptedFile.delete()
     }
 
     def "encrypt and decrypt a file"() {

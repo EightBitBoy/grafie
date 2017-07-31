@@ -14,6 +14,7 @@ class GrafieTest extends Specification {
 
     @Shared
     TestProjectDirectory projectDir
+
     File buildFile
 
     def setupSpec() {

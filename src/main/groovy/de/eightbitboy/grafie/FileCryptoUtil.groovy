@@ -26,7 +26,17 @@ class FileCryptoUtil {
     }
 
     void encryptFile(File file) {
+        File encryptedFile = new File(file.getCanonicalPath() + fileSuffix)
+        encryptedFile.createNewFile()
 
+        encryptedFile.withWriter { writer ->
+            Cipher cipher = setup(processPassword(password), Cipher.ENCRYPT_MODE)
+
+            String decryptedText = file.getText(encoding)
+            byte[] encryptedBytes = cipher.doFinal(decryptedText.getBytes(encoding))
+
+            writer.write(Base64.getEncoder().encodeToString(encryptedBytes))
+        }
     }
 
     void decryptFile(File file) {
