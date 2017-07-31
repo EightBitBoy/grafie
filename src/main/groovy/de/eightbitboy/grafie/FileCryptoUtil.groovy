@@ -32,7 +32,7 @@ class FileCryptoUtil {
         encryptedFile.createNewFile()
 
         encryptedFile.withWriter { writer ->
-            Cipher cipher = setup(processPassword(password), Cipher.ENCRYPT_MODE)
+            Cipher cipher = setup(EncryptionKey.fromPassword(password), Cipher.ENCRYPT_MODE)
 
             String decryptedText = file.getText(encoding)
             byte[] encryptedBytes = cipher.doFinal(decryptedText.getBytes(encoding))
@@ -49,7 +49,7 @@ class FileCryptoUtil {
         decryptedFile.createNewFile()
 
         decryptedFile.withWriter { writer ->
-            Cipher cipher = setup(processPassword(password), Cipher.DECRYPT_MODE)
+            Cipher cipher = setup(EncryptionKey.fromPassword(password), Cipher.DECRYPT_MODE)
 
             String encryptedText = file.getText(encoding)
             byte[] encryptedBytes = Base64.getDecoder().decode(encryptedText)
@@ -70,14 +70,6 @@ class FileCryptoUtil {
             throw new IllegalStateException(
                     "The encrypted file does not have a valid file suffix!")
         }
-    }
-
-    /** Create a 128 bit key from an arbitrary password string. */
-    private byte[] processPassword(String password) {
-        if (!password) {
-            throw new IllegalArgumentException("The provided key is null or empty!")
-        }
-        return Arrays.copyOf(DigestUtils.sha256(password), 16)
     }
 
     private Cipher setup(byte[] key, int mode) {
