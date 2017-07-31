@@ -40,7 +40,6 @@ class EncryptionKeyTest extends Specification {
 
     def "get keys from passwords of arbitrary length"() {
         when:
-        println(password)
         byte[] key = EncryptionKey.fromPassword(password)
 
         then:
