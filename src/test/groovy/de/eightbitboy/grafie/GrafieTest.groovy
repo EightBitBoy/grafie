@@ -53,11 +53,7 @@ plugins {
 
     def "add the plugin to a real project"() {
         when:
-        BuildResult result = GradleRunner.create()
-                .withProjectDir(projectDir)
-                .withPluginClasspath()
-                .withArguments('tasks')
-                .build()
+        BuildResult result = getResultFromTask('tasks')
 
         then:
         result.output.contains('Grafie')
@@ -67,11 +63,7 @@ plugins {
 
     def "execute the encryptFiles task"() {
         when:
-        BuildResult result = GradleRunner.create()
-                .withProjectDir(projectDir)
-                .withPluginClasspath()
-                .withArguments('encryptFiles')
-                .build()
+        BuildResult result = getResultFromTask('encryptFiles')
 
         then:
         result.task(':encryptFiles').getOutcome() == TaskOutcome.SUCCESS
@@ -79,11 +71,7 @@ plugins {
 
     def "execute the decryptFiles task"() {
         when:
-        BuildResult result = GradleRunner.create()
-                .withProjectDir(projectDir)
-                .withPluginClasspath()
-                .withArguments('decryptFiles')
-                .build()
+        BuildResult result = getResultFromTask('decryptFiles')
 
         then:
         result.task(':decryptFiles').getOutcome() == TaskOutcome.SUCCESS
@@ -99,5 +87,13 @@ plugins {
 
     @PendingFeature
     def "executing a task without a password should fail"() {
+    }
+
+    BuildResult getResultFromTask(String task) {
+        return GradleRunner.create()
+                .withProjectDir(projectDir)
+                .withPluginClasspath()
+                .withArguments(task)
+                .build()
     }
 }
