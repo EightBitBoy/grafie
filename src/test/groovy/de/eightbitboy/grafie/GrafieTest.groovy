@@ -32,6 +32,10 @@ class GrafieTest extends Specification {
 plugins {
     id 'de.eightbitboy.grafie'
 }
+
+grafie {
+    password = 'myPassword'
+}
 """
     }
 
@@ -59,6 +63,19 @@ plugins {
         result.output.contains('Grafie')
         result.output.contains('decryptFiles')
         result.output.contains('encryptFiles')
+    }
+
+    def "executing a task without defining a password fails"() {
+        setup:
+        buildFile.text = """
+plugins {
+    id 'de.eightbitboy.grafie'
+}
+"""
+
+        expect:
+        executeTask('encryptFiles').task(':encryptFiles').getOutcome() == TaskOutcome.FAILED
+        executeTask('decryptFiles').task(':decryptFiles').getOutcome() == TaskOutcome.FAILED
     }
 
     def "execute the encryptFiles task"() {
