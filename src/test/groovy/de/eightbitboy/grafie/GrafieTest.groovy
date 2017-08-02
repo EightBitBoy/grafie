@@ -53,7 +53,7 @@ plugins {
 
     def "add the plugin to a real project"() {
         when:
-        BuildResult result = getResultFromTask('tasks')
+        BuildResult result = executeTask('tasks')
 
         then:
         result.output.contains('Grafie')
@@ -63,7 +63,7 @@ plugins {
 
     def "execute the encryptFiles task"() {
         when:
-        BuildResult result = getResultFromTask('encryptFiles')
+        BuildResult result = executeTask('encryptFiles')
 
         then:
         result.task(':encryptFiles').getOutcome() == TaskOutcome.SUCCESS
@@ -71,25 +71,61 @@ plugins {
 
     def "execute the decryptFiles task"() {
         when:
-        BuildResult result = getResultFromTask('decryptFiles')
+        BuildResult result = executeTask('decryptFiles')
 
         then:
         result.task(':decryptFiles').getOutcome() == TaskOutcome.SUCCESS
     }
 
-    @PendingFeature
     def "encrypt a file"() {
+        setup:
+        File file = new File(projectDir, 'aFile.txt')
+        file.write('This is a secret!')
+
+        File encryptedFile = new File(projectDir, 'aFile.txt.grafie')
+        encryptedFile.createNewFile()
+
+        expect:
+        file.exists()
+        encryptedFile.exists()
+        encryptedFile.text.isEmpty()
+
+        when:
+        BuildResult result = executeTask('encryptFiles')
+
+        then:
+        result.task(':encryptFiles').getOutcome() == TaskOutcome.SUCCESS
+        !encryptedFile.text.isEmpty()
     }
 
-    @PendingFeature
     def "decrypt a file"() {
+        setup:
+        File file = new File(projectDir, 'anotherFile.txt')
+        file.write('This is another secret!')
+
+        File encryptedFile = new File(projectDir, 'anotherFile.txt.grafie')
+        encryptedFile.createNewFile()
+
+        executeTask('encryptFiles')
+
+        file.delete()
+
+        expect:
+        !file.exists()
+        encryptedFile.exists()
+        !encryptedFile.text.isEmpty()
+
+        when:
+        BuildResult result = executeTask('decryptFiles')
+
+        then:
+        result.task(':decryptFiles').getOutcome() == TaskOutcome.SUCCESS
+        file.exists()
+        !file.text.isEmpty()
+        file.text == 'This is another secret!'
     }
 
-    @PendingFeature
-    def "executing a task without a password should fail"() {
-    }
-
-    BuildResult getResultFromTask(String task) {
+    BuildResult executeTask(String task) {
         return GradleRunner.create()
                 .withProjectDir(projectDir)
                 .withPluginClasspath()
