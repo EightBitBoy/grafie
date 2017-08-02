@@ -1,6 +1,7 @@
 package de.eightbitboy.grafie
 
 import org.gradle.api.DefaultTask
+import org.gradle.api.GradleException
 import org.gradle.api.tasks.TaskAction
 
 class FileCryptoTask extends DefaultTask {
@@ -15,6 +16,10 @@ class FileCryptoTask extends DefaultTask {
 
     @TaskAction
     void cryptoAction() {
+        checkPassword(password)
+
+        project.fai
+
         FileCryptoUtil cryptoUtil = new FileCryptoUtil(password, fileSuffix)
 
         if (mode == Mode.DECRYPT) {
@@ -22,6 +27,16 @@ class FileCryptoTask extends DefaultTask {
         }
         if (mode == Mode.ENCRYPT) {
             cryptoUtil.encryptFilesWithSuffix()
+        }
+    }
+
+    void checkPassword(String password) {
+        if (password == null) {
+            throw new GradleException(
+                    "No password has been provided! Use 'grafie.password' to define a password!")
+        }
+        if (password.isEmpty()) {
+            throw new GradleException('The provided password is empty!')
         }
     }
 }
