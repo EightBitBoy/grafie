@@ -66,7 +66,7 @@ grafie {
     }
 
     def "executing a task without defining a password fails"() {
-        setup:
+        setup: 'a build file without a password'
         buildFile.text = """
 plugins {
     id 'de.eightbitboy.grafie'

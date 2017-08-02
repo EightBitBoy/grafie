@@ -10,6 +10,7 @@ class Grafie implements Plugin<Project> {
 
     void apply(Project project) {
         project.extensions.create('grafie', GrafieExtension)
+        checkPassword(project.grafie.password)
 
         project.task('decryptFiles', type: FileCryptoTask) {
             group = TASK_GROUP
@@ -29,6 +30,16 @@ class Grafie implements Plugin<Project> {
             mode = FileCryptoTask.Mode.ENCRYPT
             password = project.grafie.password
             fileSuffix = DEFAULT_FILE_SUFFIX
+        }
+    }
+
+    void checkPassword(String password) {
+        if (password == null) {
+            throw new IllegalArgumentException(
+                    "No password has been provided! Use 'grafie.password' to define a password!")
+        }
+        if (password.isEmpty()) {
+            throw new IllegalArgumentException('The provided password is empty!')
         }
     }
 }
