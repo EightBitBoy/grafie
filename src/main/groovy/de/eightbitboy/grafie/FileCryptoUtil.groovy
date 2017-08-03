@@ -7,18 +7,25 @@ class FileCryptoUtil {
     private String encoding = 'UTF-8'
     private String password
     private String fileSuffix
+    private FileUtil fileUtil
 
     FileCryptoUtil(String password, String fileSuffix) {
         this.password = password
         this.fileSuffix = fileSuffix
+        //TODO Improve root path argument.
+        this.fileUtil = new FileUtil(this.fileSuffix, new File('.'))
     }
 
     void encryptFilesWithSuffix() {
-
+        fileUtil.findAllUnencryptedFiles().each {
+            encryptFile(it)
+        }
     }
 
     void decryptFilesWithSuffix() {
-
+        fileUtil.findAllEncryptedFiles().each {
+            decryptFile(it)
+        }
     }
 
     void encryptFile(File file) {

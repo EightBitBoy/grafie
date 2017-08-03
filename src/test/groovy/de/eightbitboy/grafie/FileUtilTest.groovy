@@ -1,6 +1,5 @@
 package de.eightbitboy.grafie
 
-import spock.lang.PendingFeature
 import spock.lang.Specification
 
 class FileUtilTest extends Specification {
@@ -21,9 +20,9 @@ class FileUtilTest extends Specification {
         util2.getFileSuffix() == '_test2'
     }
 
-    @PendingFeature
     def "throw an error on invalid file suffix"() {
-        //TODO
+        expect:
+        'a' == 'b'
     }
 
     def "get an unencrypted file from an encrypted file"() {
@@ -32,8 +31,8 @@ class FileUtilTest extends Specification {
         File encryptedFile2 = new File('foo/file2.txt.FileUtilTest')
 
         when:
-        File file1 = fileUtil.getUnencryptedFile(encryptedFile1)
-        File file2 = fileUtil.getUnencryptedFile(encryptedFile2)
+        File file1 = fileUtil.findUnencryptedFileFromEncryptedFile(encryptedFile1)
+        File file2 = fileUtil.findUnencryptedFileFromEncryptedFile(encryptedFile2)
 
         then:
         !file1.canonicalPath.endsWith('.FileUtilTest')
@@ -57,8 +56,8 @@ class FileUtilTest extends Specification {
         File file2 = new File('foo/file2.txt')
 
         when:
-        File encryptedFile1 = fileUtil.getEncryptedFile(file1)
-        File encryptedFile2 = fileUtil.getEncryptedFile(file2)
+        File encryptedFile1 = fileUtil.findEncryptedFileFromUnencryptedFile(file1)
+        File encryptedFile2 = fileUtil.findEncryptedFileFromUnencryptedFile(file2)
 
         then:
         encryptedFile1.canonicalPath.endsWith('.FileUtilTest')
@@ -90,7 +89,7 @@ class FileUtilTest extends Specification {
         file4.createNewFile()
 
         when:
-        List<File> files = fileUtil.getEncryptedFiles()
+        List<File> files = fileUtil.findAllEncryptedFiles()
 
         then:
         files.find { it.canonicalPath == file1.canonicalPath }
@@ -120,7 +119,7 @@ class FileUtilTest extends Specification {
         file4.createNewFile()
 
         when:
-        List<File> files = fileUtil.getUnencryptedFiles()
+        List<File> files = fileUtil.findAllUnencryptedFiles()
 
         then:
         files.find { it.canonicalPath == new File('file1.txt').canonicalPath }

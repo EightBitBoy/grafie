@@ -18,16 +18,16 @@ class FileUtil {
         return fileSuffix
     }
 
-    File getUnencryptedFile(File encryptedFile) {
+    File findUnencryptedFileFromEncryptedFile(File encryptedFile) {
         return new File(encryptedFile.getCanonicalPath().substring(
                 0, encryptedFile.getCanonicalPath().lastIndexOf(fileSuffix)))
     }
 
-    File getEncryptedFile(File unencryptedFile) {
+    File findEncryptedFileFromUnencryptedFile(File unencryptedFile) {
         return new File(unencryptedFile.getCanonicalPath() + fileSuffix)
     }
 
-    List<File> getEncryptedFiles() {
+    List<File> findAllEncryptedFiles() {
         List<File> files = []
         // TODO Read about traversion; there might be better ways to find files matching the file extension!
         // TODO Exclude git and build directories!
@@ -39,11 +39,11 @@ class FileUtil {
         return files
     }
 
-    List<File> getUnencryptedFiles() {
-        List<File> encryptedFiles = getEncryptedFiles()
+    List<File> findAllUnencryptedFiles() {
+        List<File> encryptedFiles = findAllEncryptedFiles()
         List<File> files = []
         encryptedFiles.each { file ->
-            files.add(getUnencryptedFile(file))
+            files.add(findUnencryptedFileFromEncryptedFile(file))
         }
         return files
     }
