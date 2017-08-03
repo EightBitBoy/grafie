@@ -1,12 +1,8 @@
 package de.eightbitboy.grafie
 
-import groovy.util.logging.Log
-import org.apache.commons.codec.digest.DigestUtils
-
 import javax.crypto.Cipher
 import javax.crypto.spec.SecretKeySpec
 
-@Log
 class FileCryptoUtil {
     private String encoding = 'UTF-8'
     private String password

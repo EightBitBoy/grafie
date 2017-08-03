@@ -1,7 +1,6 @@
 package de.eightbitboy.grafie
 
 import de.eightbitboy.grafie.testhelper.TestProjectDirectory
-import spock.lang.PendingFeature
 import spock.lang.Shared
 import spock.lang.Specification
 
