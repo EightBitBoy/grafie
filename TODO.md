@@ -6,6 +6,7 @@
 * Look in properties for a default password location?
 * Support custom file encodings.
 * Find out how to mark a task as FAILED when something goes wrong!
+* Improve file suffix validity check
 
 ## Links
 

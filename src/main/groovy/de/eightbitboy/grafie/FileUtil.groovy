@@ -1,5 +1,7 @@
 package de.eightbitboy.grafie
 
+import org.gradle.api.GradleException
+
 class FileUtil {
     private String fileSuffix
     private File root
@@ -13,9 +15,20 @@ class FileUtil {
         return fileSuffix
     }
 
-    private String checkFileSuffix(String fileSuffix) {
-        // TODO Some checks for "forbidden" symbols might be necessary!
-        return fileSuffix
+    //TODO This code needs some improvement. Checking that the string contains
+    //any symbol from the list should look better.
+    static void checkFileSuffix(String fileSuffix) {
+        List<String> invalidSymbols = ['@', '§']
+
+        List<String> result = fileSuffix.findAll { suffix ->
+            invalidSymbols.any { symbol ->
+                suffix.contains(symbol)
+            }
+        }
+
+        if (result) {
+            throw new GradleException("The file suffix '${fileSuffix}' is not valid!")
+        }
     }
 
     File findUnencryptedFileFromEncryptedFile(File encryptedFile) {

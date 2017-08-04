@@ -1,5 +1,6 @@
 package de.eightbitboy.grafie
 
+import org.gradle.api.GradleException
 import spock.lang.Specification
 
 class FileUtilTest extends Specification {
@@ -20,9 +21,20 @@ class FileUtilTest extends Specification {
         util2.getFileSuffix() == '_test2'
     }
 
+    def "check a valid file suffix"() {
+        when:
+        FileUtil.checkFileSuffix('.encrypted')
+
+        then:
+        noExceptionThrown()
+    }
+
     def "throw an error on invalid file suffix"() {
-        expect:
-        'a' == 'b'
+        when:
+        FileUtil.checkFileSuffix('@encrypted')
+
+        then:
+        thrown(GradleException)
     }
 
     def "get an unencrypted file from an encrypted file"() {
