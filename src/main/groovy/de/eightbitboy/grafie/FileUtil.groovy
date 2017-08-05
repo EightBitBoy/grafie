@@ -17,7 +17,7 @@ class FileUtil {
 
     //TODO This code needs some improvement. Checking that the string contains
     //any symbol from the list should look better.
-    static void checkFileSuffix(String fileSuffix) {
+    static String checkFileSuffix(String fileSuffix) {
         List<String> invalidSymbols = ['@', '§']
 
         List<String> result = fileSuffix.findAll { suffix ->
@@ -29,6 +29,8 @@ class FileUtil {
         if (result) {
             throw new GradleException("The file suffix '${fileSuffix}' is not valid!")
         }
+
+        return fileSuffix
     }
 
     File findUnencryptedFileFromEncryptedFile(File encryptedFile) {
