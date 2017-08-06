@@ -6,6 +6,11 @@ class FileUtil {
     private String fileSuffix
     private File root
 
+    FileUtil(String fileSuffix) {
+        this.fileSuffix = checkFileSuffix(fileSuffix)
+        this.root = new File(System.getProperty('user.dir'))
+    }
+
     FileUtil(String fileSuffix, File root) {
         this.fileSuffix = checkFileSuffix(fileSuffix)
         this.root = root
@@ -34,6 +39,7 @@ class FileUtil {
     }
 
     File findUnencryptedFileFromEncryptedFile(File encryptedFile) {
+        //TODO Check that the encrypted file is ACTUALLY an encrypted file!
         return new File(encryptedFile.getCanonicalPath().substring(
                 0, encryptedFile.getCanonicalPath().lastIndexOf(fileSuffix)))
     }
