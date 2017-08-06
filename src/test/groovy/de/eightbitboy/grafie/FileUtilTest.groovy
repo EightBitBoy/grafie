@@ -51,8 +51,8 @@ class FileUtilTest extends Specification {
 
     def "get an unencrypted file from an encrypted file"() {
         setup:
-        File encryptedFile1 = new File('file1.txt.encrypted')
-        File encryptedFile2 = new File('foo/file2.txt.encrypted')
+        File encryptedFile1 = new File(projectDir, 'file1.txt.encrypted')
+        File encryptedFile2 = new File(projectDir, 'foo/file2.txt.encrypted')
 
         when:
         File file1 = fileUtil.findUnencryptedFileFromEncryptedFile(encryptedFile1)
@@ -63,14 +63,14 @@ class FileUtilTest extends Specification {
         !file2.canonicalPath.endsWith('.encrypted')
         file1.canonicalPath == encryptedFile1.canonicalPath.replace('.encrypted', '')
         file2.canonicalPath == encryptedFile2.canonicalPath.replace('.encrypted', '')
-        file1.canonicalPath == new File('file1.txt').canonicalPath
-        file2.canonicalPath == new File('foo/file2.txt').canonicalPath
+        file1.canonicalPath == new File(projectDir, 'file1.txt').canonicalPath
+        file2.canonicalPath == new File(projectDir, 'foo/file2.txt').canonicalPath
     }
 
     def "get encrypted file from an unencrypted file"() {
         setup:
-        File file1 = new File('file1.txt')
-        File file2 = new File('foo/file2.txt')
+        File file1 = new File(projectDir, 'file1.txt')
+        File file2 = new File(projectDir, 'foo/file2.txt')
 
         when:
         File encryptedFile1 = fileUtil.findEncryptedFileFromUnencryptedFile(file1)
@@ -81,16 +81,16 @@ class FileUtilTest extends Specification {
         encryptedFile2.canonicalPath.endsWith('.encrypted')
         encryptedFile1.canonicalPath == file1.canonicalPath + '.encrypted'
         encryptedFile2.canonicalPath == file2.canonicalPath + '.encrypted'
-        encryptedFile1.canonicalPath == new File('file1.txt.encrypted').canonicalPath
-        encryptedFile2.canonicalPath == new File('foo/file2.txt.encrypted').canonicalPath
+        encryptedFile1.canonicalPath == new File(projectDir, 'file1.txt.encrypted').canonicalPath
+        encryptedFile2.canonicalPath == new File(projectDir, 'foo/file2.txt.encrypted').canonicalPath
     }
 
     def "find all encrypted files"() {
         setup:
-        File file1 = new File('file1.txt.encrypted')
-        File file2 = new File('file2.txt.encrypted')
-        File file3 = new File('foo/file3.txt.encrypted')
-        File file4 = new File('bar/file4.txt.encrypted')
+        File file1 = new File(projectDir, 'file1.txt.encrypted')
+        File file2 = new File(projectDir, 'file2.txt.encrypted')
+        File file3 = new File(projectDir, 'foo/file3.txt.encrypted')
+        File file4 = new File(projectDir, 'bar/file4.txt.encrypted')
         file3.getParentFile().mkdirs()
         file4.getParentFile().mkdirs()
         file1.createNewFile()
@@ -109,10 +109,10 @@ class FileUtilTest extends Specification {
     }
 
     def "find all unencrypted files from encrypted file"() {
-        File file1 = new File('file1.txt.encrypted')
-        File file2 = new File('file2.txt.encrypted')
-        File file3 = new File('foo/file3.txt.encrypted')
-        File file4 = new File('bar/file4.txt.encrypted')
+        File file1 = new File(projectDir, 'file1.txt.encrypted')
+        File file2 = new File(projectDir, 'file2.txt.encrypted')
+        File file3 = new File(projectDir, 'foo/file3.txt.encrypted')
+        File file4 = new File(projectDir, 'bar/file4.txt.encrypted')
         file3.getParentFile().mkdirs()
         file4.getParentFile().mkdirs()
         file1.createNewFile()
@@ -124,9 +124,9 @@ class FileUtilTest extends Specification {
         List<File> files = fileUtil.findAllUnencryptedFiles()
 
         then:
-        files.find { it.canonicalPath == new File('file1.txt').canonicalPath }
-        files.find { it.canonicalPath == new File('file2.txt').canonicalPath }
-        files.find { it.canonicalPath == new File('foo/file3.txt').canonicalPath }
-        files.find { it.canonicalPath == new File('bar/file4.txt').canonicalPath }
+        files.find { it.canonicalPath == new File(projectDir, 'file1.txt').canonicalPath }
+        files.find { it.canonicalPath == new File(projectDir, 'file2.txt').canonicalPath }
+        files.find { it.canonicalPath == new File(projectDir, 'foo/file3.txt').canonicalPath }
+        files.find { it.canonicalPath == new File(projectDir, 'bar/file4.txt').canonicalPath }
     }
 }
