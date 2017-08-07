@@ -5,9 +5,5 @@ package de.eightbitboy.grafie
  * It is used for configuring the plugin.
  */
 class GrafieExtension {
-
-    /**
-     * The password used for encrypting files.
-     */
-    String password = ''
+    String password
 }
