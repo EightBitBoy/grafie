@@ -11,14 +11,15 @@ class FileCryptoTask extends DefaultTask {
     }
 
     Mode mode = Mode.ENCRYPT
-    String password = ''
-    String fileSuffix = ''
+    private String password
+    private String fileSuffix = '.grafie'
 
     @TaskAction
     void cryptoAction() {
-        checkPassword(project.grafie.password)
+        this.password = project.grafie.password
+        checkPassword(this.password)
 
-        FileCryptoUtil cryptoUtil = new FileCryptoUtil(password, fileSuffix)
+        FileCryptoUtil cryptoUtil = new FileCryptoUtil(this.password, this.fileSuffix)
 
         if (mode == Mode.DECRYPT) {
             cryptoUtil.decryptFilesWithSuffix()

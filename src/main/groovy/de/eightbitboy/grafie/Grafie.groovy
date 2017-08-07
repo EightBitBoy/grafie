@@ -6,7 +6,6 @@ import org.gradle.api.Plugin
 class Grafie implements Plugin<Project> {
     final static String ID = 'de.eightbitboy.grafie'
     final static String TASK_GROUP = 'Grafie'
-    final static String DEFAULT_FILE_SUFFIX = '.grafie'
 
     void apply(Project project) {
         project.extensions.create('grafie', GrafieExtension)
@@ -17,8 +16,6 @@ class Grafie implements Plugin<Project> {
                     'the default is \'.grafie\'.'
 
             mode = FileCryptoTask.Mode.DECRYPT
-            password = project.grafie.password
-            fileSuffix = DEFAULT_FILE_SUFFIX
         }
 
         project.task('encryptFiles', type: FileCryptoTask) {
@@ -27,8 +24,6 @@ class Grafie implements Plugin<Project> {
                     'and encryption file name extension exists, the default is \'.grafie\'.'
 
             mode = FileCryptoTask.Mode.ENCRYPT
-            password = project.grafie.password
-            fileSuffix = DEFAULT_FILE_SUFFIX
         }
     }
 }
