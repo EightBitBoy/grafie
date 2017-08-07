@@ -1,5 +1,7 @@
 package de.eightbitboy.grafie
 
+import org.gradle.api.GradleException
+
 import javax.crypto.Cipher
 import javax.crypto.spec.SecretKeySpec
 
@@ -63,14 +65,14 @@ class FileCryptoUtil {
 
     void checkUnencryptedFileName(File file) {
         if (file.getName().endsWith(fileSuffix)) {
-            throw new IllegalStateException(
+            throw new GradleException(
                     "The unencrypted file already has the file suffix for encrypted files!")
         }
     }
 
     void checkEncryptedFileName(File file) {
         if (!file.getName().endsWith(fileSuffix)) {
-            throw new IllegalStateException(
+            throw new GradleException(
                     "The encrypted file does not have a valid file suffix!")
         }
     }
