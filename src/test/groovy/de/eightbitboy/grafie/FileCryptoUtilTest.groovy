@@ -1,6 +1,7 @@
 package de.eightbitboy.grafie
 
 import de.eightbitboy.grafie.testhelper.TestProjectDirectory
+import org.gradle.api.GradleException
 import spock.lang.Shared
 import spock.lang.Specification
 
@@ -29,13 +30,17 @@ class FileCryptoUtilTest extends Specification {
         File file = new File(projectDir, 'encryptMe.txt')
         file.write('This is a test.')
 
+        File encryptedFile = new File(projectDir, 'encryptMe.txt.encrypted')
+
+        expect:
+        !encryptedFile.exists()
+
         when:
         cryptoUtil.encryptFile(file)
 
         then:
-        File encryptedFile = new File(projectDir, 'encryptMe.txt.encrypted')
         encryptedFile.exists()
-        !encryptedFile.getText('UTF-8').isEmpty()
+        !encryptedFile.getText().isEmpty()
     }
 
     def "encrypt and decrypt a file"() {
@@ -63,35 +68,32 @@ class FileCryptoUtilTest extends Specification {
         file = new File(projectDir, 'encryptMeToo.txt')
         then:
         file.exists()
-        file.getText('UTF-8') == 'This is another test.'
+        file.getText() == 'This is another test.'
     }
 
-    def "encrypt a text multiple times, the encrypted text should not change"() {
+    def "encrypt a text multiple times, the encrypted text should match"() {
         setup:
         File file1 = new File(projectDir, 'aFile.txt')
         file1.write('This is an encryption test!')
         File file2 = new File(projectDir, 'anotherFile.txt')
         file2.write('This is an encryption test!')
 
-        cryptoUtil.encryptFile(file1)
-        cryptoUtil.encryptFile(file2)
 
         File encryptedFile1 = new File(projectDir, 'aFile.txt.encrypted')
         File encryptedFile2 = new File(projectDir, 'anotherFile.txt.encrypted')
 
-        file1.delete()
-        file2.delete()
+        when:
+        cryptoUtil.encryptFile(file1)
+        cryptoUtil.encryptFile(file2)
 
-        expect:
-        !file1.exists()
-        !file2.exists()
+        then:
         encryptedFile1.exists()
         encryptedFile2.exists()
 
         and:
-        !encryptedFile1.getText('UTF-8').isEmpty()
-        !encryptedFile2.getText('UTF-8').isEmpty()
-        encryptedFile1.getText('UTF-8') == encryptedFile2.getText('UTF-8')
+        !encryptedFile1.getText().isEmpty()
+        !encryptedFile2.getText().isEmpty()
+        encryptedFile1.getText() == encryptedFile2.getText()
     }
 
     def "encrypting a file which already has the file suffix is not possible"() {
@@ -103,7 +105,7 @@ class FileCryptoUtilTest extends Specification {
         cryptoUtil.encryptFile(file)
 
         then:
-        thrown(IllegalStateException)
+        thrown(GradleException)
     }
 
     def "decrypting a file which has no file suffix is not possible"() {
@@ -115,6 +117,6 @@ class FileCryptoUtilTest extends Specification {
         cryptoUtil.decryptFile(file)
 
         then:
-        thrown(IllegalStateException)
+        thrown(GradleException)
     }
 }
