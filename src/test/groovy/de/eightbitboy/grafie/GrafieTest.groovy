@@ -70,20 +70,26 @@ grafie {
         buildFile.text = "plugins {id 'de.eightbitboy.grafie'}"
         BuildResult result
 
+        //TODO Find out how to test for failing tests if they throw an eception.
+        //TODO Are there other ways to fail a task from the plugin?
+        /*
         when:
         result = executeTask('encryptFiles')
         then:
         result.task(':encryptFiles').getOutcome() == TaskOutcome.FAILED
+        */
 
         when:
         executeTask('encryptFiles')
         then:
         thrown(UnexpectedBuildFailure)
 
+        /*
         when:
         result = executeTask('decryptFiles')
         then:
         result.task(':decryptFiles').getOutcome() == TaskOutcome.FAILED
+        */
 
         when:
         executeTask('decryptFiles')
