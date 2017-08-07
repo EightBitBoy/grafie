@@ -6,7 +6,8 @@
 * Look in properties for a default password location?
 * Support custom file encodings.
 * Find out how to mark a task as FAILED when something goes wrong!
-* Improve file suffix validity check
+* Improve file suffix validity check.
+* Use Apache commons text RandomStringGenerator to generate passwords for EncryptionKeyTest.
 
 ## Links
 

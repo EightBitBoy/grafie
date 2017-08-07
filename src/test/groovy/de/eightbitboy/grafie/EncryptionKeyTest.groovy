@@ -1,6 +1,7 @@
 package de.eightbitboy.grafie
 
 import org.apache.commons.lang3.ArrayUtils
+import org.gradle.api.GradleException
 import org.gradle.internal.impldep.org.apache.commons.lang.RandomStringUtils
 import spock.lang.Specification
 
@@ -10,7 +11,7 @@ class EncryptionKeyTest extends Specification {
         EncryptionKey.fromPassword(null)
 
         then:
-        thrown(IllegalArgumentException)
+        thrown(GradleException)
     }
 
     def "a password must not be empty"() {
@@ -18,7 +19,7 @@ class EncryptionKeyTest extends Specification {
         EncryptionKey.fromPassword('')
 
         then:
-        thrown(IllegalArgumentException)
+        thrown(GradleException)
     }
 
     def "a key is not null or empty"() {
@@ -48,7 +49,6 @@ class EncryptionKeyTest extends Specification {
         key.length == 16
 
         where:
-        //TODO use RandomStringGenerator
-        password << (1..200).collect() { RandomStringUtils.random(it) }
+        password << (1..100).collect() { RandomStringUtils.random(it) }
     }
 }
