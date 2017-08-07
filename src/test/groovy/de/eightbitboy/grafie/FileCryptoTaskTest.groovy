@@ -6,7 +6,7 @@ import spock.lang.Specification
 
 class FileCryptoTaskTest extends Specification {
 
-    def "add task to project"() {
+    def "add the task to a project"() {
         when:
         Project project = ProjectBuilder.builder().build()
         def task = project.task('customTask', type: FileCryptoTask)
