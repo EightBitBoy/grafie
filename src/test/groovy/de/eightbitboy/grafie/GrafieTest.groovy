@@ -7,7 +7,6 @@ import org.gradle.testkit.runner.BuildResult
 import org.gradle.testkit.runner.GradleRunner
 import org.gradle.testkit.runner.TaskOutcome
 import org.gradle.testkit.runner.UnexpectedBuildFailure
-import spock.lang.PendingFeature
 import spock.lang.Shared
 import spock.lang.Specification
 
@@ -66,29 +65,28 @@ grafie {
         result.output.contains('encryptFiles')
     }
 
-    /* TODO
-    Currently the test checks for an exception.
-    It would be nicer if the task being executed does not just throw an exception and
-     rather marks the task as FAILED. Read about error handling for gradle plugins!
-
-     https://stackoverflow.com/questions/10312259/recommended-way-to-stop-a-gradle-build
-     */
-
     def "executing a task without defining a password fails"() {
         setup: 'a build file without a password'
-        buildFile.text = """
-plugins {
-    id 'de.eightbitboy.grafie'
-}
-"""
+        buildFile.text = "plugins {id 'de.eightbitboy.grafie'}"
+        BuildResult result
 
         when:
-        executeTask('encryptFiles').task(':encryptFiles').getOutcome() == TaskOutcome.FAILED
+        result = executeTask('encryptFiles')
+        then:
+        result.task(':encryptFiles').getOutcome() == TaskOutcome.FAILED
+
+        when:
+        executeTask('encryptFiles')
         then:
         thrown(UnexpectedBuildFailure)
 
         when:
-        executeTask('decryptFiles').task(':decryptFiles').getOutcome() == TaskOutcome.FAILED
+        result = executeTask('decryptFiles')
+        then:
+        result.task(':decryptFiles').getOutcome() == TaskOutcome.FAILED
+
+        when:
+        executeTask('decryptFiles')
         then:
         thrown(UnexpectedBuildFailure)
     }

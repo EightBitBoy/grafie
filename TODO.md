@@ -41,3 +41,20 @@ PBESpec
 https://stackoverflow.com/questions/3451670/java-aes-and-using-my-own-key
 https://stackoverflow.com/questions/18362137/encryption-with-aes-256-java
 https://stackoverflow.com/questions/3954611/encrypt-and-decrypt-with-aes-and-base64-encoding
+
+
+
+
+
+    /* TODO
+    Currently the test checks for an exception.
+    It would be nicer if the task being executed does not just throw an exception and
+     rather marks the task as FAILED. Read about error handling for gradle plugins!
+
+     https://stackoverflow.com/questions/10312259/recommended-way-to-stop-a-gradle-build
+     */
+
+    def "executing a task without defining a password fails"() {
+    
+    
+    
