@@ -23,6 +23,7 @@ class FileUtilTest extends Specification {
         projectDir.deleteRecursively()
     }
 
+    //TODO What is this test for?
     def "check the file suffix"() {
         when:
         FileUtil util1 = new FileUtil('.test1')
@@ -102,13 +103,14 @@ class FileUtilTest extends Specification {
         List<File> files = fileUtil.findAllEncryptedFiles()
 
         then:
+        files.size() == 4
         files.find { it.canonicalPath == file1.canonicalPath }
         files.find { it.canonicalPath == file2.canonicalPath }
         files.find { it.canonicalPath == file3.canonicalPath }
         files.find { it.canonicalPath == file4.canonicalPath }
     }
 
-    def "find all unencrypted files from encrypted file"() {
+    def "find all unencrypted files from encrypted files"() {
         File file1 = new File(projectDir, 'file1.txt.encrypted')
         File file2 = new File(projectDir, 'file2.txt.encrypted')
         File file3 = new File(projectDir, 'foo/file3.txt.encrypted')
@@ -124,6 +126,7 @@ class FileUtilTest extends Specification {
         List<File> files = fileUtil.findAllUnencryptedFiles()
 
         then:
+        files.size() == 4
         files.find { it.canonicalPath == new File(projectDir, 'file1.txt').canonicalPath }
         files.find { it.canonicalPath == new File(projectDir, 'file2.txt').canonicalPath }
         files.find { it.canonicalPath == new File(projectDir, 'foo/file3.txt').canonicalPath }
