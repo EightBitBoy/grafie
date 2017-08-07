@@ -17,7 +17,7 @@ class FileCryptoTask extends DefaultTask {
     @TaskAction
     void cryptoAction() {
         this.password = project.grafie.password
-        checkPassword(this.password)
+        EncryptionKey.checkPassword(this.password)
 
         FileCryptoUtil cryptoUtil = new FileCryptoUtil(this.password, this.fileSuffix)
 
@@ -26,17 +26,6 @@ class FileCryptoTask extends DefaultTask {
         }
         if (mode == Mode.ENCRYPT) {
             cryptoUtil.encryptFilesWithSuffix()
-        }
-    }
-
-    void checkPassword(String password) {
-        if (password == null) {
-            throw new TaskExecutionException(this, new IllegalArgumentException(
-                    "No password has been provided! Use 'grafie.password' to define a password!"))
-        }
-        if (password.isEmpty()) {
-            throw new TaskExecutionException(this, new IllegalArgumentException(
-                    'The provided password is empty!'))
         }
     }
 }
