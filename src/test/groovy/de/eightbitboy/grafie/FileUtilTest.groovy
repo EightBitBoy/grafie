@@ -23,6 +23,23 @@ class FileUtilTest extends Specification {
         projectDir.deleteRecursively()
     }
 
+    def "instantiate a FileUtil with a valid file suffix"() {
+        when:
+        new FileUtil('.valid')
+        then:
+        noExceptionThrown()
+
+        when:
+        new FileUtil('.valid', new File('.'))
+        then:
+        noExceptionThrown()
+    }
+
+    def "get the file suffxi"() {
+        expect:
+        fileUtil.getFileSuffix() == '.encrypted'
+    }
+
     //TODO What is this test for?
     def "check the file suffix"() {
         when:
