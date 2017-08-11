@@ -10,7 +10,6 @@ plugins {
     id 'com.gradle.plugin-publish' version '0.9.7'
     id 'com.github.ben-manes.versions' version '0.15.0'
     id 'com.jfrog.bintray' version '1.7.3'
-    id 'net.saliman.cobertura' version '2.5.0'
 }
 
 apply plugin: 'groovy'
@@ -47,6 +46,14 @@ dependencies {
 
 group = 'de.eightbitboy'
 version = '0.1.0'
+
+test {
+    outputs.upToDateWhen { false }
+    testLogging {
+        exceptionFormat = 'full'
+        events 'failed', 'passed', 'skipped', 'standardOut'
+    }
+}
 
 pluginBundle {
     website = 'https://github.com/EightBitBoy/grafie'
@@ -94,14 +101,6 @@ bintray {
             name = project.version
             released = new Date()
         }
-    }
-}
-
-test {
-    outputs.upToDateWhen { false }
-    testLogging {
-        exceptionFormat = 'full'
-        events 'failed', 'passed', 'skipped', 'standardOut'
     }
 }
 
