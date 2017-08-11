@@ -25,7 +25,7 @@ class FileCryptoUtilTest extends Specification {
         cryptoUtil = new FileCryptoUtil('password', '.encrypted')
     }
 
-    def "encrypt a file"() {
+    def "encrypt a specific file"() {
         setup:
         File file = new File(projectDir, 'encryptMe.txt')
         file.write('This is a test.')
@@ -43,7 +43,7 @@ class FileCryptoUtilTest extends Specification {
         !encryptedFile.getText().isEmpty()
     }
 
-    def "encrypt and decrypt a file"() {
+    def "encrypt and decrypt a specific file"() {
         setup:
         File file = new File(projectDir, 'encryptMeToo.txt')
         file.write('This is another test.')
@@ -69,6 +69,10 @@ class FileCryptoUtilTest extends Specification {
         then:
         file.exists()
         file.getText() == 'This is another test.'
+    }
+
+    def "encrypt and decrypt a file by suffix"() {
+        
     }
 
     def "encrypt a text multiple times, the encrypted text should match"() {
