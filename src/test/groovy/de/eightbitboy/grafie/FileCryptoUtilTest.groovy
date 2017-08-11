@@ -72,7 +72,31 @@ class FileCryptoUtilTest extends Specification {
     }
 
     def "encrypt and decrypt a file by suffix"() {
-        
+        setup:
+        File file = new File(projectDir, 'a.txt')
+        file.write('Secret!')
+        File encryptedFile = new File(projectDir, 'a.txt.encrypted')
+        encryptedFile.createNewFile()
+
+        expect:
+        encryptedFile.exists()
+        encryptedFile.getText().isEmpty()
+
+        when:
+        cryptoUtil.encryptFilesWithSuffix()
+        then:
+        !encryptedFile.getText().isEmpty()
+
+        when:
+        file.delete()
+        then:
+        !file.exists()
+
+        when:
+        cryptoUtil.decryptFilesWithSuffix()
+        then:
+        file.exists()
+        file.getText() == 'Secret!'
     }
 
     def "encrypt a text multiple times, the encrypted text should match"() {
