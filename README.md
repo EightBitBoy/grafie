@@ -2,20 +2,42 @@
 [![Build Status](https://travis-ci.org/EightBitBoy/grafie.svg?branch=master)](https://travis-ci.org/EightBitBoy/grafie)
 
 # ATTENTION
-
 **The plugin has not been released yet! Everything below is still work in progress!**
 
 ## About
+Grafie encrypts files containing sensitive information in your repository.
+
+Sometimes it is difficult to exclude secret but important information from a public repository. This might be special configuration files or API keys which should not be visible to the general public. 
+
+## Include Grafie in your project
+Add Grafie to your build file:
+
+### All Gradle versions:
+```
+buildscript {
+    repositories {
+        maven {
+            url "https://plugins.gradle.org/m2/"
+        }
+    }
+    dependencies {
+        classpath "gradle.plugin.de.eightbitboy:grafie:0.1.0"
+    }
+}
+apply plugin: "de.eightbitboy.grafie"
+```
+
+### Gradle 2.1 and higher:
+```
+plugins {
+  id "de.eightbitboy.grafie" version "0.1.0"
+}
+```
 
 ## Usage
-
-Include **grafie** in your build file:
-```
-```
-
 For every file you want to encrypt create an empty file with the same name and the added extension "**.grafie**":
 ```
-$>ls
+$> ls
 build.gradle
 secret.txt
 $> cat secret.txt
