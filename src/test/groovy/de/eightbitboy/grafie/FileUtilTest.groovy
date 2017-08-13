@@ -23,38 +23,6 @@ class FileUtilTest extends Specification {
         projectDir.deleteRecursively()
     }
 
-    //FIXME The tests do not affect code coverage! Why?
-    /*
-    def "instantiate a FileUtil with a valid file suffix"() {
-        when:
-        new FileUtil('.valid')
-        then:
-        noExceptionThrown()
-
-        when:
-        new FileUtil('.valid', new File('.'))
-        then:
-        noExceptionThrown()
-    }
-
-
-    def "get the file suffxi"() {
-        expect:
-        fileUtil.getFileSuffix() == '.encrypted'
-    }
-    */
-
-    //TODO What is this test for?
-    def "check the file suffix"() {
-        when:
-        FileUtil util1 = new FileUtil('.test1')
-        FileUtil util2 = new FileUtil('_test2')
-
-        then:
-        util1.getFileSuffix() == '.test1'
-        util2.getFileSuffix() == '_test2'
-    }
-
     def "check a valid file suffix"() {
         when:
         FileUtil.checkFileSuffix('.encrypted')
@@ -63,7 +31,7 @@ class FileUtilTest extends Specification {
         noExceptionThrown()
     }
 
-    def "throw an error on invalid file suffix"() {
+    def "throw an error when the file suffix is invalid"() {
         when:
         FileUtil.checkFileSuffix('@encrypted')
 
