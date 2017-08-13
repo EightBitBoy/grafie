@@ -13,6 +13,7 @@
 * Map extension properties to task properties, see https://docs.gradle.org/current/userguide/custom_plugins.html
 * Find information about other encryption types.
 * Support different file encodings?
+* Test multiple Gradle versions, see https://docs.gradle.org/current/userguide/test_kit.html#sub:gradle-runner-gradle-version
 
 ## Links
 
