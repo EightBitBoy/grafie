@@ -56,6 +56,9 @@ $>cat secret.txt.grafie
 oisaujfipfusifuspifaufofuoefk
 ```
 
+## Contributions
+Any contribution is welcome. Do not hesitate to contact the developer via E-Mail or to create an issue to discuss bugs or features.
+
 ## Resources that helped developing the plugin
 * [Gradle documentation: Writing Custom Plugins](https://docs.gradle.org/current/userguide/custom_plugins.html)
 * [Gradle documentation: The Gradle TestKit](https://docs.gradle.org/current/userguide/test_kit.html)
