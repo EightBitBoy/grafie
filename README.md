@@ -17,7 +17,7 @@ The encryption happens with the AES algorithm. A 128 bit key is used which is de
 Add Grafie to your ```build.gradle``` file.
 
 ### All Gradle versions:
-```
+```Gradle
 buildscript {
     repositories {
         maven {
