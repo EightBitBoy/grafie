@@ -3,6 +3,7 @@ package de.eightbitboy.grafie
 import org.gradle.api.GradleException
 
 import javax.crypto.Cipher
+import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
 
 class FileCryptoUtil {
@@ -80,7 +81,7 @@ class FileCryptoUtil {
     private Cipher setup(byte[] key, int mode) {
         Cipher cipher = Cipher.getInstance('AES/CBC/PKCS5Padding')
         SecretKeySpec secretKeySpec = new SecretKeySpec(key, 'AES')
-        cipher.init(mode, secretKeySpec)
+        cipher.init(mode, secretKeySpec, new IvParameterSpec(key))
         return cipher
     }
 }
