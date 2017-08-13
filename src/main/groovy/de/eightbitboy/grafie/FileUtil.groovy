@@ -69,5 +69,19 @@ class FileUtil {
         return files
     }
 
+    void checkPlaintextFileName(File file) {
+        if (file.getName().endsWith(fileSuffix)) {
+            throw new GradleException(
+                    "The plaintext file already has the file suffix for encrypted files!")
+        }
+    }
+
+    void checkEncryptedFileName(File file) {
+        if (!file.getName().endsWith(fileSuffix)) {
+            throw new GradleException(
+                    "The encrypted file does not have a valid file suffix!")
+        }
+    }
+
     // TODO Check files for invalid names and file extensions, handle FileFormatExceptions
 }

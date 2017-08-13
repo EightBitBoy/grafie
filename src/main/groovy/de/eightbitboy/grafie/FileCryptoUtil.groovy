@@ -1,9 +1,6 @@
 package de.eightbitboy.grafie
 
-import org.gradle.api.GradleException
-
 import javax.crypto.Cipher
-import javax.crypto.spec.IvParameterSpec
 import javax.crypto.spec.SecretKeySpec
 
 class FileCryptoUtil {
@@ -32,12 +29,11 @@ class FileCryptoUtil {
     }
 
     void encryptFile(File plaintextFile) {
-        checkUnencryptedFileName(plaintextFile)
-
+        fileUtil.checkPlaintextFileName(plaintextFile)
         File encryptedFile = fileUtil.findEncryptedFileFromUnencryptedFile(plaintextFile)
 
         encryptedFile.withWriter { writer ->
-            Cipher cipher = setup(EncryptionKey.fromPassword(password), Cipher.ENCRYPT_MODE)
+            Cipher cipher = setupEncryption(EncryptionKey.fromPassword(password), Cipher.ENCRYPT_MODE)
 
             String decryptedText = plaintextFile.getText(encoding)
             byte[] encryptedBytes = cipher.doFinal(decryptedText.getBytes(encoding))
@@ -47,13 +43,12 @@ class FileCryptoUtil {
     }
 
     void decryptFile(File encryptedFile) {
-        checkEncryptedFileName(encryptedFile)
-
+        fileUtil.checkEncryptedFileName(encryptedFile)
         File decryptedFile = fileUtil.findUnencryptedFileFromEncryptedFile(encryptedFile)
         decryptedFile.createNewFile()
 
         decryptedFile.withWriter { writer ->
-            Cipher cipher = setup(EncryptionKey.fromPassword(password), Cipher.DECRYPT_MODE)
+            Cipher cipher = setupEncryption(EncryptionKey.fromPassword(password), Cipher.DECRYPT_MODE)
 
             String encryptedText = encryptedFile.getText(encoding)
             byte[] encryptedBytes = Base64.getDecoder().decode(encryptedText)
@@ -62,21 +57,7 @@ class FileCryptoUtil {
         }
     }
 
-    void checkUnencryptedFileName(File file) {
-        if (file.getName().endsWith(fileSuffix)) {
-            throw new GradleException(
-                    "The unencrypted file already has the file suffix for encrypted files!")
-        }
-    }
-
-    void checkEncryptedFileName(File file) {
-        if (!file.getName().endsWith(fileSuffix)) {
-            throw new GradleException(
-                    "The encrypted file does not have a valid file suffix!")
-        }
-    }
-
-    private Cipher setup(byte[] key, int mode) {
+    private Cipher setupEncryption(byte[] key, int mode) {
         Cipher cipher = Cipher.getInstance('AES/ECB/PKCS5Padding')
         SecretKeySpec secretKeySpec = new SecretKeySpec(key, 'AES')
         cipher.init(mode, secretKeySpec)
