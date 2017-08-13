@@ -35,8 +35,8 @@ class FileCryptoUtil {
         encryptedFile.withWriter { writer ->
             Cipher cipher = setupEncryption(Cipher.ENCRYPT_MODE)
 
-            String decryptedText = plaintextFile.getText(encoding)
-            byte[] encryptedBytes = cipher.doFinal(decryptedText.getBytes(encoding))
+            String plaintext = plaintextFile.getText(encoding)
+            byte[] encryptedBytes = cipher.doFinal(plaintext.getBytes(encoding))
 
             writer.write(Base64.getEncoder().encodeToString(encryptedBytes))
         }
