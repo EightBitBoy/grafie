@@ -68,7 +68,7 @@ grafie {
   
 ### Encrypt files
 For every file you want to encrypt create an empty file with the same name and the added extension "**.grafie**":
-```Shell
+```ShellSession
 $> ls
 build.gradle
 secret.txt
@@ -78,7 +78,7 @@ $>touch secret.txt.grafie
 ```
 
 Execute the task **encryptFiles**:
-```Shell
+```ShellSession
 $>gradle encryptFiles
 $>cat secret.txt.grafie
 oisaujfipfusifuspifaufofuoefk
