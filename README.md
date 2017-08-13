@@ -39,6 +39,27 @@ plugins {
 ```
 
 ## Usage
+
+### Configure a password
+Provide a password in your ```build.gradle``` file.
+```
+grafie {
+    password = 'yourPassword' 
+}
+```
+ 
+Obviously you do not want to save the password directly in ```build.gradle```, instead use ```gradle.properties``` to provide it locally. Get the property in ```build.gradle```:
+```
+grafie {
+    password = findProperty('MY_PASSWORD')
+}
+```
+Define the property in ```gradle.properties```:
+```
+MY_PASSWORD=thisIsSecret
+```
+  
+### Encrypt files
 For every file you want to encrypt create an empty file with the same name and the added extension "**.grafie**":
 ```
 $> ls
@@ -54,6 +75,14 @@ Execute the task **encryptFiles**:
 $>gradle encryptFiles
 $>cat secret.txt.grafie
 oisaujfipfusifuspifaufofuoefk
+```
+### Decrypt files
+
+### Full plugin configuration example
+```
+grafie {
+    password = 'aSecretPassword'
+}
 ```
 
 ## Contributions
