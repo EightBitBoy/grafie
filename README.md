@@ -32,7 +32,7 @@ apply plugin: "de.eightbitboy.grafie"
 ```
 
 ### Gradle 2.1 and higher:
-```
+```Gradle
 plugins {
   id 'de.eightbitboy.grafie' version '0.1.0'
 }
@@ -42,25 +42,25 @@ plugins {
 
 ### Configure a password
 Provide a password in your ```build.gradle``` file.
-```
+```Gradle
 grafie {
     password = 'yourPassword' 
 }
 ```
  
 Obviously you do not want to save the password directly in ```build.gradle```, instead use ```gradle.properties``` to provide it locally. Get the property in ```build.gradle```:
-```
+```Gradle
 grafie {
     password = findProperty('MY_PASSWORD')
 }
 ```
 Define the property in ```gradle.properties```:
-```
+```INI
 MY_PASSWORD=thisIsSecret
 ```
 
 When working with continuous integration systems the password may be provided via environment variables:
-```
+```Gradle
 grafie {
     password = System.getenv('MY_PASSWORD')
 }
@@ -68,7 +68,7 @@ grafie {
   
 ### Encrypt files
 For every file you want to encrypt create an empty file with the same name and the added extension "**.grafie**":
-```
+```Shell
 $> ls
 build.gradle
 secret.txt
@@ -78,7 +78,7 @@ $>touch secret.txt.grafie
 ```
 
 Execute the task **encryptFiles**:
-```
+```Shell
 $>gradle encryptFiles
 $>cat secret.txt.grafie
 oisaujfipfusifuspifaufofuoefk
@@ -86,7 +86,7 @@ oisaujfipfusifuspifaufofuoefk
 ### Decrypt files
 
 ### Full plugin configuration example
-```
+```Gradle
 grafie {
     password = 'aSecretPassword'
 }
