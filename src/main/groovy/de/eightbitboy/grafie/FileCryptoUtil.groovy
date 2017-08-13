@@ -33,7 +33,7 @@ class FileCryptoUtil {
         File encryptedFile = fileUtil.findEncryptedFileFromUnencryptedFile(plaintextFile)
 
         encryptedFile.withWriter { writer ->
-            Cipher cipher = setupEncryption(EncryptionKey.fromPassword(password), Cipher.ENCRYPT_MODE)
+            Cipher cipher = setupEncryption(Cipher.ENCRYPT_MODE)
 
             String decryptedText = plaintextFile.getText(encoding)
             byte[] encryptedBytes = cipher.doFinal(decryptedText.getBytes(encoding))
@@ -44,11 +44,11 @@ class FileCryptoUtil {
 
     void decryptFile(File encryptedFile) {
         fileUtil.checkEncryptedFileName(encryptedFile)
-        File decryptedFile = fileUtil.findUnencryptedFileFromEncryptedFile(encryptedFile)
-        decryptedFile.createNewFile()
+        File plaintextFile = fileUtil.findUnencryptedFileFromEncryptedFile(encryptedFile)
+        plaintextFile.createNewFile()
 
-        decryptedFile.withWriter { writer ->
-            Cipher cipher = setupEncryption(EncryptionKey.fromPassword(password), Cipher.DECRYPT_MODE)
+        plaintextFile.withWriter { writer ->
+            Cipher cipher = setupEncryption(Cipher.DECRYPT_MODE)
 
             String encryptedText = encryptedFile.getText(encoding)
             byte[] encryptedBytes = Base64.getDecoder().decode(encryptedText)
@@ -57,9 +57,9 @@ class FileCryptoUtil {
         }
     }
 
-    private Cipher setupEncryption(byte[] key, int mode) {
+    private Cipher setupEncryption(int mode) {
         Cipher cipher = Cipher.getInstance('AES/ECB/PKCS5Padding')
-        SecretKeySpec secretKeySpec = new SecretKeySpec(key, 'AES')
+        SecretKeySpec secretKeySpec = new SecretKeySpec(EncryptionKey.fromPassword(password), 'AES')
         cipher.init(mode, secretKeySpec)
         return cipher
     }
