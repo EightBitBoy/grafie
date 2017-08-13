@@ -31,33 +31,31 @@ class FileCryptoUtil {
         }
     }
 
-    void encryptFile(File file) {
-        checkUnencryptedFileName(file)
+    void encryptFile(File plaintextFile) {
+        checkUnencryptedFileName(plaintextFile)
 
-        File encryptedFile = new File(file.getCanonicalPath() + fileSuffix)
-        encryptedFile.createNewFile()
+        File encryptedFile = fileUtil.findEncryptedFileFromUnencryptedFile(plaintextFile)
 
         encryptedFile.withWriter { writer ->
             Cipher cipher = setup(EncryptionKey.fromPassword(password), Cipher.ENCRYPT_MODE)
 
-            String decryptedText = file.getText(encoding)
+            String decryptedText = plaintextFile.getText(encoding)
             byte[] encryptedBytes = cipher.doFinal(decryptedText.getBytes(encoding))
 
             writer.write(Base64.getEncoder().encodeToString(encryptedBytes))
         }
     }
 
-    void decryptFile(File file) {
-        checkEncryptedFileName(file)
+    void decryptFile(File encryptedFile) {
+        checkEncryptedFileName(encryptedFile)
 
-        File decryptedFile = new File(file.getCanonicalPath().substring(
-                0, file.getCanonicalPath().lastIndexOf(fileSuffix)))
+        File decryptedFile = fileUtil.findUnencryptedFileFromEncryptedFile(encryptedFile)
         decryptedFile.createNewFile()
 
         decryptedFile.withWriter { writer ->
             Cipher cipher = setup(EncryptionKey.fromPassword(password), Cipher.DECRYPT_MODE)
 
-            String encryptedText = file.getText(encoding)
+            String encryptedText = encryptedFile.getText(encoding)
             byte[] encryptedBytes = Base64.getDecoder().decode(encryptedText)
 
             writer.write(new String(cipher.doFinal(encryptedBytes)))
