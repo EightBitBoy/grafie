@@ -10,6 +10,8 @@
 * Use Apache commons text RandomStringGenerator to generate passwords for EncryptionKeyTest.
 * Use "project.file", see https://docs.gradle.org/current/userguide/custom_plugins.html
 * Map extension properties to task properties, see https://docs.gradle.org/current/userguide/custom_plugins.html
+* Find information about other encryption types.
+* Support different file encodings?
 
 ## Links
 
