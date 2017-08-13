@@ -83,6 +83,8 @@ $ gradle encryptFiles
 $ cat secret.txt.grafie
 oisaujfipfusifuspifaufofuoefk
 ```
+
+The content of the encrypted file is overwritten when the source file changes!
 ### Decrypt files
 An encrypted file exists:
 ```ShellSession
@@ -104,14 +106,26 @@ $ cat important.txt
 This is some important information!
 ```
 
+The content of the unencrypted file is overwritten when the content of the encrypted file changes!
 ### Ignore files in your git repository
-Commit all files with the file name extension "***.grafie***"!
-Ignore every unencryped files for which an encrypted file exists!
+Commit all files with the file name extension "**.grafie**"!
+
+Ignore every unencryped file for which an encrypted file exists!
 
 ### Full plugin configuration example
 ```Gradle
 grafie {
     password = 'aSecretPassword'
+}
+```
+
+### Include Grafie in your workflow
+Since a build might rely on the information stored in the encrypted files the **decryptFiles** task should run as early as possible.
+
+For example when working on an Android project, decrypt files before the actual build starts:
+```Gradle
+preBuild {
+    dependsOn decryptFiles
 }
 ```
 
