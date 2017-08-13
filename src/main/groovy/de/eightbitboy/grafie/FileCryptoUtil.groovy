@@ -32,14 +32,8 @@ class FileCryptoUtil {
         fileUtil.checkPlaintextFileName(plaintextFile)
         File encryptedFile = fileUtil.findEncryptedFileFromUnencryptedFile(plaintextFile)
 
-        Cipher cipher = setupEncryption(Cipher.ENCRYPT_MODE)
         encryptedFile.withWriter { writer ->
-
-            String plaintext = plaintextFile.getText(encoding)
-            byte[] encryptedBytes = cipher.doFinal(plaintext.getBytes(encoding))
-            String encodedEncryptedText = Base64.getEncoder().encodeToString(encryptedBytes)
-
-            writer.write(encodedEncryptedText)
+            writer.write(encryptAndEncodeText(plaintextFile.getText(encoding)))
         }
     }
 
@@ -48,18 +42,24 @@ class FileCryptoUtil {
         File plaintextFile = fileUtil.findUnencryptedFileFromEncryptedFile(encryptedFile)
         plaintextFile.createNewFile()
 
-        Cipher cipher = setupEncryption(Cipher.DECRYPT_MODE)
         plaintextFile.withWriter { writer ->
-
-            String encryptedText = encryptedFile.getText(encoding)
-            byte[] encryptedBytes = Base64.getDecoder().decode(encryptedText)
-            String plaintext = new String(cipher.doFinal(encryptedBytes))
-
-            writer.write(plaintext)
+            writer.write(decryptEncodedText(encryptedFile.getText(encoding)))
         }
     }
 
-    private Cipher setupEncryption(int mode) {
+    String encryptAndEncodeText(String plaintext) {
+        Cipher cipher = setupCipher(Cipher.ENCRYPT_MODE)
+        byte[] encryptedBytes = cipher.doFinal(plaintext.getBytes(encoding))
+        return Base64.getEncoder().encodeToString(encryptedBytes)
+    }
+
+    String decryptEncodedText(String encryptedAndEncodedText) {
+        Cipher cipher = setupCipher(Cipher.DECRYPT_MODE)
+        byte[] encryptedBytes = Base64.getDecoder().decode(encryptedAndEncodedText)
+        return new String(cipher.doFinal(encryptedBytes))
+    }
+
+    private Cipher setupCipher(int mode) {
         Cipher cipher = Cipher.getInstance('AES/ECB/PKCS5Padding')
         SecretKeySpec secretKeySpec = new SecretKeySpec(EncryptionKey.fromPassword(password), 'AES')
         cipher.init(mode, secretKeySpec)
