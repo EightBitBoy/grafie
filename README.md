@@ -14,18 +14,18 @@ The Gradle plugin "Grafie" symmetrically encrypts files containing secrets using
 The encryption happens with the AES algorithm. A 128 bit key is used which is derived from the SHA-256 hash of a user-provided password with an arbitrary length. 
 
 ## Include Grafie in your project
-Add Grafie to your build file:
+Add Grafie to your ```build.gradle``` file.
 
 ### All Gradle versions:
 ```
 buildscript {
     repositories {
         maven {
-            url "https://plugins.gradle.org/m2/"
+            url 'https://plugins.gradle.org/m2/'
         }
     }
     dependencies {
-        classpath "gradle.plugin.de.eightbitboy:grafie:0.1.0"
+        classpath 'gradle.plugin.de.eightbitboy:grafie:0.1.0'
     }
 }
 apply plugin: "de.eightbitboy.grafie"
@@ -34,7 +34,7 @@ apply plugin: "de.eightbitboy.grafie"
 ### Gradle 2.1 and higher:
 ```
 plugins {
-  id "de.eightbitboy.grafie" version "0.1.0"
+  id 'de.eightbitboy.grafie' version '0.1.0'
 }
 ```
 
