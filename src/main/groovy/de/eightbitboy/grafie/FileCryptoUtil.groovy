@@ -79,9 +79,9 @@ class FileCryptoUtil {
     }
 
     private Cipher setup(byte[] key, int mode) {
-        Cipher cipher = Cipher.getInstance('AES/CBC/PKCS5Padding')
+        Cipher cipher = Cipher.getInstance('AES/ECB/PKCS5Padding')
         SecretKeySpec secretKeySpec = new SecretKeySpec(key, 'AES')
-        cipher.init(mode, secretKeySpec, new IvParameterSpec(key))
+        cipher.init(mode, secretKeySpec)
         return cipher
     }
 }
