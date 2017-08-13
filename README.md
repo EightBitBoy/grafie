@@ -9,7 +9,9 @@ Grafie encrypts files containing sensitive information in your repository.
 
 Sometimes it is difficult to exclude (semi-)secret but important information from a repository. This might be special configuration files or API keys which should not be visible to the general public. Removing such information from a repository makes working on a project and building it difficult for everyone, secrets must be configured on every developer's machine and every continuous integration system. Changes to those secrets means reconfiguring all systems too.
 
-The Gradle plugin "Grafie" symmetrically encrypts files containing secrets. Encrypted files are added to the repository and versioned while the original cleartext versions of those files are added to a repository's ignore list. Whenever someone clones the repository and builds the project cleartext files are decrypted from the encrypted files. 
+The Gradle plugin "Grafie" symmetrically encrypts files containing secrets. Encrypted files are added to the repository and versioned while the original cleartext versions of those files are added to a repository's ignore list. Whenever someone clones the repository and builds the project cleartext files are decrypted from the encrypted files.
+
+The encryption happens with the AES algorithm. A 128 bit key is used which is derived from the SHA-256 hash of a password with an arbitrary length. 
 
 ## Include Grafie in your project
 Add Grafie to your build file:
