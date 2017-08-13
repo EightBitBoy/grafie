@@ -1,6 +1,7 @@
 # TODO
 
 ## Development
+* Check a repository's .gitignore!
 * Use the new syntax for applying plugins.
 * Make sure the password is set and not empty.
 * Look in properties for a default password location?

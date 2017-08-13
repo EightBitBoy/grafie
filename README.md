@@ -11,7 +11,7 @@ Sometimes it is difficult to exclude (semi-)secret but important information fro
 
 The Gradle plugin "Grafie" symmetrically encrypts files containing secrets using a single password, it is the only thing every developer or CI server must know. Encrypted files are added to the repository and versioned while the original cleartext versions of those files are added to a repository's ignore list. Whenever someone clones the repository and builds the project cleartext files are decrypted from the encrypted files.
 
-The encryption happens with the AES algorithm. A 128 bit key is used which is derived from the SHA-256 hash of a user-provided password with an arbitrary length. 
+The encryption happens with the AES algorithm. A 128 bit key is used which is derived from the SHA-256 hash of a user-provided password with an arbitrary length. The encrypted binary information is stored as Base64 encoding.
 
 ## Include Grafie in your project
 Add Grafie to your ```build.gradle``` file.
@@ -67,7 +67,7 @@ grafie {
 ```
   
 ### Encrypt files
-For every file you want to encrypt create an empty file with the same name and the added extension "**.grafie**":
+For every file you want to encrypt create a file with the same name and the added extension "**.grafie**":
 ```ShellSession
 $ ls
 build.gradle
@@ -77,13 +77,36 @@ This is a secret text!
 $ touch secret.txt.grafie
 ```
 
-Execute the task **encryptFiles**:
+Execute the Gradle task **encryptFiles**:
 ```ShellSession
 $ gradle encryptFiles
 $ cat secret.txt.grafie
 oisaujfipfusifuspifaufofuoefk
 ```
 ### Decrypt files
+An encrypted file exists:
+```ShellSession
+$ ls
+build.gradle
+important.txt.grafie
+$ cat important.txt.grafie
+oisaujfipfusifuspifaufofuoefk
+```
+
+Execute the Gradle task **decryptFiles**:
+```ShellSession
+$ gradle decryptFiles
+$ ls
+build.gradle
+important.txt
+important.txt.grafie
+$ cat important.txt
+This is some important information!
+```
+
+### Ignore files in your git repository
+Commit all files with the file name extension "***.grafie***"!
+Ignore every unencryped files for which an encrypted file exists!
 
 ### Full plugin configuration example
 ```Gradle
