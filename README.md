@@ -58,6 +58,13 @@ Define the property in ```gradle.properties```:
 ```
 MY_PASSWORD=thisIsSecret
 ```
+
+When working with continuous integration systems the password may be provided via environment variables:
+```
+grafie {
+    password = System.getenv('MY_PASSWORD')
+}
+```
   
 ### Encrypt files
 For every file you want to encrypt create an empty file with the same name and the added extension "**.grafie**":
