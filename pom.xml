@@ -9,18 +9,53 @@
 
     <name>grafie</name>
 
+    <repositories>
+        <repository>
+            <id>gradle-repo</id>
+            <url>https://repo.gradle.org/gradle/libs-releases-local/</url>
+        </repository>
+    </repositories>
+
     <build>
         <plugins>
+            <plugin>
+                <groupId>org.codehaus.gmavenplus</groupId>
+                <artifactId>gmavenplus-plugin</artifactId>
+                <version>1.5</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>compile</goal>
+                            <goal>testCompile</goal>
+                        </goals>
+                    </execution>
+                </executions>
+            </plugin>
+            <plugin>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <version>2.18.1</version>
+                <configuration>
+                    <useFile>false</useFile>
+                    <includes>
+                        <include>**/*Test.groovy</include>
+                    </includes>
+                </configuration>
+            </plugin>
             <plugin>
                 <groupId>com.atlassian.maven.plugins</groupId>
                 <artifactId>clover-maven-plugin</artifactId>
                 <version>4.2.0</version>
             </plugin>
         </plugins>
-
     </build>
 
     <dependencies>
+        <dependency>
+            <groupId>org.gradle</groupId>
+            <artifactId>gradle-core</artifactId>
+            <version>4.1</version>
+            <scope>test</scope>
+        </dependency>
         <dependency>
             <groupId>org.codehaus.groovy</groupId>
             <artifactId>groovy-all</artifactId>
