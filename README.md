@@ -5,7 +5,7 @@
 **The plugin has not been released yet! Everything below is still work in progress!**
 
 ## About
-Grafie encrypts files containing sensitive information in your repository.
+Grafie encrypts files which contain sensitive information in your repository.
 
 Sometimes it is difficult to exclude (semi-)secret but important information from a repository. This might be special configuration files or API keys which should not be visible to the general public. Removing such information from a repository makes working on a project and building it difficult for everyone, secrets must be configured on every developer's machine and every continuous integration system. Changes to those secrets means reconfiguring all systems too.
 
