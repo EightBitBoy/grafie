@@ -32,13 +32,14 @@ class FileCryptoUtil {
         fileUtil.checkPlaintextFileName(plaintextFile)
         File encryptedFile = fileUtil.findEncryptedFileFromUnencryptedFile(plaintextFile)
 
+        Cipher cipher = setupEncryption(Cipher.ENCRYPT_MODE)
         encryptedFile.withWriter { writer ->
-            Cipher cipher = setupEncryption(Cipher.ENCRYPT_MODE)
 
             String plaintext = plaintextFile.getText(encoding)
             byte[] encryptedBytes = cipher.doFinal(plaintext.getBytes(encoding))
+            String encodedEncryptedText = Base64.getEncoder().encodeToString(encryptedBytes)
 
-            writer.write(Base64.getEncoder().encodeToString(encryptedBytes))
+            writer.write(encodedEncryptedText)
         }
     }
 
@@ -47,13 +48,14 @@ class FileCryptoUtil {
         File plaintextFile = fileUtil.findUnencryptedFileFromEncryptedFile(encryptedFile)
         plaintextFile.createNewFile()
 
+        Cipher cipher = setupEncryption(Cipher.DECRYPT_MODE)
         plaintextFile.withWriter { writer ->
-            Cipher cipher = setupEncryption(Cipher.DECRYPT_MODE)
 
             String encryptedText = encryptedFile.getText(encoding)
             byte[] encryptedBytes = Base64.getDecoder().decode(encryptedText)
+            String plaintext = new String(cipher.doFinal(encryptedBytes))
 
-            writer.write(new String(cipher.doFinal(encryptedBytes)))
+            writer.write(plaintext)
         }
     }
 
