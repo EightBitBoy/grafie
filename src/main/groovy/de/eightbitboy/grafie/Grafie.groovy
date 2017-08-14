@@ -10,20 +10,18 @@ class Grafie implements Plugin<Project> {
     void apply(Project project) {
         project.extensions.create('grafie', GrafieExtension)
 
-        project.task('decryptFiles', type: FileCryptoTask) {
-            group = TASK_GROUP
-            description = 'Decrypt all files which have the encryption file name extension, ' +
-                    'the default is \'.grafie\'.'
-
-            mode = FileCryptoTask.Mode.DECRYPT
+        project.tasks.create('decryptFiles', FileCryptoTask) { task ->
+            task.setMode(FileCryptoTask.Mode.DECRYPT)
+            task.setGroup(TASK_GROUP)
+            task.setDescription('Decrypt all files which have the encryption file name extension, ' +
+                    'the default is \'.grafie\'.')
         }
 
-        project.task('encryptFiles', type: FileCryptoTask) {
-            group = TASK_GROUP
-            description = 'Encrypt all files for which a file with the same name ' +
-                    'and encryption file name extension exists, the default is \'.grafie\'.'
-
-            mode = FileCryptoTask.Mode.ENCRYPT
+        project.tasks.create('encryptFiles', FileCryptoTask) { task ->
+            task.setMode(FileCryptoTask.Mode.ENCRYPT)
+            task.setGroup(TASK_GROUP)
+            task.setDescription('Encrypt all files for which a file with the same name ' +
+                    'and encryption file name extension exists, the default is \'.grafie\'.')
         }
     }
 }
