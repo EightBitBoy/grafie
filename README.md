@@ -137,6 +137,7 @@ Any contribution is welcome. Do not hesitate to contact the developer via E-Mail
 * [Gradle documentation: The Gradle TestKit](https://docs.gradle.org/current/userguide/test_kit.html)
 * [Gradle sample: Custom plugin](https://github.com/gradle/gradle/tree/master/subprojects/docs/src/samples/customPlugin)
 * [jonathanhood's gradle-plugin-example](https://github.com/jonathanhood/gradle-plugin-example)
+* [Gradle guides: Writing Gradle Plugins](https://guides.gradle.org/writing-gradle-plugins)
 
 ## Changelog
 
