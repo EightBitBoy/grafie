@@ -74,8 +74,7 @@ class GrafieTest extends Specification {
         """
         BuildResult result
 
-        //TODO Find out how to test for failing tests if they throw an eception.
-        //TODO Are there other ways to fail a task from the plugin?
+        //TODO Find out how to test for failing tests if they throw an exception.
         /*
         when:
         result = executeTask('encryptFiles')
