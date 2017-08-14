@@ -21,6 +21,7 @@
 * Use project.files, see https://docs.gradle.org/3.3/userguide/working_with_files.html
 * Read about logging in plugins/tasks, use this.logger in task.
 * Read bout input/output annotations for tasks.
+* Check files for invalid names and file extensions, handle FileFormatExceptions.
 
 ## Links
 https://docs.gradle.org/current/userguide/custom_plugins.html#sec:mapping_extension_properties_to_task_properties
