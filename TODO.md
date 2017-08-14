@@ -16,6 +16,8 @@
 * What is the correct way to throw errors from within a plugin?
 * Support different file encodings?
 * Test multiple Gradle versions, see https://docs.gradle.org/current/userguide/test_kit.html#sub:gradle-runner-gradle-version, and https://github.com/gradle/gradle/blob/master/subprojects/docs/src/samples/testKit/gradleRunner/gradleVersion/src/test/groovy/org/gradle/sample/BuildLogicFunctionalTest.groovy, and https://docs.gradle.org/current/javadoc/org/gradle/testkit/runner/GradleRunner.html#withGradleVersion(java.lang.String)
+* Use project.files, see https://docs.gradle.org/3.3/userguide/working_with_files.html
+* Read about logging in plugins/tasks, 
 
 ## Links
 https://docs.gradle.org/current/userguide/custom_plugins.html#sec:mapping_extension_properties_to_task_properties
@@ -26,13 +28,8 @@ https://guides.gradle.org/implementing-gradle-plugins/
 https://github.com/gradle/gradle/tree/master/subprojects
 https://speakerdeck.com/bmuschko/gradle-plugin-best-practices-by-example
 
-//validateExtension(project) //FIXME Make sure a password is provided!
-//TODO use project.file in tasks to access files
-//TODO use project.files !!!11!!!1!
-// see https://docs.gradle.org/3.3/userguide/working_with_files.html
+
 //TODO read about input / output annotation
-
-
 //TODO use this.logger in FileCryptoTask
 
 https://stackoverflow.com/questions/15554296/simple-java-aes-encrypt-decrypt-example
