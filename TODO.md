@@ -13,13 +13,9 @@
 * Map extension properties to task properties, see https://docs.gradle.org/current/userguide/custom_plugins.html
 * Find information about other encryption types.
 * Support different file encodings?
-* Test multiple Gradle versions, see https://docs.gradle.org/current/userguide/test_kit.html#sub:gradle-runner-gradle-version
+* Test multiple Gradle versions, see https://docs.gradle.org/current/userguide/test_kit.html#sub:gradle-runner-gradle-version, and https://github.com/gradle/gradle/blob/master/subprojects/docs/src/samples/testKit/gradleRunner/gradleVersion/src/test/groovy/org/gradle/sample/BuildLogicFunctionalTest.groovy
 
 ## Links
-
-https://github.com/gradle/gradle/tree/master/subprojects/docs/src/samples/testKit/gradleRunner
-https://github.com/gradle/gradle/blob/master/design-docs/testing-toolkit.md#milestone-3
-https://blog.gradle.org/introducing-testkit
 https://github.com/ysb33r/gradleTest
 https://github.com/eriwen/gradle-js-plugin/tree/master/src/test/groovy/com/eriwen/gradle/js/util
 https://discuss.gradle.org/t/separate-execution-for-java-unit-and-integration-tests/8713
