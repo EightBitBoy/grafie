@@ -29,14 +29,14 @@ class GrafieTest extends Specification {
     def setup() {
         buildFile = new File(projectDir, 'build.gradle')
         buildFile << """
-plugins {
-    id 'de.eightbitboy.grafie'
-}
-
-grafie {
-    password = 'myPassword'
-}
-"""
+        plugins {
+            id 'de.eightbitboy.grafie'
+        }
+        
+        grafie {
+            password = 'myPassword'
+        }
+        """
     }
 
     def cleanup() {
@@ -67,7 +67,11 @@ grafie {
 
     def "executing a task without defining a password fails"() {
         setup: 'a build file without a password'
-        buildFile.text = "plugins {id 'de.eightbitboy.grafie'}"
+        buildFile.text = """
+        plugins {
+            id 'de.eightbitboy.grafie'
+        }
+        """
         BuildResult result
 
         //TODO Find out how to test for failing tests if they throw an eception.

@@ -12,17 +12,13 @@
 * Use "project.file", see https://docs.gradle.org/current/userguide/custom_plugins.html
 * Map extension properties to task properties, see https://docs.gradle.org/current/userguide/custom_plugins.html
 * Find information about other encryption types.
+* Separate unit tests and integration tests.
 * Support different file encodings?
-* Test multiple Gradle versions, see https://docs.gradle.org/current/userguide/test_kit.html#sub:gradle-runner-gradle-version, and https://github.com/gradle/gradle/blob/master/subprojects/docs/src/samples/testKit/gradleRunner/gradleVersion/src/test/groovy/org/gradle/sample/BuildLogicFunctionalTest.groovy
+* Test multiple Gradle versions, see https://docs.gradle.org/current/userguide/test_kit.html#sub:gradle-runner-gradle-version, and https://github.com/gradle/gradle/blob/master/subprojects/docs/src/samples/testKit/gradleRunner/gradleVersion/src/test/groovy/org/gradle/sample/BuildLogicFunctionalTest.groovy, and https://docs.gradle.org/current/javadoc/org/gradle/testkit/runner/GradleRunner.html#withGradleVersion(java.lang.String)
 
 ## Links
-https://github.com/ysb33r/gradleTest
-https://github.com/eriwen/gradle-js-plugin/tree/master/src/test/groovy/com/eriwen/gradle/js/util
-https://discuss.gradle.org/t/separate-execution-for-java-unit-and-integration-tests/8713
-https://discuss.gradle.org/t/how-do-i-unit-test-custom-tasks/3815
-https://discuss.gradle.org/t/how-to-execute-a-task-in-unit-test-for-custom-plugin/6771/3
+https://docs.gradle.org/current/userguide/custom_plugins.html#sec:mapping_extension_properties_to_task_properties
 
-//TODO https://docs.gradle.org/current/userguide/custom_plugins.html#sec:mapping_extension_properties_to_task_properties
 
 https://guides.gradle.org/writing-gradle-plugins/
 https://guides.gradle.org/implementing-gradle-plugins/
