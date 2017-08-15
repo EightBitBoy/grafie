@@ -141,5 +141,5 @@ Any contribution is welcome. Do not hesitate to contact the developer via E-Mail
 
 ## Changelog
 
-### 0.1.0 - not yet released
+### 0.1.0 - 2017-08-15
 * Initial release
