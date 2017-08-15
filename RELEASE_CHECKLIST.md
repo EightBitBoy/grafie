@@ -1,4 +1,4 @@
-# Releases
+# Release Checklist
 This is a checklist for preparing releases.
 
 * Adjust the version in **build.gradle**.
