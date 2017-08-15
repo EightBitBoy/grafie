@@ -147,4 +147,25 @@ class FileCryptoUtilTest extends Specification {
         then:
         thrown(GradleException)
     }
+
+    def "encrypting and decrypting a file with different passwords fails"() {
+        setup:
+        FileCryptoUtil cryptoUtilOne = new FileCryptoUtil('1234', '.encrypted')
+        FileCryptoUtil cryptoUtilTwo = new FileCryptoUtil('abcd', '.encrypted')
+
+        File file = new File(projectDir, 'cat.txt')
+        file.write('Meeeooowwww!')
+
+        File encryptedFile = new File(projectDir, 'cat.txt.encrypted')
+
+        when:
+        cryptoUtilOne.encryptFile(file)
+        then:
+        encryptedFile.exists()
+
+        when:
+        cryptoUtilTwo.decryptFile(encryptedFile)
+        then:
+        thrown(GradleException)
+    }
 }
