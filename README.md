@@ -121,7 +121,7 @@ preBuild {
 }
 ```
 
-### Full plugin configuration example
+## Full plugin configuration example
 ```Gradle
 grafie {
     password = 'aSecretPassword'
