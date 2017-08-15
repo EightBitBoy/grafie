@@ -108,9 +108,8 @@ This is some important information!
 
 The plaintext file is overwritten when the content of the encrypted file changes!
 ### Git and Grafie
-Commit all files with the file name extension "**.grafie**"!
-
-Ignore every plaintext file for which an encrypted file exists!
+* Commit all files with the file name extension "**.grafie**"!
+* Ignore every plaintext file for which an encrypted file exists!
 
 ### Include Grafie in your workflow
 Since a build might rely on the information stored in the encrypted files the **decryptFiles** task should run as early as possible.
