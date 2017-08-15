@@ -56,6 +56,8 @@ class FileCryptoUtil {
     String decryptEncodedText(String encryptedAndEncodedText) {
         Cipher cipher = setupCipher(Cipher.DECRYPT_MODE)
         byte[] encryptedBytes = Base64.getDecoder().decode(encryptedAndEncodedText)
+        //TODO Catch and propagate javax.crypto.BadPaddingException, happens when decrypting with wrong password.
+        //TODO Test this!
         return new String(cipher.doFinal(encryptedBytes))
     }
 
