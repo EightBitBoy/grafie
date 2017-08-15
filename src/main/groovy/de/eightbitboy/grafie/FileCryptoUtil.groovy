@@ -1,5 +1,8 @@
 package de.eightbitboy.grafie
 
+import org.gradle.api.GradleException
+
+import javax.crypto.BadPaddingException
 import javax.crypto.Cipher
 import javax.crypto.spec.SecretKeySpec
 
@@ -56,9 +59,16 @@ class FileCryptoUtil {
     String decryptEncodedText(String encryptedAndEncodedText) {
         Cipher cipher = setupCipher(Cipher.DECRYPT_MODE)
         byte[] encryptedBytes = Base64.getDecoder().decode(encryptedAndEncodedText)
-        //TODO Catch and propagate javax.crypto.BadPaddingException, happens when decrypting with wrong password.
-        //TODO Test this!
-        return new String(cipher.doFinal(encryptedBytes))
+
+        String plaintext
+        try {
+            plaintext = new String(cipher.doFinal(encryptedBytes))
+        } catch (BadPaddingException e) {
+            throw new GradleException('The decryption was not successful. ' +
+                    'Probably the passwords used for encrypting and decrypting the text differ from each other!', e)
+        }
+
+        return plaintext
     }
 
     private Cipher setupCipher(int mode) {
