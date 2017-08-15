@@ -1,7 +1,7 @@
 package de.eightbitboy.grafie
 
 import org.apache.commons.lang3.ArrayUtils
-import org.gradle.api.GradleException
+import org.gradle.api.InvalidUserDataException
 import org.gradle.internal.impldep.org.apache.commons.lang.RandomStringUtils
 import spock.lang.Specification
 
@@ -11,7 +11,7 @@ class EncryptionKeyTest extends Specification {
         EncryptionKey.fromPassword(null)
 
         then:
-        thrown(GradleException)
+        thrown(InvalidUserDataException)
     }
 
     def "a password must not be empty"() {
@@ -19,7 +19,7 @@ class EncryptionKeyTest extends Specification {
         EncryptionKey.fromPassword('')
 
         then:
-        thrown(GradleException)
+        thrown(InvalidUserDataException)
     }
 
     def "a key is not null or empty"() {
