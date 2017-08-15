@@ -1,9 +1,6 @@
 # grafie - Gradle File Encryption Plugin
 [![Build Status](https://travis-ci.org/EightBitBoy/grafie.svg?branch=master)](https://travis-ci.org/EightBitBoy/grafie)
 
-# ATTENTION
-**The plugin has not been released yet! Everything below is still work in progress!**
-
 ## About
 Grafie encrypts files which contain sensitive information in your repository.
 
