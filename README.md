@@ -1,12 +1,12 @@
-# grafie - Gradle File Encryption Plugin
+# Grafie - Gradle File Encryption Plugin
 [![Build Status](https://travis-ci.org/EightBitBoy/grafie.svg?branch=master)](https://travis-ci.org/EightBitBoy/grafie)
+
+Grafie encrypts files which contain sensitive information in your repository.
 
 * [Grafie on the official Gradle plugins site](https://plugins.gradle.org/plugin/de.eightbitboy.grafie)
 * [Grafie on Bintray](https://bintray.com/eightbitboy/projects/grafie)
 
 ## About
-Grafie encrypts files which contain sensitive information in your repository.
-
 Sometimes it is difficult to exclude (semi-)secret but important information from a repository. This might be special configuration files or API keys which should not be visible to the general public, it does no damage if the information leaks to the outside but you still do not want everybody to see it. Removing such information from a repository makes working on a project and building it difficult for everyone, secrets must be shared and configured on every developer's machine and every continuous integration system. Changes to those many secrets means reconfiguring all systems in many places too.
 
 The Gradle plugin "Grafie" symmetrically encrypts files containing secrets using a single password, it is the only thing every developer or CI server must know. Encrypted files are added to the repository and versioned while the original cleartext versions of those files are added to a repository's ignore list. Whenever someone clones the repository and builds the project cleartext files are decrypted from the encrypted files.
