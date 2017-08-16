@@ -25,16 +25,16 @@ buildscript {
         }
     }
     dependencies {
-        classpath 'gradle.plugin.de.eightbitboy:grafie:0.1.0'
+        classpath 'gradle.plugin.de.eightbitboy:grafie:0.1.1'
     }
 }
-apply plugin: "de.eightbitboy.grafie"
+apply plugin: 'de.eightbitboy.grafie'
 ```
 
 ### Gradle 2.1 and higher:
 ```Gradle
 plugins {
-  id 'de.eightbitboy.grafie' version '0.1.0'
+  id 'de.eightbitboy.grafie' version '0.1.1'
 }
 ```
 
