@@ -35,6 +35,10 @@ task('createClasspathManifest') {
     }
 }
 
+task('reports') {
+    dependsOn clean, test, jacocoTestReport, dependencyUpdates
+}
+
 dependencies {
     compile gradleApi()
     compile 'org.codehaus.groovy:groovy-all:2.4.11'
