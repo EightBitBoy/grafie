@@ -16,6 +16,7 @@ apply plugin: 'groovy'
 apply plugin: 'java-gradle-plugin'
 apply plugin: 'maven-publish'
 apply plugin: 'jacoco'
+apply plugin: 'codenarc'
 
 repositories {
     jcenter()
@@ -36,7 +37,7 @@ task('createClasspathManifest') {
 }
 
 task('reports') {
-    dependsOn clean, test, jacocoTestReport, dependencyUpdates
+    dependsOn clean, test, jacocoTestReport, codenarcMain, dependencyUpdates
 }
 
 dependencies {
@@ -58,6 +59,11 @@ test {
         exceptionFormat = 'full'
         events 'failed', 'passed', 'skipped', 'standardOut'
     }
+}
+
+codenarcMain {
+    ignoreFailures true
+    configFile file('config/codenarc/rules.groovy')
 }
 
 pluginBundle {
