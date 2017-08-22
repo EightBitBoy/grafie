@@ -53,12 +53,12 @@ class FileCryptoUtil {
     String encryptAndEncodeText(String plaintext) {
         Cipher cipher = setupCipher(Cipher.ENCRYPT_MODE)
         byte[] encryptedBytes = cipher.doFinal(plaintext.getBytes(encoding))
-        return Base64.getEncoder().encodeToString(encryptedBytes)
+        return Base64.encoder.encodeToString(encryptedBytes)
     }
 
     String decryptEncodedText(String encryptedAndEncodedText) {
         Cipher cipher = setupCipher(Cipher.DECRYPT_MODE)
-        byte[] encryptedBytes = Base64.getDecoder().decode(encryptedAndEncodedText)
+        byte[] encryptedBytes = Base64.decoder.decode(encryptedAndEncodedText)
 
         String plaintext
         try {
