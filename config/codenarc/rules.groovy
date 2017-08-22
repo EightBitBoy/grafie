@@ -157,7 +157,7 @@ ruleset {
     BracesForIfElse 
     BracesForMethod 
     BracesForTryCatchFinally 
-    ClassJavadoc 
+    //ClassJavadoc 
     ClosureStatementOnOpeningLineOfMultipleLineClosure 
     ConsecutiveBlankLines 
     FileEndsWithoutNewline 

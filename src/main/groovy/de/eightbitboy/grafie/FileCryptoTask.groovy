@@ -11,7 +11,7 @@ class FileCryptoTask extends DefaultTask {
 
     Mode mode = Mode.ENCRYPT
     private String password
-    private String fileSuffix = '.grafie'
+    private final String fileSuffix = '.grafie'
 
     @TaskAction
     void cryptoAction() {
