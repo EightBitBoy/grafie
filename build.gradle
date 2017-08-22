@@ -57,7 +57,7 @@ test {
     outputs.upToDateWhen { false }
     testLogging {
         exceptionFormat = 'full'
-        events 'failed', 'passed', 'skipped', 'standardOut'
+        events 'failed', /*'passed',*/ 'skipped', 'standardOut'
     }
 }
 
