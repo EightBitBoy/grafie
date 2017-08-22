@@ -124,9 +124,9 @@ ruleset {
     DuplicateStringLiteral 
     
     //rulesets/enhanced.xml
-    CloneWithoutCloneable 
+    //CloneWithoutCloneable //Disabled because of compilation warnings.
     JUnitAssertEqualsConstantActualValue 
-    UnsafeImplementationAsMap 
+    //UnsafeImplementationAsMap //Disabled because of compilation warnings.
     
     //rulesets/exceptions.xml
     CatchArrayIndexOutOfBoundsException 

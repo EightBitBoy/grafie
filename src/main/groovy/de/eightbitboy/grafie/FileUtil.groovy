@@ -40,13 +40,13 @@ class FileUtil {
 
     File findUnencryptedFileFromEncryptedFile(File encryptedFile) {
         checkEncryptedFileName(encryptedFile)
-        return new File(encryptedFile.getCanonicalPath().substring(
-                0, encryptedFile.getCanonicalPath().lastIndexOf(fileSuffix)))
+        return new File(encryptedFile.canonicalPath.substring(
+                0, encryptedFile.canonicalPath.lastIndexOf(fileSuffix)))
     }
 
     File findEncryptedFileFromUnencryptedFile(File plaintextFile) {
         checkPlaintextFileName(plaintextFile)
-        return new File(plaintextFile.getCanonicalPath() + fileSuffix)
+        return new File(plaintextFile.canonicalPath + fileSuffix)
     }
 
     List<File> findAllEncryptedFiles() {
