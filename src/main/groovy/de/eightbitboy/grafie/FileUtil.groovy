@@ -3,8 +3,8 @@ package de.eightbitboy.grafie
 import org.gradle.api.GradleException
 
 class FileUtil {
-    private String fileSuffix
-    private File root
+    private final String fileSuffix
+    private final File root
 
     FileUtil(String fileSuffix) {
         this.fileSuffix = checkFileSuffix(fileSuffix)
