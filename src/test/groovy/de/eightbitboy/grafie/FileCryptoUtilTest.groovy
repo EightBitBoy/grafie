@@ -8,9 +8,9 @@ import spock.lang.Specification
 class FileCryptoUtilTest extends Specification {
 
     @Shared
-    TestProjectDirectory projectDir
+    private TestProjectDirectory projectDir
 
-    FileCryptoUtil cryptoUtil
+    private FileCryptoUtil cryptoUtil
 
     def setupSpec() {
         projectDir = new TestProjectDirectory()
@@ -40,7 +40,7 @@ class FileCryptoUtilTest extends Specification {
 
         then:
         encryptedFile.exists()
-        !encryptedFile.getText().isEmpty()
+        !encryptedFile.text.isEmpty()
     }
 
     def "encrypt and decrypt a specific file"() {
@@ -68,7 +68,7 @@ class FileCryptoUtilTest extends Specification {
         file = new File(projectDir, 'encryptMeToo.txt')
         then:
         file.exists()
-        file.getText() == 'This is another test.'
+        file.text == 'This is another test.'
     }
 
     def "encrypt and decrypt a file by suffix"() {
@@ -80,12 +80,12 @@ class FileCryptoUtilTest extends Specification {
 
         expect:
         encryptedFile.exists()
-        encryptedFile.getText().isEmpty()
+        encryptedFile.text.isEmpty()
 
         when:
         cryptoUtil.encryptFilesWithSuffix()
         then:
-        !encryptedFile.getText().isEmpty()
+        !encryptedFile.text.isEmpty()
 
         when:
         file.delete()
@@ -96,7 +96,7 @@ class FileCryptoUtilTest extends Specification {
         cryptoUtil.decryptFilesWithSuffix()
         then:
         file.exists()
-        file.getText() == 'Secret!'
+        file.text == 'Secret!'
     }
 
     def "encrypt a text multiple times, the encrypted text should match"() {
@@ -105,7 +105,6 @@ class FileCryptoUtilTest extends Specification {
         file1.write('This is an encryption test!')
         File file2 = new File(projectDir, 'anotherFile.txt')
         file2.write('This is an encryption test!')
-
 
         File encryptedFile1 = new File(projectDir, 'aFile.txt.encrypted')
         File encryptedFile2 = new File(projectDir, 'anotherFile.txt.encrypted')
@@ -119,9 +118,9 @@ class FileCryptoUtilTest extends Specification {
         encryptedFile2.exists()
 
         and:
-        !encryptedFile1.getText().isEmpty()
-        !encryptedFile2.getText().isEmpty()
-        encryptedFile1.getText() == encryptedFile2.getText()
+        !encryptedFile1.text.isEmpty()
+        !encryptedFile2.text.isEmpty()
+        encryptedFile1.text == encryptedFile2.text
     }
 
     def "encrypting a file which already has the file suffix is not possible"() {

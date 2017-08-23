@@ -49,6 +49,6 @@ class EncryptionKeyTest extends Specification {
         key.length == 16
 
         where:
-        password << (1..100).collect() { RandomStringUtils.random(it) }
+        password << (1..100).collect { RandomStringUtils.random(it) }
     }
 }
