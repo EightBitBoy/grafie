@@ -63,7 +63,12 @@ test {
 
 codenarcMain {
     ignoreFailures true
-    configFile file('config/codenarc/rules.groovy')
+    configFile file('config/codenarc/main_rules.groovy')
+}
+
+codenarcTest {
+    ignoreFailures true
+    configFile file('config/codenarc/test_rules.groovy')
 }
 
 pluginBundle {

@@ -140,6 +140,8 @@ Any contribution is welcome. Do not hesitate to contact the developer via E-Mail
 
 ## Changelog
 
+### 0.2.0 - not yet released
+
 ### 0.1.1 - 2017-08-16
 * Use better exceptions when the password is missing.
 * Handle an exception thrown when the password used for decrypting a file differs from the encryption password.
