@@ -4,7 +4,7 @@ import spock.lang.Specification
 
 class GrafieExtensionTest extends Specification {
 
-    GrafieExtension extension
+    private GrafieExtension extension
 
     def setup() {
         extension = new GrafieExtension()
@@ -15,11 +15,11 @@ class GrafieExtensionTest extends Specification {
         extension.setPassword('secret')
 
         then:
-        extension.getPassword() == 'secret'
+        extension.password == 'secret'
     }
 
     def "the password is null"() {
         expect:
-        extension.getPassword() == null
+        extension.password == null
     }
 }

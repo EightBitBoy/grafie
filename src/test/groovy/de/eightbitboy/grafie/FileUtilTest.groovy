@@ -8,9 +8,9 @@ import spock.lang.Specification
 class FileUtilTest extends Specification {
 
     @Shared
-    TestProjectDirectory projectDir
+    private TestProjectDirectory projectDir
 
-    FileUtil fileUtil
+    private FileUtil fileUtil
 
     def setup() {
         projectDir = new TestProjectDirectory()
@@ -81,8 +81,8 @@ class FileUtilTest extends Specification {
         File file2 = new File(projectDir, 'file2.txt.encrypted')
         File file3 = new File(projectDir, 'foo/file3.txt.encrypted')
         File file4 = new File(projectDir, 'bar/file4.txt.encrypted')
-        file3.getParentFile().mkdirs()
-        file4.getParentFile().mkdirs()
+        file3.parentFile.mkdirs()
+        file4.parentFile.mkdirs()
         file1.createNewFile()
         file2.createNewFile()
         file3.createNewFile()
@@ -104,8 +104,8 @@ class FileUtilTest extends Specification {
         File file2 = new File(projectDir, 'file2.txt.encrypted')
         File file3 = new File(projectDir, 'foo/file3.txt.encrypted')
         File file4 = new File(projectDir, 'bar/file4.txt.encrypted')
-        file3.getParentFile().mkdirs()
-        file4.getParentFile().mkdirs()
+        file3.parentFile.mkdirs()
+        file4.parentFile.mkdirs()
         file1.createNewFile()
         file2.createNewFile()
         file3.createNewFile()
