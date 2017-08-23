@@ -86,7 +86,7 @@ ruleset {
     IfStatementCouldBeTernary
     InvertedIfElse
     LongLiteralWithLowerCaseL
-    NoDef
+    //NoDef
     NoTabCharacter
     ParameterReassignment
     TernaryCouldBeElvis
@@ -261,7 +261,7 @@ ruleset {
     JUnitFailWithoutMessage
     JUnitLostTest
     JUnitPublicField
-    JUnitPublicNonTestMethod
+    //JUnitPublicNonTestMethod
     JUnitPublicProperty
     JUnitSetUpCallsSuper
     JUnitStyleAssertions
