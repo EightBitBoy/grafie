@@ -13,9 +13,9 @@ import spock.lang.Specification
 class GrafieTest extends Specification {
 
     @Shared
-    TestProjectDirectory projectDir
+    private TestProjectDirectory projectDir
 
-    File buildFile
+    private File buildFile
 
     def setupSpec() {
         projectDir = new TestProjectDirectory()
@@ -72,10 +72,11 @@ class GrafieTest extends Specification {
             id 'de.eightbitboy.grafie'
         }
         """
-        BuildResult result
 
         //TODO Find out how to test for failing tests if they throw an exception.
         /*
+        BuildResult result
+
         when:
         result = executeTask('encryptFiles')
         then:
@@ -105,7 +106,7 @@ class GrafieTest extends Specification {
         BuildResult result = executeTask('encryptFiles')
 
         then:
-        result.task(':encryptFiles').getOutcome() == TaskOutcome.SUCCESS
+        result.task(':encryptFiles').outcome == TaskOutcome.SUCCESS
     }
 
     def "execute the decryptFiles task"() {
@@ -113,7 +114,7 @@ class GrafieTest extends Specification {
         BuildResult result = executeTask('decryptFiles')
 
         then:
-        result.task(':decryptFiles').getOutcome() == TaskOutcome.SUCCESS
+        result.task(':decryptFiles').outcome == TaskOutcome.SUCCESS
     }
 
     def "encrypt a file"() {
@@ -133,7 +134,7 @@ class GrafieTest extends Specification {
         BuildResult result = executeTask('encryptFiles')
 
         then:
-        result.task(':encryptFiles').getOutcome() == TaskOutcome.SUCCESS
+        result.task(':encryptFiles').outcome == TaskOutcome.SUCCESS
         !encryptedFile.text.isEmpty()
     }
 
@@ -158,7 +159,7 @@ class GrafieTest extends Specification {
         BuildResult result = executeTask('decryptFiles')
 
         then:
-        result.task(':decryptFiles').getOutcome() == TaskOutcome.SUCCESS
+        result.task(':decryptFiles').outcome == TaskOutcome.SUCCESS
         file.exists()
         !file.text.isEmpty()
         file.text == 'This is another secret!'
