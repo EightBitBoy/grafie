@@ -1,9 +1,11 @@
 package de.eightbitboy.grafie
 
 import spock.lang.Specification
+import spock.lang.Subject
 
 class GrafieExtensionTest extends Specification {
 
+    @Subject
     private GrafieExtension extension
 
     def setup() {

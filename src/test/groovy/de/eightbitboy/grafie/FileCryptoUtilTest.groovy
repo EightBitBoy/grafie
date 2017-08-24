@@ -4,12 +4,14 @@ import de.eightbitboy.grafie.testhelper.TestProjectDirectory
 import org.gradle.api.GradleException
 import spock.lang.Shared
 import spock.lang.Specification
+import spock.lang.Subject
 
 class FileCryptoUtilTest extends Specification {
 
     @Shared
     private TestProjectDirectory projectDir
 
+    @Subject
     private FileCryptoUtil cryptoUtil
 
     def setupSpec() {
