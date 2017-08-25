@@ -12,13 +12,13 @@ class FileUtilTest extends Specification {
     private TestProjectDirectory projectDir
 
     @Subject
-    private de.eightbitboy.grafie.file.FileUtil fileUtil
+    private FileUtil fileUtil
 
     def setup() {
         projectDir = new TestProjectDirectory()
         projectDir.mkdirs()
 
-        fileUtil = new de.eightbitboy.grafie.file.FileUtil('.encrypted', new File('.'))
+        fileUtil = new FileUtil('.encrypted', new File('.'))
     }
 
     def cleanup() {
@@ -27,7 +27,7 @@ class FileUtilTest extends Specification {
 
     def "check a valid file suffix"() {
         when:
-        de.eightbitboy.grafie.file.FileUtil.checkFileSuffix('.encrypted')
+        FileUtil.checkFileSuffix('.encrypted')
 
         then:
         noExceptionThrown()
@@ -35,7 +35,7 @@ class FileUtilTest extends Specification {
 
     def "throw an error when the file suffix is invalid"() {
         when:
-        de.eightbitboy.grafie.file.FileUtil.checkFileSuffix('@encrypted')
+        FileUtil.checkFileSuffix('@encrypted')
 
         then:
         thrown(GradleException)
