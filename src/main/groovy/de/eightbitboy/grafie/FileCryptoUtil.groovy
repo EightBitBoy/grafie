@@ -1,5 +1,6 @@
 package de.eightbitboy.grafie
 
+import de.eightbitboy.grafie.file.FileReaderWriter
 import de.eightbitboy.grafie.file.FileUtil
 import org.gradle.api.GradleException
 
@@ -12,14 +13,14 @@ class FileCryptoUtil {
     private final String password
     private final String fileSuffix
     private final FileUtil fileUtil
-    private final boolean encodeBase64
+    private final FileReaderWriter readerWriter
 
     FileCryptoUtil(String password, String fileSuffix, boolean encodeBase64 = true) {
         this.password = password
         this.fileSuffix = fileSuffix
-        this.encodeBase64 = encodeBase64
         //TODO Improve root path argument.
         this.fileUtil = new FileUtil(this.fileSuffix, new File('.'))
+        this.readerWriter = new FileReaderWriter(encodeBase64)
     }
 
     void encryptFilesWithSuffix() {
