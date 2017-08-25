@@ -12,6 +12,10 @@ class FileCryptoUtil {
     private final String fileSuffix
     private final FileUtil fileUtil
 
+    FileCryptoUtil(String password, File source, File target) {
+        this.password = password
+    }
+
     FileCryptoUtil(String password, String fileSuffix) {
         this.password = password
         this.fileSuffix = fileSuffix

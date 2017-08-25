@@ -4,8 +4,6 @@
 * Publish, see https://guides.gradle.org/publishing-plugins-to-gradle-plugin-portal/
 * Read about up-to-date checks, see https://docs.gradle.org/4.0/userguide/more_about_tasks.html
 * Check a repository's .gitignore!
-* Use the new syntax for applying plugins.
-* Make sure the password is set and not empty.
 * Look in properties for a default password location?
 * Support custom file encodings.
 * Find out how to mark a task as FAILED when something goes wrong!
