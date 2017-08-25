@@ -1,4 +1,4 @@
-package de.eightbitboy.grafie
+package de.eightbitboy.grafie.file
 
 import org.gradle.api.GradleException
 

@@ -1,5 +1,6 @@
 package de.eightbitboy.grafie
 
+import de.eightbitboy.grafie.file.FileUtil
 import org.gradle.api.GradleException
 
 import javax.crypto.BadPaddingException
