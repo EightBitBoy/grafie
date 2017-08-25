@@ -11,14 +11,12 @@ class FileCryptoUtil {
     private final String password
     private final String fileSuffix
     private final FileUtil fileUtil
+    private final boolean encodeBase64
 
-    FileCryptoUtil(String password, File source, File target) {
-        this.password = password
-    }
-
-    FileCryptoUtil(String password, String fileSuffix) {
+    FileCryptoUtil(String password, String fileSuffix, boolean encodeBase64 = true) {
         this.password = password
         this.fileSuffix = fileSuffix
+        this.encodeBase64 = encodeBase64
         //TODO Improve root path argument.
         this.fileUtil = new FileUtil(this.fileSuffix, new File('.'))
     }
